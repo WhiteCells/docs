@@ -165,44 +165,21 @@ gcc select.cpp bubble.cpp main.cpp -o app
 gcc 源文件名.c -o 可执行文件名
 
 # gcc 编译选项
--E # 预处理指定的源文件
--S # 编译指定的源文
--c # 编译、汇编指定的文件
--o file1 file2
--g # 在程序编译时，生成调试信息，该程序可以被调试器调试
--D # 在程序编译时，指定一个宏
--W # 不生成任何警告信息
+-E    # 将源文件输出预处理后的代码，不进行编译、汇编和链接
+-S    # 将源文件编译为汇编代码 .s，不进行汇编和链接
+-c    # 将源文件编译为目标文件 .o，不进行链接
+-o    # 指定输出文件名
+-g    # 生成调试信息，以便调试器进行调试
+-D    # 定义宏，-DDEBUG 定义名为 DEBUG 的宏
+-W    # 不生成任何警告信息
 -Wall # 生成所有警告信息
--On # n 的取值范围: 0~3，编译器的优化选项的 4 个级别，-O0 表示没有优化，-O1 表示缺省值，-O
--I  # 指定编译时指定使用的库
--L  # 指定编译时搜索的库的路径
+-On   # n 的取值范围: 0~3，编译器的优化选项的 4 个级别，-O0 表示没有优化，-O1 表示缺省值
+-I    # 指定库头文件路径
+-L    # 指定库文件的搜索路径
+-l    # 指定链接库的名称
 -fPIC # 生成与位置无关的代码
 -fpic # 生成与位置无关的代码
 -std  # 指定 c 方言，-std=c99，gcc 默认 GNU C
--lm   # 链接时检索并使用数学库函数
-```
-
-### man
-
-```sh
-man [] <function> # 查看 <function> 的文档
-
-# 在帮助文档下 输入 /
-/RETURN VAL # 搜索该文档下的包含返回值的内容
-
-使用 man 命令的基本语法如下：
-man [section] command/function_name
-其中：
-    section：可选参数，表示手册页的章节号。如果省略该参数，man 命令将按照默认的顺序搜索所有章节，并显示找到的第一个匹配的手册页。常见的章节号包括：
-        Section 1：用户命令 (User Commands)
-        Section 2：系统调用 (System Calls)
-        Section 3：C 库函数 (Library Functions)
-        Section 4：设备文件 (Special Files)
-        Section 5：文件格式和协议 (File Formats and Protocols)
-        Section 6：游戏和屏幕保护程序 (Games and Screensavers)
-        Section 7：杂项 (Miscellaneous)
-        Section 8：系统管理命令 (System Administration Commands)
-    command/function_name：要查询手册页的命令或函数名称。
 ```
 
 
