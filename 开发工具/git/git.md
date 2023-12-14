@@ -371,7 +371,8 @@ git commit -m "file1 delete"
 如果不想删除工作区文件，只想删除仓库区文件
 
 ```sh
-git rm --cached file1
+git rm --cached file1      # 文件
+git rm --cached ./test/ -r # 目录
 ```
 
 ## git 忽略文件
