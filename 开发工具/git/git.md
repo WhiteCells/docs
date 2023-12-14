@@ -31,45 +31,33 @@ Windows 安装 [git 下载](https://git-scm.com/)
 ```sh
 # 配置用户名，用来辨识是谁提交的内容
 git config --global user.name "UserName" 
-# UserName : 用户名，如果没有空格可以不加双引号
-# 省略（Local）: 本地配置，只对本地仓库有效
-# --global : 全局配置，所有仓库生效
-# --system : 系统配置，对所有用户生效
 
 # 配置邮箱
 git config --global user.email 123456@gmail.com
-# 邮箱中间是没有空格的所以可以不加引号
-
-# 保存用户配置将 Git 的凭证缓存设置为 store。
-# 这个命令会在用户的 home 目录下创建一个名为 .git-credentials 的文件，
-# 并将 Git 的访问凭证保存到这个文件中。
-# 下次 Git 在访问同一个远程仓库时，就会从这个文件中获取访问凭证，
-# 而不是要求用户输入用户名和密码
-git config --global credential.helper store
-
-# 删除 credential.helper 配置
-git config --global --unset credential.helper store
 
 # 查看配置用户信息
 git config --global --list
 
-# 设置默认编辑器
-git config --global core.editor [editor] # [editor] vim nano notepad 等
+# 设置默认编辑器，[editor] vim nano notepad 等
+git config --global core.editor [editor]
+
 # 编辑配置
 git config --global --edit
 
-# 生成密钥
-ssh-keygen -t rsa -C “123456@gmail.com” # 需要权限
+# 生成密钥，需要权限
+ssh-keygen -t rsa -C "123456@gmail.com"
 
 # 同时配置 github 和 gitee 的 ssh key
 ssh-keygen -t rsa -C "123456@gmail.com" -f "id_rsa_github"
 ssh-keygen -t rsa -C "123456@gmail.com" -f "id_rsa_gitee"
+
 # 修改 .ssh/config
 Host github.com
 User 123456@gmail.com
-Hostname github.com
+Hostname ssh.github.com
 PreferredAuthentications publickey
 IdentityFile ~/.ssh/id_rsa_github
+Port 443
 
 Host gitee.com
 User 123456@gmail.com

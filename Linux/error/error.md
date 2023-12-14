@@ -15,3 +15,14 @@ sudo vim /etc/hosts
 ```
 185.199.108.133 raw.githubusercontent.com
 ```
+
+
+
+### error002
+
+更新失败问题
+
+```
+echo "nameserver 8.8.8.8" | sudo tee /etc/resolv.conf
+```
+

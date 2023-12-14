@@ -44,50 +44,39 @@ git branch -m main
 
 #### ssh: connect to host github.com port 22: Connection refused
 
-配置好 ssh 后测试 `ssh -T git@github.com`
+解决方法：
 
 ```sh
-ssh: connect to host github.com port 22: Connection refused
-```
-
-Linux 解决方法：
-
-```sh
+# Linux
 vim ~/.ssh/config
+
+# Windows
+notepad C:\Users\[Username]\.ssh\config
 ```
 
 写入以下内容，修改 ssh 连接时使用的端口
 
 ```
 Host github.com
-  Hostname ssh.github.com
-  Port 443
-```
-
-Windows 解决方法：
-
-在 `C:\Users\User\.ssh` 中添加以下内容：
-
-```
-Host github.com
-User [email]
 Hostname ssh.github.com
-PreferredAuthentications publickey
-IdentityFile ~/.ssh/id_rsa
 Port 443
 ```
+
+最后终端输入 `ssh -T -p 443 git@ssh.github.com` 验证
 
 ### error004
 
 #### fatal: not a git repository (or any of the parent directories): .git
 
-问题描述:
+问题描述：
 
 在初始化过本地仓库，有远程仓库的前提下，且配置好了 ssh，连接远程仓库出现报错
 
 ```sh
 fatal: not a git repository (or any of the parent directories): .git
 ```
+
+解决方法：
 
 重新初始化仓库
 
