@@ -113,6 +113,3 @@ inoremap "  ""<esc>i
 ```
 
 `ctrl` `n` 或 `ctrl` `p` 来在当前文件中进行补全
-
-
-

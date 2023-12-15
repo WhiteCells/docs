@@ -57,9 +57,23 @@ notepad C:\Users\[Username]\.ssh\config
 写入以下内容，修改 ssh 连接时使用的端口
 
 ```
+# 使用 22 端口
+# Host github.com
+#   Hostname github.com
+#   User git
+#   Port 22
+#   IdentityFile ~/.ssh/your_private_key
+
+# 使用 443 端口
+# 用于 HTTPS 流量，有助于绕过防火墙或网络限制
 Host github.com
-Hostname ssh.github.com
-Port 443
+  Hostname ssh.github.com
+  User git
+  Port 443
+  IdentityFile ~/.ssh/your_private_key
+
+# 指定首选的身份验证方法
+  PreferredAuthentications publickey
 ```
 
 最后终端输入 `ssh -T -p 443 git@ssh.github.com` 验证

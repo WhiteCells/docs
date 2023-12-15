@@ -22,7 +22,7 @@ sudo zypper install git
 
 ### Windows 版本安装 git
 
-Windows 安装 [git 下载](https://git-scm.com/)
+[git 下载](https://git-scm.com/)
 
 ### git 配置
 
@@ -53,25 +53,26 @@ ssh-keygen -t rsa -C "123456@gmail.com" -f "id_rsa_gitee"
 
 # 修改 .ssh/config
 Host github.com
-User 123456@gmail.com
-Hostname ssh.github.com
-PreferredAuthentications publickey
-IdentityFile ~/.ssh/id_rsa_github
-Port 443
+  User 123456@gmail.com
+  Hostname ssh.github.com
+  PreferredAuthentications publickey
+  IdentityFile ~/.ssh/id_rsa_github
+  Port 443
 
 Host gitee.com
-User 123456@gmail.com
-Hostname gitee.com
-PreferredAuthentications publickey
-IdentityFile ~/.ssh/id_rsa_gitee
+  User 123456@gmail.com
+  Hostname gitee.com
+  PreferredAuthentications publickey
+  IdentityFile ~/.ssh/id_rsa_gitee
 
 # Linux 查看公钥
 cat ~/.ssh/id_rsa.pub
-# 复制公钥，保存到 github setting -> SSH and GPG keys
+
 
 # Windows 查看公钥
-notepad.exe C:/Users/[Username]/.ssh/id_rsa.pub
-# [Username] 用户名
+notepad C:/Users/[Username]/.ssh/id_rsa.pub
+# PowerShell 复制到剪切板
+Get-Content C:/Users/[Username]/.ssh/id_rsa.pub | Set-Clipboard
 
 # 检查通信
 ssh -T git@github.com
@@ -96,7 +97,7 @@ git clone git@github.com:[UserName]/[Repo] # 克隆远程仓库到当前目录
 # [Repo] github repostiory name
 
 git clone git@github.com:[UserName]/[Repo] [Directory] # 克隆远程仓库到指定目录
-# [Directory] 相对路径 or 绝对路径
+# [Directory] 相对路径 or 绝对路径 默认当前路径
 ```
 
 ## git 区域和文件状态
@@ -212,8 +213,9 @@ git log --oneline # 简短输出 log，查看提交 hash
 
 清除线上仓库 git 提交记录
 ```sh
-git checkout --orphan [latest-branch] # 这里只能用 checkout，用 switch 会创建一个没有文件的 latest-branch 分支
+git checkout --orphan [latest-branch] 
 # [latest-branch] 自定义新的分支名
+# 只能用 checkout，switch 会创建一个没有文件的 latest-branch 分支
 
 git add .               # 暂存所有文件
 
@@ -227,20 +229,19 @@ git push -f origin main # 提交远程 main 分支
 ```
 
 ```sh
-git switch --orphan [fasde]
-# [fasde] 自定义新分支
+git switch --orphan [server]
+# [server] 自定义新分支
 
-git checkout --orphan [fasde] # 在原分支的的基础上暂存所有文件
+git checkout --orphan [server] # 在原分支的的基础上暂存所有文件
 # 得到空分支需要删除所有文件
 git rm rf .
 ```
 
-修改提交信息
-修改最近一次提交的 commit 信息
+修改提交信息，修改最近一次提交的 commit 信息
 ```sh
-git commit --amend # 进入命令模式
-git commit --amend --only # 修改最近的提交信息而不修改提交内容
-git push --force main # 推送到远程仓库
+git commit --amend         # 进入命令模式
+git commit --amend --only  # 修改最近的提交信息而不修改提交内容
+git push --force main      # 推送到远程仓库
 ```
 
 ## git 推送
@@ -279,19 +280,14 @@ git reflog
 # 查看之前的所有命令，查看所有版本号
 ```
 
-## git 撤销对已修改文件的修改
+## git 撤销暂存区的修改
 
 ```sh
-# 修改或者使用 rm 删除的文件
-git checkout -- [file] # 撤销对单个文件的修改
-# [file] 文件路路径
-git checkout -- .      # 撤销对所有已修改文件的修改
+# 撤销对单个文件的修改
+git checkout -- [file]
 
-# 修改或者使用 git rm 删除的文件
-git reset [CommitHash] --hard
-
-git revert HEAD # 撤销对已提交的修改
-git revert [CommitHash] # 撤销对历史提交的修改
+# 撤销对所有已修改文件的修改
+git checkout -- .
 ```
 
 ## git 查看差异
@@ -300,11 +296,11 @@ git revert [CommitHash] # 撤销对历史提交的修改
 # 工作区和暂存区
 git diff
 
-# 工作区和上一个本地仓库的区别
-git diff HEAD^
-
 # 工作区和本地仓库的区别
 git diff HEAD
+
+# 工作区和上一个本地仓库的区别
+git diff HEAD^
 
 # 暂存区和本地仓库的区别
 git diff --cached
@@ -314,8 +310,9 @@ git diff [CommitHash] [CommitHash]
 # [CommitHash] 为版本号，也可以是用 HEAD
 
 # 比较分支之间的差异
-git diff [branch_name] [branch_name] 
+git diff [BranchName] [BranchName] 
 
+# 比较分支之间指定的文件的区别
 git diff HEAD~ HEAD [file]
 # [file] 需要查看的文件的差异
 
