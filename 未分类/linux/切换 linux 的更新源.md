@@ -1,17 +1,36 @@
-Ubuntu / Debian：
-- 更新源配置文件：`/etc/apt/sources.list`
-- 使用文本编辑器（如 nano 或 vim）打开该文件：
-  ```sh
-  sudo nano /etc/apt/sources.list
-  ```
-- 在文件中找到类似 `deb http://archive.ubuntu.com/ubuntu/ focal main` 的行，将其替换为你想要使用的更新源地址。
-- 保存并关闭文件。
-- 运行以下命令以更新软件包列表：
-  ```sh
-  sudo apt update
-  ```
+### Ubuntu / Debian
 
-CentOS / RHEL：
+```sh
+# 备份源配置文件
+cp /etc/apt/sources.list /etc/apt/old_sources.list
+
+# 打开源配置文件
+sudo vim /etc/apt/sources.list
+
+# 清除原配置文件 (命令模式)
+:%d
+
+# 复制源镜像
+deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal main restricted universe multiverse
+deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-updates main restricted universe multiverse
+deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-backports main restricted universe multiverse
+deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-security main restricted universe multiverse
+
+# Ubuntu 版本代号
+# Ubuntu 23.04: lunar
+# Ubuntu 22.04 LTS: jammy
+# Ubuntu 22.10: kinetic
+# Ubuntu 20.04 LTS: focal
+# Ubuntu 18.04 LTS: bionic
+# Ubuntu 16.04 LTS: xenial
+# Ubuntu 16.04 LTS: trusty
+
+# 更新软件包列表
+sudo apt update
+```
+
+### CentOS / RHEL
+
 - 更新源配置文件：`/etc/yum.repos.d/CentOS-Base.repo`
 - 使用文本编辑器打开该文件：
   ```sh
@@ -25,7 +44,8 @@ CentOS / RHEL：
   sudo yum update
   ```
 
-Arch Linux：
+### Arch Linux
+
 - 更新源配置文件：`/etc/pacman.d/mirrorlist`
 - 使用文本编辑器打开该文件：
   ```sh
@@ -41,7 +61,7 @@ Arch Linux：
 
 在修改更新源之前，最好备份原始配置文件，以防出现问题。此外，确保更新源是可靠和稳定的，以确保系统的安全性和稳定性。
 
-开源镜像站
+### 开源镜像站
 
-- [1](https://mirror.tuna.tsinghua.edu.cn/help/ubuntu/)
-- [2](https://mirrors.ustc.edu.cn/help/ubuntu.html)
+- https://mirror.tuna.tsinghua.edu.cn/help/ubuntu/
+- https://mirrors.ustc.edu.cn/help/index.html

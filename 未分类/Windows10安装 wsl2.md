@@ -75,7 +75,7 @@ sh -c "$(fetch -o - https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 
 ```sh
 vim ~/.zshrc
-# gentoo
+# af-magic
 source ~/.zshrc
 ```
 

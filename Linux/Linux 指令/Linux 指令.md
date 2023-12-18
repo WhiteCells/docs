@@ -83,6 +83,9 @@ kill -9 [pid] # 强制终止指定进程进程，SIGKILL 信号来终止进程
 sudo shutdown [option] [time] [warningmessage]
 sudo halt       # 系统停机，不断电
 sudo poweroff   # 系统完全关闭
+
+sudo apt install package
+sudo apt remove package
 ```
 
 文件权限
@@ -102,18 +105,6 @@ r-x: 其他组的权限
 # 八进制表示
 1 7 5 5
 ```
-
-man
-
-```sh
-# centOS
-yum install -y man-pages
-
-# Ubuntu
-sudo apt-get install manpages
-```
-
-
 
 ### 命令帮助
 

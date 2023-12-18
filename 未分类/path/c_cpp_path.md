@@ -1,94 +1,78 @@
-[GCC](http://ftp.gnu.org/gnu/gcc/)
+### Linux
 
-visual studio 运行 linux 中 IntelliSense IntelliSense 使用 gnu（使用 gcc 可能有些宏值出现错误提示）
+```sh
+# 添加一个新的 PPA（Personal Package Archive）源，来获取最新版本的 g++
+sudo add-apt-repository ppa:ubuntu-toolchain-r/test
 
-1. 首先，查看您当前的 `g++` 版本。在终端中输入以下命令：
+# 更新软件包列表
+sudo apt update
 
-   ```
-   g++ --version
-   ```
+# 安装 g++-10 这个版本的 g++ 编译器
+sudo apt install g++-10
 
-2. 如果您的 `g++` 版本较旧，那么您需要添加一个新的 `PPA`（Personal Package Archive）源，来获取最新版本的 `g++`。在终端中输入以下命令：
-
-   ```
-   sudo add-apt-repository ppa:ubuntu-toolchain-r/test
-   ```
-
-   这个命令将会添加一个名为 `ubuntu-toolchain-r/test` 的 PPA 源到您的系统中。
-
-3. 接下来，更新软件包列表，并升级 `g++`。在终端中输入以下命令：
-
-   ```
-   sudo apt update
-   sudo apt install g++-10
-   ```
-
-   这个命令将会更新软件包列表，并安装 `g++-10` 这个版本的 `g++` 编译器。
-
-4. 最后，确认 `g++-10` 已经正确安装。在终端中输入以下命令：
-
-   ```
-   g++-10 --version
-   ```
-
-   如果输出了正确的 `g++` 版本号，说明升级已经成功。
-
-除了 `PPA` 源升级方式，还有其他升级方式，比如手动下载源码编译安装等方法。您可以根据实际情况选择最适合的升级方式。
-
-
-
-如果您已经成功运行了`sudo apt install g++-10`命令，并且没有出现错误提示，那么恭喜您，您已经成功安装了`g++-10`版本的`g++`编译器。
-
-您可以通过在终端中输入以下命令来验证安装结果：
-
-```
+# 查看是否安装成功
 g++-10 --version
-```
 
-如果输出显示为`g++`的正确版本号，说明安装成功。现在，您可以使用`g++-10`命令来编译您的C++代码，并使用新版本的功能和特性。
+# 使用新版本
+g++-10 main.cpp -o main
 
-请注意，在使用新的`g++-10`编译器时，您可以将`g++-10`命令替换为`g++`命令，以便更方便地使用新版本的编译器。可以通过创建一个符号链接来实现这一点，如下所示：
-
-```
+# 创建一个符号链接，将 g++-10 命令替换为 g++ 命令
 sudo ln -s /usr/bin/g++-10 /usr/bin/g++
+
+# sudo ln -s /usr/bin/gcc-10 /usr/bin/gcc
 ```
-
-现在，您可以使用`g++`命令来代替`g++-10`命令进行编译，而不需要每次都指定版本号。
-
-
 
 如果出现 `ln: failed to create symbolic link '/usr/bin/g++': File exists` 错误，表示 `/usr/bin/g++` 已经存在了。
 
-这可能是因为之前已经创建过了一个叫做 `/usr/bin/g++` 的符号链接。您可以通过以下步骤解决这个问题：
+这可能是因为已经创建过了一个叫做 `/usr/bin/g++` 的符号链接
 
-1. 首先，检查一下 `/usr/bin/g++` 文件的类型。在终端中输入以下命令：
+```sh
+# 检查 /usr/bin/g++ 文件的类型
+file /usr/bin/g++
+# /usr/bin/g++: symbolic link 表示符号链接存在
 
-   ```
-   file /usr/bin/g++
-   ```
+# 删除符号链接
+sudo rm /usr/bin/g++
 
-   如果输出显示 `/usr/bin/g++: symbolic link`，那么说明之前已经有一个名为 `/usr/bin/g++` 的符号链接存在。
+# 创建符号链接，/usr/bin/g++ 指向 /usr/bin/g++-10
+sudo ln -s /usr/bin/g++-10 /usr/bin/g++
 
-2. 如果确实是符号链接存在，并且您确定这个符号链接是您之前创建的，那么您可以删除它。在终端中输入以下命令：
+# 检查符号链接是否创建成功
+ls -l /usr/bin/g++
+# /usr/bin/g++ -> /usr/bin/g++-10 表示符号链接创建成功
 
-   ```
-   sudo rm /usr/bin/g++
-   ```
+# 使用新版本
+g++ main.cpp -o main
+```
 
-   这将会删除 `/usr/bin/g++` 符号链接文件。
+> ps：
+>
+> 1. vscode 运行 linux 中 IntelliSense 使用 gnu（使用 gcc 可能有些宏出现错误提示）
+>
+> 2. 移除 PPA 源，不移除无法安装低版本 GCC
+>
+>    ```sh
+>    sudo add-apt-repository --remove ppa:ubuntu-toolchain-r/test
+>    # 安装低版本 GCC 时出错
+>    # The following packages have unmet dependencies
+>    sudo apt-get install aptitude
+>    sudo aptitude install g++
+>    # 选择 no 后面都是 yes
+>    ```
 
-3. 现在，您可以再次尝试创建符号链接。在终端中输入以下命令：
+### Windows
 
-   ```
-   sudo ln -s /usr/bin/g++-10 /usr/bin/g++
-   ```
+[sourceforge](https://sourceforge.net) 上安装的版本为旧版本
 
-   这将会创建一个名为 `/usr/bin/g++` 的符号链接，指向 `/usr/bin/g++-10`。
+[niXman/mingw-builds-binaries/releases ](https://github.com/niXman/mingw-builds-binaries/releases) github 上下载新版本
 
-4. 最后，您可以再次验证符号链接是否创建成功。在终端中输入以下命令：
+- 32位的操作系统，选择 i686，64位的操作系统，选择 x86_64；
+- 13.1.0 是 GCC 的版本号；
+- win32 是开发 windows 系统程序的协议，posix 是其他系统的协议（例如Linux、Unix、Mac OS）；
+- 异常处理模型 seh（新的，仅支持64位系统），sjlj（稳定的，64位和32位都支持）， dwarf（优于sjlj的，仅支持32位系统）；
+- msvcrt、ucrt 运行时库类型，
+- MSVCRT（Microsoft Visual C Runtime）是 Microsoft Visual C++ 早期版本使用的运行时库，用于支持 C 程序的运行。它提供了一些常用的 C 函数，如 printf、scanf、malloc、free等。MSVCRT 只能在 32 位 Windows 系统上运行，对于 64 位系统和 Windows Store 应用程序不支持。UCRT（Universal C Runtime）是在 Windows 10 中引入的新的 C 运行时库，用于支持 C 程序的运行和开发。UCRT 提供了一些新的 C 函数，同时还支持 Unicode 字符集和安全函数，如 strcpy_s、strcat_s、_itoa_s 等。UCRT 同时支持 32 位和 64 位系统，并且可以与 Windows Store 应用程序一起使用；
+- rev1 构建版本；
 
-   ```
-   ls -l /usr/bin/g++
-   ```
+配置环境变量，bin 目录
 
-   输出应该显示 `/usr/bin/g++ -> /usr/bin/g++-10`，表示符号链接创建成功。
