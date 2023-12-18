@@ -1,12 +1,12 @@
 ### 1.文件描述符
 
-在内核中，所有打开的文件都过文件描述符引用。文件描述符是一个非负数，范围在 `0~OPEN_MAX - 1`，当进程创建时默认为它打开 3 个文件描述符，它们始终链接终端：
+在内核中，所有打开的文件都过文件描述符引用。文件描述符是一个非负数，范围在 `0` 至 `OPEN_MAX - 1`，当进程创建时默认为它打开 3 个文件描述符，它们始终链接终端：
 
 - `STDIN_FILENO`：标准输入 （0）
 - `STDOUT_FILENO`：标准输出（1）
 - `STDERR_FILENO`：标准错误输出（2）
 
-使用 `STDIN_FILENO`、`STDOUT_FILENO`、`STDERR_FILENO` 代替 0、1、2 从而提高可读性，可移植性及维护性，这 3 个宏位于 `<unistd.h>` 中。
+使用 `STDIN_FILENO`、`STDOUT_FILENO`、`STDERR_FILENO` 代替 0、1、2 从而提高可读性，可移植性及维护性，这 3 个宏位于 `<unistd.h>` 中
 
 #### 1.1 复制文件描述符
 
@@ -14,7 +14,7 @@
 #include <stdio.h>
 
 // 复制文件描述符
-int dup(int lodfd);
+int dup(int oldfd);
     argument:
         - oldfd: 需要复制的文件描述符
     return: 
@@ -23,8 +23,8 @@ int dup(int lodfd);
         - 失败返回 -1
 
 // dup2 系统调用执行与 dup 相同的任务，但它不使用编号最低的未使用文件描述符，
-// 而是使用 newfd 中指定的文件描述符编号。
-// 如果文件描述符 newfd 以前是打开的，那么它在被重用之前会被关闭。
+// 而是使用 newfd 中指定的文件描述符编号
+// 如果文件描述符 newfd 以前是打开的，那么它在被重用之前会被关闭，是一个原子操作
 int dup2(int oldfd, int newfd);
     argument:
         - oldfd: 需要复制 oldfd 文件描述符
@@ -37,30 +37,9 @@ int dup2(int oldfd, int newfd);
     note:
         - 如果 oldfd 无效，复制失败，newfd 不会被关闭
         - 如果 oldfd 和 newfd 相等则什么都不会做，返回 newfd
-```
-
-```c
-#include <unistd.h>
-#include <stdio.h>
-#include <fcntl.h>
-#include <stdlib.h>
-
-// 省略返回值判断
-int main() {
-    int fd = open("testfile.txt", O_RDWR | O_CREAT);
-
-    int cp_fd = dup(fd);
-    printf("oldfd: %d\n", fd);
-    printf("newfd: %d\n", cp_fd);
-
-    close(fd);
-    close(cp_fd);
-    return 0;
-}
-
-/*****************************/
-oldfd: 3
-newfd: 4
+            
+// 这些函数返回的新文件描述符与参数 oldfd 共享一个文件表项
+// （文件表项） 文件状态标志、当前文件偏移量、v 节点指针
 ```
 
 ### 2. 相关调用
@@ -76,27 +55,26 @@ newfd: 4
 int open(const char *pathname, int flags);
     argument:
         - pathname: 需要打开的文件的路径
-        - flags: 
-            - 必须包含以下:
+        - flags:
+            - 必须指定一个:
                 - O_RDONLY: 只读
                 - O_WRONLY: 只写
                 - O_RDWR: 读写
-            - 可以附加 0 个或多个，使用按位或 | 的方式附加
-                - O_APPEND: 文件以追加方式打开，
-                            在每次写入 write 之前文件偏移量 offset 位于文件末尾
-                            一个原子操作
+                - O_EXEC: 只执行打开（某些系统可用）
+                - O_SEARCH: 只搜索打开（应用于目录）（某些系统可用）
+            - 使用按位或 | 的方式附加 0 个或多个，
+                - O_APPEND: 文件以追加方式打开，在每次写入 write 之前文件偏移量 offset 位于文件末尾，是一个原子操作
                 - O_ASYNC: 启用信号驱动 I/O
                 - O_SYNC: 以同步写入方式打开文件，确保写入立即被写入磁盘。
                 - O_DSYNC: 文件写入操作会保证数据的完整性
-                - O_CLOEXEC: (since Linux 2.6.23)文件描述符被传递给一个新的进程（通过 exec 系统调用）时，
-                             这个文件描述符会被自动关闭
+                - O_RSYNC: 使每一个 read 操作等待，直到所有对文件同一部分挂起的写操作完成
                 - O_CREAT: 如果指定路径下文件不存在，将其创建为常规文件
-                - O_DIRECT: 尽量减少此文件的I/O对缓存的影响
+                - O_DIRECT: 尽量减少此文件的 I/O 对缓存的影响
                 - O_CLOEXEC: 在执行 exec 系统调用时关闭文件描述符
                 - O_DIRECTORY: 打开目录，如果路径 pathname 不是目录，则 open 失败
                 - O_EXCL: 与 O_CREAT 一起使用，如果文件已经存在，则 open 失败
                 - O_NOCTTY: 如果文件是终端设备，不将其分配为控制终端
-                - O_LARGEFILE: 处理大文件，这个标志可能已经不再是必需的
+                - O_LARGEFILE: 处理大文件（这个标志可能已经不再是必需的）
                 - O_NOFOLLOW: 直接操作符号链接而不是其指向的文件
                 - O_TMPFILE: 在文件系统中创建一个不与目录关联的临时文件
                 - O_TRUNC: 如果文件存在，将其截断为空文件
@@ -119,7 +97,7 @@ int open(const char *pathname, int flags, mode_t mode);
             - S_IWOTH: 其他写
             - S_IXOTH: 其他执行
 
-// creat() 函数是一个过时的系统调用，可以使用 open() 函数
+// creat() 函数是一个过时的系统调用
 // 由于历史原因，creat() 函数仍然存在于一些系统中
 int creat(const char *pathname, mode_t mocde);
 
@@ -367,7 +345,7 @@ Unix 系统支持在不同进程间共享打开文件，内核使用 3 种数据
 内核在文件表上新增两个表项：
 
 - 这两个文件表项指向同一个 v 节点表项
-- 进程 A、B 各自的文件描述符表项分别指向这两个文件表项，因此每个进程都有自己的对该文件的当前偏移量
+- 进程 A、B 各自的文件描述符表项分别指向这两个文件表项，因此每个进程都有独立的当前文件偏移量
 
 对文件操作的结果：
 

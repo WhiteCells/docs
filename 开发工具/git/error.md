@@ -76,7 +76,15 @@ Host github.com
   PreferredAuthentications publickey
 ```
 
-最后终端输入 `ssh -T -p 443 git@ssh.github.com` 验证
+```sh
+# 测试SSH连接
+ssh -T -p 443 git@ssh.github.com
+ssh -T -p 22 git@github.com
+# 默认端口号 22
+ssh -T git@github.com 
+```
+
+
 
 ### error004
 
