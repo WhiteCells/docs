@@ -1,4 +1,4 @@
-[vim download](https://www.vim.org/download.php)
+[vim ](https://www.vim.org)
 
 ```sh
 ######## normal mode #########

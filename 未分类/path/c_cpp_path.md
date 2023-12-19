@@ -76,3 +76,10 @@ g++ main.cpp -o main
 
 配置环境变量，bin 目录
 
+
+
+### 相关链接
+
+- https://www.mingw-w64.org/
+- https://sourceforge.net
+- https://github.com/niXman/mingw-builds-binaries/releases

@@ -1,6 +1,6 @@
-[wsl 官方文档](https://learn.microsoft.com/zh-cn/windows/wsl/install)
+[wsl official documents](https://learn.microsoft.com/zh-cn/windows/wsl/install)
 
-必须在 Windows 10 版本 2004 及更高版本（内部版本 19041 及更高版本）或 Windows 11 才能使用以下命令。 
+系统要求：Windows 10 版本 2004 及以上（内部版本 19041 及以上）或 Windows 11  
 
 管理员模式下打开 PowerShell 或 Windows 命令提示符
 
@@ -13,7 +13,7 @@ wsl --set-version Ubuntu 2 # wsl2
 
 
 ```sh
-explorer.exe . # 打开子系统路径
+explorer.exe . # 打开子系统当前路径
 
 cd /mnt/ # 进入本地磁盘挂载
 ```

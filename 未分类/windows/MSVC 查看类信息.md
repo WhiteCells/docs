@@ -2,13 +2,9 @@
 cl /d1 reportSingleClassLayout类名 文件
 # cl /d1 reportSingleClassLayoutFactory main.cpp
 
-# cl: 这是 MSVC 编译器的命令行工具。
-# /d1: 这是一个调试开关，用于指定后续的特定调试选项。
-# reportSingleClassLayoutFactory: 这是一个特定的调试选项，
-# 用于生成给定类（在这个例子中是 "Factory"）的内存布局报告。
-# 这对于理解对象在内存中是如何布局的非常有用，
-# 尤其是在考虑对齐、继承、虚函数等方面。
-# main.cpp: 这是你要编译的源代码文件。
+# cl: 这是 MSVC 编译器的命令行工具
+# /d1: 这是一个调试开关，用于指定后续的特定调试选项
+# 理解对象在内存中是如何布局，在考虑对齐、继承、虚函数等方面
 ```
 
 Microsoft Visual C++ (MSVC) 编译器提供了许多有用的命令和选项，可用于各种编译、调试和优化任务。以下是一些常用和重要的命令及其功能：
