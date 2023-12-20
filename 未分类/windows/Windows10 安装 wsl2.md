@@ -24,18 +24,6 @@ WSL2 关闭
 wsl --shutdown # powershell 中执行
 ```
 
-ssh 连接 WSL2
-
-```sh
-sudo apt install openssh-server
-sudo vim /etc/ssh/sshd_config
-    // 配置ssh参数
-    // Port 22
-    // PasswordAuthentication yes
-sudo service ssh --full-restart
-	// sudo service ssh start
-```
-
 WSL 删除指定系统
 
 ```sh
@@ -50,7 +38,7 @@ wsl --set-default [distribution_name]
 
 WSL 优化
 
-linux 默认 shell 是 bash 在 gdb 调试是补全 program 会出现卡顿
+linux 默认 shell 是 bash 在 gdb 调试时补全 program 会出现卡顿
 
 安装 zsh（zshell）
 
