@@ -7,14 +7,23 @@ sudo apt install openssh-server
 
 # 启动 ssh 服务
 sudo systemctl start ssh
+# sudo service ssh start
+
 # 停止 ssh 服务
 sudo systemctl stop ssh
-# 自启 ssh
+# sudo service ssh stop
+
+# 自启 ssh 服务
 sudo systemctl enable ssh
-# 取消自启
+# sudo service ssh enable
+
+# 取消自启 ssh 服务
 sudo systemctl disable ssh
+# sudo service ssh disable
+
 # 查看 ssh 服务
 sudo systemctl status ssh
+# sudo service ssh status
 
 # 安装 net-tools
 sudo apt install net-tools

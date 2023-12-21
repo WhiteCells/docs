@@ -33,10 +33,10 @@ ls -laf     # -f 选项用于对结果进行排序
 stat [file]	# 查看文件 [file] 的相关信息
 
 
-rm [file]     # 删除当前路径下文件名为 [file] 的文件，区分后缀
+rm [file]     # 删除指定文件
 rm *.o        # 删除当前路径下所有后缀为 .o 的文件，其他后缀同理
 rmdir [dir]   # 只能删除当前路径下的空文件夹 [dir]，非空无法删除
-rm [dir] -rf  # 删除当前路径下文件夹
+rm -r [dir]   # 删除指定文件夹
 
 env           # 查看环境变量，坏境变量是键值对的形式，一个键可以对应多个值，中间用 “:” 分隔
 
@@ -83,9 +83,6 @@ kill -9 [pid] # 强制终止指定进程进程，SIGKILL 信号来终止进程
 sudo shutdown [option] [time] [warningmessage]
 sudo halt       # 系统停机，不断电
 sudo poweroff   # 系统完全关闭
-
-sudo apt install package
-sudo apt remove package
 ```
 
 文件权限
@@ -122,7 +119,7 @@ man 文档有 9 个类别
 4. 设备文件的说明
 5. 设置文件或者某些文件的格式
 6. 游戏
-7. 惯例与协议等。例如 Linux 标准文件系统、网络协议、ASCII说明内容
+7. 惯例与协议等。例如 Linux 标准文件系统、网络协议、ASCII 说明内容
 8. 系统管理员可用的管理条令
 9. 与内核有关的文件
 

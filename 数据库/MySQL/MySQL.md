@@ -39,6 +39,10 @@
    sudo service [ServiceName] start
    # or
    sudo systemctl start [ServiceName]
+   
+   # MySQL 开发库
+   # #include <mysql/mysql.h>
+   sudo apt install libmysqlclient-dev
    ```
 
 ### 客户端连接
@@ -82,23 +86,14 @@
 
 4. 注释：
 
-   1. 单行注释：
-
-      ```sql
-      -- 注释
-      # 注释 (MySQL 特有)
-      ```
-
-   2. 多行注释：
-
-      ```sql
-      /* 
-      注释            
-      注释
-      */
-      ```
-
-      
+   ```mysql
+   -- 注释
+   # 注释 (MySQL 特有)
+   
+   /* 
+   注释
+   */
+   ```
 
 ### SQL语句分类
 
