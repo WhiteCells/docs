@@ -187,11 +187,16 @@ message(${PORT})
 ```cmake
 # if
 
+# 数值比较
 # LESS
 # GREATER
 # EQUAL
 # LESS_EQUAL
 # GREATER_EQUAL
+
+# 字符串比较
+# STREQUAL
+# ...
 
 if(${CMAKE_VERSION} LESS 3.28.0)
     message("version too low")
