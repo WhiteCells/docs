@@ -321,5 +321,86 @@ message(${val}) # new val
 
 ---
 
-add_executable 写入相对路径，在中引入头文件需要相对路径
+### Project Configure
 
+#### Method 1
+
+- add_executable 写入相对路径，引入头文件时需要相对路径
+
+```sh
+# 项目目录
+- test1
+    - include
+        * test.h
+    - src
+        * test.cpp
+    * CMakeLists.txt
+    * main.cpp
+```
+
+```cmake
+# CMakeLists.txt
+cmake_minimum_required(VERSION 3.20.0)
+project(test1 CXX)
+add_executable(test1 main.cpp src/test.cpp)
+```
+
+```cpp
+// test.h
+#ifndef _TEST_H_
+#define _TEST_H_
+
+void test();
+
+#endif // _TEST_H_
+
+// test.cpp
+#include "../include/test.h"
+#include <iostream>
+
+void test() { puts("test1"); }
+
+// main.cpp
+#include "include/test.h"
+
+int main(int argc, char const *argv[]) {
+    test();
+    return 0;
+}
+```
+
+#### Method 2
+
+- include 方法可以引用子目录中的 cmake 配置文件，将配置加入 add_executable 中
+
+```sh
+# 项目目录
+- test2
+    - include
+        * test.h
+    - src
+        * test.cmake
+        * test.cpp
+    * CMakeLists.txt
+    * main.cpp
+```
+
+```cmake
+# test.cmake
+set(test_source src/test.cpp)
+
+# CMakeLists.txt
+cmake_minimum_required(VERSION 3.20.0)
+project(timer CXX)
+include(src/test.cmake)
+add_executable(timer main.cpp ${test_source})
+```
+
+#### Method 3
+
+CMakeLists 嵌套
+
+- target_include_directories 头文件目录的声明
+- target_link_libraries 链接库文件
+- add_subdirectory 添加子目录
+- add_library 生成库文件默认静态库

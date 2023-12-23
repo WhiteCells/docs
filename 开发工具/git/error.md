@@ -1,7 +1,5 @@
 ### error001
 
-#### ssh: Could not resolve hostname ssh.github.com: Temporary failure in name resolution fatal: Could not read from remote repository.
-
 ```sh
 ssh: Could not resolve hostname ssh.github.com: Temporary failure in name resolution
 fatal: Could not read from remote repository.
@@ -10,13 +8,11 @@ Please make sure you have the correct access rights
 and the repository exists.
 ```
 
+解决方法：
+
 关闭代理
 
 ### error002
-
-#### Using 'master' as the name for the initial branch. This default branch name
-
-初始化仓库时出现以下错误：
 
 ```sh
 hint: Using 'master' as the name for the initial branch. This default branch name
@@ -31,6 +27,10 @@ hint:
 hint:   git branch -m <name>
 ```
 
+初始化仓库时出现错误
+
+解决方法：
+
 全局修改默认初始化分支为 main
 
 ```sh
@@ -42,7 +42,9 @@ git branch -m main
 
 ### error003
 
-#### ssh: connect to host github.com port 22: Connection refused
+```sh
+ssh: connect to host github.com port 22: Connection refused
+```
 
 解决方法：
 
@@ -84,19 +86,13 @@ ssh -T -p 22 git@github.com
 ssh -T git@github.com 
 ```
 
-
-
 ### error004
 
-#### fatal: not a git repository (or any of the parent directories): .git
-
-问题描述：
-
-在初始化过本地仓库，有远程仓库的前提下，且配置好了 ssh，连接远程仓库出现报错
-
-```sh
+```
 fatal: not a git repository (or any of the parent directories): .git
 ```
+
+在初始化过本地仓库，有远程仓库的前提下，且配置好了 ssh，连接远程仓库出现报错
 
 解决方法：
 
@@ -108,7 +104,7 @@ git init
 
 ### error005
 
-#### The authenticity of host 'ssh.github.com (20.205.243.160)' can't be established.
+The authenticity of host 'ssh.github.com (20.205.243.160)' can't be established.
 
 ```sh
 ECDSA key fingerprint is SHA256:p2QAMXNIC1TJYWeIOttrVc98/R1BUFWu3/LiyKgUfQM.
@@ -116,4 +112,25 @@ Are you sure you want to continue connecting (yes/no/[fingerprint])?
 ```
 
 直接输入 yes 回车即可
+
+### error006
+
+```
+warning: ----------------- SECURITY WARNING ----------------
+warning: | TLS certificate verification has been disabled! |
+warning: ---------------------------------------------------
+warning: HTTPS connections may not be secure. See https://aka.ms/gcm/tlsverify for more information.
+warning: ----------------- SECURITY WARNING ----------------
+warning: | TLS certificate verification has been disabled! |
+warning: ---------------------------------------------------
+warning: HTTPS connections may not be secure. See https://aka.ms/gcm/tlsverify for more information.
+```
+
+https 方式连接远程仓库时出现报错
+
+解决方法：
+
+```sh
+git config --global http.sslVerify true
+```
 
