@@ -14,43 +14,36 @@ CMake 是一个开源的、跨平台的自动化构建工具
 
 ```cmake
 # CMakeLists.txt
-cmake_minimum_required(VERSION 3.20) # 最低版本要求
+cmake_minimum_required(VERSION 3.20) # CMake 最低版本要求
 project(project-name) # 项目名
-add_executable(project-name main.cpp) # 由源文件生成一个可执行的程序
+add_executable(binary-name main.cpp) # 由源文件生成一个可执行的程序
 ```
 
 ```sh
-cmake -B build # 创建一个 build 目录并在此目录下生成构建文件
-cmake --build build # 构建项目
-
-cmake -P *.cmake # 执行文件
-
+# cmake -h 查看可生成构建文件
 cmake -G "[generator-name]" -T [toolset-spec] -A [platform-name] -B [path-to-source]
+
+cmake -B build # 创建一个 build 目录并在此目录下生成构建文件
+
+# 构建文件生成之后，修改源文件后只需要使用构建文件进行构建即可
+cmake --build build # 以 build 目录下的文件构建项目
+
+cmake -P test.cmake # 执行名为 test 的 CMake 脚本文件
 ```
 
 ### Windows CMake
 
 [CMake installation](https://cmake.org/download/)
 
-```cmake
-# 生成构建文件
-# 默认生成 MSVC 构建文件
-# cmake -h 查看可生成构建文件
-cmake -G "[generator-name]" -T [toolset-spec] -A [platform-name] -B [path-to-source]
-# cmake -B [build]
-# cmake -G "MinGW Makefiles" -B [linux-build]
-
-# 构建项目
-cmake --build [build]
-```
+默认生成 MSVC 构建文件
 
 ### Linux CMake
 
 ```sh
-# 包安装
+# 包方式安装
 sudo apt install cmake
 
-# 源码编译
+# 源码编译方式安装
 # 安装编译工具
 sudo apt install build-essential
 # 下载源码
@@ -328,7 +321,7 @@ message(${val}) # new val
 - add_executable 写入相对路径，引入头文件时需要相对路径
 
 ```sh
-# 项目目录
+# 项目树
 - test1
     - include
         * test.h
@@ -339,14 +332,14 @@ message(${val}) # new val
 ```
 
 ```cmake
-# CMakeLists.txt
+# ./CMakeLists.txt
 cmake_minimum_required(VERSION 3.20.0)
 project(test1 CXX)
-add_executable(test1 main.cpp src/test.cpp)
+add_executable(app main.cpp src/test.cpp)
 ```
 
 ```cpp
-// test.h
+// ./include/test.h
 #ifndef _TEST_H_
 #define _TEST_H_
 
@@ -354,13 +347,13 @@ void test();
 
 #endif // _TEST_H_
 
-// test.cpp
+// ./src/test.cpp
 #include "../include/test.h"
 #include <iostream>
 
-void test() { puts("test1"); }
+void test() { puts("test"); }
 
-// main.cpp
+// ./main.cpp
 #include "include/test.h"
 
 int main(int argc, char const *argv[]) {
@@ -374,7 +367,7 @@ int main(int argc, char const *argv[]) {
 - include 方法可以引用子目录中的 cmake 配置文件，将配置加入 add_executable 中
 
 ```sh
-# 项目目录
+# 项目树
 - test2
     - include
         * test.h
@@ -386,14 +379,38 @@ int main(int argc, char const *argv[]) {
 ```
 
 ```cmake
-# test.cmake
+# ./src/test.cmake
 set(test_source src/test.cpp)
 
-# CMakeLists.txt
+# ./CMakeLists.txt
 cmake_minimum_required(VERSION 3.20.0)
 project(timer CXX)
 include(src/test.cmake)
-add_executable(timer main.cpp ${test_source})
+add_executable(app main.cpp ${test_source})
+```
+
+```cpp
+// ./include/test.h
+#ifndef _TEST_H_
+#define _TEST_H_
+
+void test();
+
+#endif // _TEST_H_
+
+// ./src/test.cpp
+#include "../include/test.h"
+#include <iostream>
+
+void test() { puts("test"); }
+
+// ./main.cpp
+#include "include/test.h"
+
+int main(int argc, char const *argv[]) {
+    test();
+    return 0;
+}
 ```
 
 #### Method 3
@@ -404,3 +421,197 @@ CMakeLists 嵌套
 - target_link_libraries 链接库文件
 - add_subdirectory 添加子目录
 - add_library 生成库文件默认静态库
+
+```sh
+# 项目树
+- test3
+    - include
+        * test.h
+    - src
+        * CMakeLists.txt
+        * test.cpp
+    * CMakeLists.txt
+    * main.cpp
+```
+
+```cmake
+# ./src/CMakeLists.txt
+add_library(testlib test.cpp)
+
+# ./CMakeLists.txt
+cmake_minimum_required(VERSION 3.20.0)
+project(test3 CXX)
+add_subdirectory(src)
+add_executable(app main.cpp)
+target_link_libraries(test3 PUBLIC testlib)
+target_include_directories(test3 PUBLIC include)
+```
+
+```cpp
+// ./include/test.h
+#ifndef _TEST_H_
+#define _TEST_H_
+
+void test();
+
+#endif // _TEST_H_
+
+// ./src/test.cpp
+#include "../include/test.h"
+#include <iostream>
+
+void test() { puts("test"); }
+
+// ./main.cpp
+#include "test.h"
+
+int main(int argc, char const *argv[]) {
+    test();
+    return 0;
+}
+```
+
+#### Method 4
+
+版本要求：3.12
+
+- add_library OBJECT，Object Library 是一个特殊的库类型，将目标文件编译成一个库，但不会生成最终的链接文件，可以在 add_library 或 add_executable 中将 Object Library 作为源文件进行链接，从而生成最终的可执行文件或库文件
+- 将 target_include_directories 移入到子 CMakeLists.txt 中
+
+```sh
+# 项目树
+- test4
+    - include
+        * test1.h
+        * test2.h
+    - src
+        * CMakeLists.txt
+        * test1.cpp
+        * test2.cpp
+    * CMakeLists.txt
+    * main.cpp
+```
+
+```cmake
+# ./src/CMakeLists.txt
+file(GLOB SRC *.cpp)
+add_library(testlib OBJECT ${SRC})
+target_include_directories(testlib PUBLIC ../include)
+
+# ./CMakeLists.txt
+cmake_minimum_required(VERSION 3.20.0)
+project(test4 CXX)
+add_subdirectory(src)
+add_executable(app main.cpp)
+target_link_libraries(test4 PUBLIC testlib)
+```
+
+```cpp
+// ./include/test1.h
+#ifndef _TEST_H_
+#define _TEST_H_
+
+void test1();
+
+#endif // _TEST1_H_
+
+// ./include/test2.h
+#ifndef _TEST2_H_
+#define _TEST2_H_
+
+void test2();
+
+#endif // _TEST2_H_
+
+// ./src/test1.cpp
+#include <iostream>
+
+void test1() { puts("test1"); }
+
+// ./src/test2.cpp
+#include <iostream>
+
+void test2() { puts("test2"); }
+
+// ./main.cpp
+#include "test1.h"
+#include "test2.h"
+
+int main(int argc, char const *argv[]) {
+    test1();
+    test2();
+    return 0;
+}
+```
+
+### Static And Dynamic Libraries
+
+#### Generate
+
+Windows 静态库 libxxx.lib，动态库 libxxx.dll （需要全名）
+
+Unix 静态库 libxxx.a，动态库 libxxx.so （只需要给出 xxx）
+
+```cmake
+file() # 搜索源文件
+
+add_library(libtest STATIC ${SRC}) # 生成静态库
+## add_library(test STATIC ${SRC}) # Unix
+add_library(libtest SHARED ${SRC}) # 生成动态库
+## add_library(test SHARED ${SRC}) # Unix
+
+${LIBRARY_OUTPUT_PATH} # 库导出目录
+```
+
+```sh
+# 项目树
+- generate-libraries
+    - include
+        * test.h
+    - src
+        * test.cpp
+    * CMakeLists.txt
+```
+
+```cmake
+# ./CMakeLists.txt
+cmake_minimum_required(VERSION 3.20.0)
+project(generate-libraries CXX)
+
+file(GLOB SRC ${PROJECT_SOURCE_DIR}/src/*.cpp)
+include_directories(${PROJECT_SOURCE_DIR}/include)
+
+set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
+add_library(test STATIC ${SRC})
+
+## set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/dll)
+## add_library(test SHARED ${SRC})
+```
+
+#### Call
+
+静态库
+
+1. 引入头文件
+2. 链接静态库
+3. 生成可执行二进制文件
+
+```sh
+# 项目树
+- call-lib
+    - include
+        * test.h
+    - src
+        * test.cpp
+    * CMakeLists.txt
+```
+
+
+
+动态库
+
+1. 引入头文件
+2. 声明库目录
+3. 生成可执行二进制文件
+4. 链接动态库
+
