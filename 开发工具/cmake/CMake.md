@@ -13,22 +13,89 @@ CMake 是一个开源的、跨平台的自动化构建工具
 
 
 ```cmake
-# CMakeLists.txt
-cmake_minimum_required(VERSION 3.20) # CMake 最低版本要求
-project(project-name) # 项目名
-add_executable(binary-name main.cpp) # 由源文件生成一个可执行的程序
+## CMakeLists.txt
+
+## 指定所需的 CMake 最低版本号
+cmake_minimum_required(VERSION 3.20)
+
+## 指定项目的名称、版本号和描述信息
+## project(<项目名称> [VERSION <版本号>] [DESCRIPTION <描述>] [HOMEPAGE_URL <主页URL>] [LANGUAGES <语言1> <语言2> ...])
+project(project-name CXX)
+
+## 指定 C++ 标准
+set(CMAKE_CXX_STANDARD 11)
+
+## 严格遵守指定的 C++ 标准
+set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
+
+# 指定的 CMake 脚本文件包含到当前的 CMakeLists.txt 文件中进行处理
+include(test.cmake)
+
+## 生成配置文件
+## 将 config.h.in 中的变量替换为 CMake 中定义的值，并将结果输出到 config.h 文件中
+configure_file(config.h.in config.h)
+
+## 定义目标（可执行文件或库）的名称，指定源文件列表
+add_executable(app main.cpp)
+
+## 添加将子目录到构建中，并处理该目录的 CMakeLists.txt 文件
+add_subdirectory(${PROJECT_SOURCE_DIR}/src)
+
+## 指定 include 查找头文件路径
+include_directories(${PROJECT_SOURCE_DIR}/include)
+
+## 指定目标所依赖的库文件或目标文件
+target_link_libraries(app PUBLIC testlib)
+
+## 指定目标所需的头文件目录
+target_include_directories(app PUBLIC ${PROJECT_BINARY_DIR})
+
+## 将指定宏定义添加到目标的编译定义中
+target_compile_definitions(libtest PUBLIC "USE_TEST1")
+
+## 指定链接器在链接过程中搜索库文件的目录
+link_directories(${PROJECT_SOURCE_DIR}/lib)
+
+## 将指定库链接到当前目标
+link_libraries(libtest)
+
+### 文件搜索
+## 根据指定的通配符模式获取文件列表，并将结果存储到变量中
+file(GLOB SRC ${PROJECT_SOURCE_DIR}/src/*.cpp)
+
+### 静态库和动态库
+## 设置库的输出路径
+set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/dll)
+## 创建一个动态库到指定路径，将指定源文件添加到该库中
+add_library(libtest SHARED ${SRC})
+## 创建一个静态库到指定路径，将指定源文件添加到该库中
+add_library(libtest STATIC ${SRC})
+## add_library 默认为静态库
+## add_library(libtest ${SRC})
+
+### zu
+# PUBLIC 本目标需要，依赖于本目标的其他目标也需要
+# INTERFACE 本目标不需要，依赖于本目标的其他目标需要
+# PRIVATE 本目标需要，依赖于本目标的其他目标不需要
 ```
 
 ```sh
-# cmake -h 查看可生成构建文件
+## Command
+
+## 查看可生成构建文件
+cmake -h
+
 cmake -G "[generator-name]" -T [toolset-spec] -A [platform-name] -B [path-to-source]
 
-cmake -B build # 创建一个 build 目录并在此目录下生成构建文件
+## 创建一个 build 目录并在此目录下生成构建文件
+cmake -B build
 
-# 构建文件生成之后，修改源文件后只需要使用构建文件进行构建即可
-cmake --build build # 以 build 目录下的文件构建项目
+## 构建文件生成之后，修改源文件后只需要使用构建文件进行构建即可
+## 以 build 目录下的文件构建项目
+cmake --build build
 
-cmake -P test.cmake # 执行名为 test 的 CMake 脚本文件
+## 执行名为 test 的 CMake 脚本文件
+cmake -P test.cmake
 ```
 
 ### Windows CMake
@@ -66,32 +133,28 @@ cmake --version
 #### message
 
 ```cmake
-# synatx.cmake
 message("hello world")
+# hello world
+
 message("hello 
 world")
+# hello
+# world
+
 message(hello\ world)
+# hello world
+
 message(hello\ 
 world)
-message([[hello world]])
-message([[hello 
-world]])
-message([[hello world]])
-message([[hello 
-world]])
+# hello
+# world
 
-# 执行 cmake 文件
-# $cmake -P synatx.cmake
+message([[hello world]])
 # hello world
-# hello 
-# world
-# hello world
-# hello world
-# hello world
-# hello 
-# world
-# hello world
-# hello 
+
+message([[hello 
+world]])
+# hello
 # world
 ```
 
@@ -105,8 +168,17 @@ world]])
 # 避免使用 CMake 关键字
 # 变量存储时都是字符串
 
-# ${[var_name]} # 获取变量 
-message(${CMAKE_VERSION})
+# ${[var_name]} # 获取变量
+message(${CMAKE_VERSION})            # 当前 CMake 的版本号
+message(${CMAKE_SOURCE_DIR})         # 顶级源代码目录的路径
+message(${CMAKE_BINARY_DIR})         # 顶层构建目录的路径
+message(${CMAKE_CURRENT_SOURCE_DIR}) # 当前处理的 CMakeLists.txt 文件所在的源代码目录的路径
+message(${CMAKE_CURRENT_BINARY_DIR}) # 当前处理的 CMakeLists.txt 文件所在的二进制目录的路径
+message(${CMAKE_CURRENT_LIST_FILE})  # 当前处理的 CMakeLists.txt 文件的完整路径，包括文件名
+message(${CMAKE_MODULE_PATH})        # 指定额外的模块查找路径的列表
+message(${CMAKE_BUILD_TYPE})         # 当前构建的类型，例如 Debug、Release
+message(${CMAKE_CXX_STANDARD})       # C++ 标准
+message(${CMAKE_C_STANDARD})         # C 标准
 
 # set
 set(var1 "test variable")
@@ -318,8 +390,6 @@ message(${val}) # new val
 
 #### Method 1
 
-- add_executable 写入相对路径，引入头文件时需要相对路径
-
 ```sh
 # 项目树
 - test1
@@ -417,11 +487,6 @@ int main(int argc, char const *argv[]) {
 
 CMakeLists 嵌套
 
-- target_include_directories 头文件目录的声明
-- target_link_libraries 链接库文件
-- add_subdirectory 添加子目录
-- add_library 生成库文件默认静态库
-
 ```sh
 # 项目树
 - test3
@@ -443,8 +508,8 @@ cmake_minimum_required(VERSION 3.20.0)
 project(test3 CXX)
 add_subdirectory(src)
 add_executable(app main.cpp)
-target_link_libraries(test3 PUBLIC testlib)
-target_include_directories(test3 PUBLIC include)
+target_link_libraries(app PUBLIC testlib)
+target_include_directories(app PUBLIC include)
 ```
 
 ```cpp
@@ -476,7 +541,6 @@ int main(int argc, char const *argv[]) {
 版本要求：3.12
 
 - add_library OBJECT，Object Library 是一个特殊的库类型，将目标文件编译成一个库，但不会生成最终的链接文件，可以在 add_library 或 add_executable 中将 Object Library 作为源文件进行链接，从而生成最终的可执行文件或库文件
-- 将 target_include_directories 移入到子 CMakeLists.txt 中
 
 ```sh
 # 项目树
@@ -495,15 +559,15 @@ int main(int argc, char const *argv[]) {
 ```cmake
 # ./src/CMakeLists.txt
 file(GLOB SRC *.cpp)
-add_library(testlib OBJECT ${SRC})
-target_include_directories(testlib PUBLIC ../include)
+add_library(libtest OBJECT ${SRC})
 
 # ./CMakeLists.txt
 cmake_minimum_required(VERSION 3.20.0)
 project(test4 CXX)
 add_subdirectory(src)
 add_executable(app main.cpp)
-target_link_libraries(test4 PUBLIC testlib)
+target_link_libraries(app PUBLIC libtest)
+target_include_directories(app PUBLIC ${PROJECT_SOURCE_DIR}/include)
 ```
 
 ```cpp
@@ -550,15 +614,20 @@ int main(int argc, char const *argv[]) {
 
 Windows 静态库 libxxx.lib，动态库 libxxx.dll （需要全名）
 
-Unix 静态库 libxxx.a，动态库 libxxx.so （只需要给出 xxx）
+Unix 静态库 libxxx.a，动态库 libxxx.so （只需要给出 xxx，默认带 lib 前缀）
+
+静态库生成后可以修改名称，动态库生成后不能修改名称
 
 ```cmake
 file() # 搜索源文件
 
-add_library(libtest STATIC ${SRC}) # 生成静态库
-## add_library(test STATIC ${SRC}) # Unix
-add_library(libtest SHARED ${SRC}) # 生成动态库
-## add_library(test SHARED ${SRC}) # Unix
+# 生成静态库
+add_library(test STATIC ${SRC}) # Unix
+## add_library(libtest STATIC ${SRC}) # Windows
+
+# 生成动态库
+add_library(test SHARED ${SRC}) # Unix
+## add_library(libtest SHARED ${SRC}) # Windows
 
 ${LIBRARY_OUTPUT_PATH} # 库导出目录
 ```
@@ -583,14 +652,14 @@ include_directories(${PROJECT_SOURCE_DIR}/include)
 
 set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 add_library(test STATIC ${SRC})
+## add_library(libtest STATIC ${SRC}) # Windows
 
 ## set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/dll)
 ## add_library(test SHARED ${SRC})
+## add_library(libtest SHARED ${SRC}) # Windows
 ```
 
-#### Call
-
-静态库
+#### Call Static Library
 
 1. 引入头文件
 2. 链接静态库
@@ -601,17 +670,242 @@ add_library(test STATIC ${SRC})
 - call-lib
     - include
         * test.h
-    - src
-        * test.cpp
+    - lib
+        * libtest.a
+        # libtest.lib # Windwos
     * CMakeLists.txt
+    * main.cpp
 ```
 
+```cmake
+# ./CMakeLists.txt
+cmake_minimum_required(VERSION 3.20.0)
+project(call-lib CXX)
 
+include_directories(${PROJECT_SOURCE_DIR}/include)
+link_directories(${PROJECT_SOURCE_DIR}/lib)
+link_libraries(test)
+## link_libraries(libtest) # Windows
+add_executable(app main.cpp)
+```
 
-动态库
+```cpp
+// ./include/test.h
+#ifndef _TEST_H_
+#define _TEST_H_
+
+void test();
+
+#endif // _TEST_H_
+
+// ./main.cpp
+#include "test.h"
+
+int main(int argc, char const *argv[]) {
+    test();
+    return 0;
+}
+```
+
+#### Call Dynamic Library
 
 1. 引入头文件
 2. 声明库目录
 3. 生成可执行二进制文件
 4. 链接动态库
+
+```sh
+# 项目树
+- call-dll
+    - include
+        * test.h
+    - dll
+        * libtest.so
+        # libtest.dll # Windows
+    * CMakeLists.txt
+    * main.cpp
+```
+
+```cmake
+# ./CMakeLists.txt
+cmake_minimum_required(VERSION 3.20.0)
+project(call-so CXX)
+
+include_directories(${PROJECT_SOURCE_DIR}/include)
+link_directories(${PROJECT_SOURCE_DIR}/so)
+add_executable(app main.cpp)
+target_link_libraries(app PUBLIC test)
+## target_link_libraries(app PUBLIC libtest) # Windows
+
+# Windows 上需要让动态库和可执行文件处于同一目录
+```
+
+```cpp
+// ./include/test.h
+#ifndef _TEST_H_
+#define _TEST_H_
+
+void test();
+
+#endif // _TEST_H_
+
+// ./main.cpp
+#include "test.h"
+
+int main(int argc, char const *argv[]) {
+    test();
+    return 0;
+}
+```
+
+### Interaction
+
+```sh
+# 项目树
+- interaction
+    * CMakeLists.txt
+    * config.h
+    * main.cpp
+```
+
+```cmake
+# ./CMakeLists.txt
+cmake_minimum_required(VERSION 3.20.0)
+project(interaction CXX)
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
+configure_file(config.h.in config.h)
+add_executable(app main.cpp)
+target_include_directories(app PUBLIC ${PROJECT_BINARY_DIR})
+```
+
+```cpp
+// ./config.h
+#define CMAKE_CXX_STANDARD ${CMAKE_CXX_STANDARD}
+
+// ./main.cpp
+#include <iostream>
+#include "config.h"
+
+int main(int argc, char const *argv[]) {
+    std::cout << CMAKE_CXX_STANDARD << std::endl;
+    return 0;
+}
+```
+
+### Conditional Compilation
+
+通过传入不同的参数编译不同的文件
+
+1. 用 option 定义变量
+2. 在子 CMakeList.txt 中根据变量 ON 或 OFF 修改源文件及 target_compile_definitions
+3. 修改源文件根据变量选择代码
+4. 执行命令是 -D<变量>=ON/OFF 进行条件编译
+
+```sh
+# 项目树
+- conditional-compilation
+    - include
+        * test1.h
+        * test2.h
+    - src
+        * CMakeLists.txt
+        * test1.cpp
+        * test2.cpp
+    * CMakeLists.txt
+    * main.cpp
+```
+
+```cmake
+# ./src/CMakeLists.txt
+option(USE_TEST1 "Use test1" ON) # 默认给定 ON
+
+set(SRC test2.cpp)
+if(USE_TEST1)
+    set(SRC test1.cpp ${SRC})
+endif()
+
+add_library(libtest ${SRC})
+
+if(USE_TEST1)
+    target_compile_definitions(libtest PUBLIC "USE_TEST1") # 目标文件编译时添加 USE_TEST1 宏定义
+endif()
+
+# ./CMakeLists.txt
+cmake_minimum_required(VERSION 3.20.0)
+project(conditional-compilation CXX)
+
+include_directories(${PROJECT_SOURCE_DIR}/include)
+add_subdirectory(src)
+add_executable(app main.cpp)
+target_link_libraries(app PUBLIC libtest)
+target_link_libraries(app PUBLIC ${PROJECT_SOURCE_DIR}/include)
+```
+
+```cpp
+// ./include/test1.h
+#ifndef _TEST1_H_
+#define _TEST1_H_
+
+void test1();
+
+#endif // _TEST1_H_
+
+// ./include/test2.h
+#ifndef _TEST2_H_
+#define _TEST2_H_
+
+void test2();
+
+#endif // _TEST2_H_
+
+// ./src/test1.cpp
+#include "test1.h"
+#include <iostream>
+
+void test1() { puts("test1"); }
+
+// ./src/test2.cpp
+#include "test2.h"
+#include <iostream>
+
+void test2() { puts("test2"); }
+
+// ./main.cpp
+#ifdef USE_TEST1
+#include "test1.h"
+#endif
+#include "test2.h"
+#include <iostream>
+
+int main(int argc, char const *argv[]) {
+#ifdef USE_TEST1
+    test1();
+#endif
+    test2();
+    return 0;
+}
+```
+
+```sh
+# build result
+$ cmake -B build -DUSE_TEST1=ON
+// $ cmake -B build
+...
+$ cmake --build build
+...
+$ .\build\Debug\app.exe
+// $ ./build/app
+test1
+test2
+
+
+$ cmake -B build -DUSE_TEST1=OFF
+...
+$ cmake --build build
+...
+$ .\build\Debug\app.exe
+// $ ./build/app
+test2
+```
 
