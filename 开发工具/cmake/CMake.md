@@ -73,7 +73,7 @@ add_library(libtest STATIC ${SRC})
 ## add_library 默认为静态库
 ## add_library(libtest ${SRC})
 
-### zu
+### 作用域
 # PUBLIC 本目标需要，依赖于本目标的其他目标也需要
 # INTERFACE 本目标不需要，依赖于本目标的其他目标需要
 # PRIVATE 本目标需要，依赖于本目标的其他目标不需要
@@ -383,8 +383,6 @@ Test("test arg")
 ## message("test arg")
 message(${val}) # new val
 ```
-
----
 
 ### Project Configure
 
