@@ -168,17 +168,19 @@ world]])
 # 避免使用 CMake 关键字
 # 变量存储时都是字符串
 
-# ${[var_name]} # 获取变量
+# ${var_name} # 获取变量
+# 内置变量并不都是有初始值的
 message(${CMAKE_VERSION})            # 当前 CMake 的版本号
 message(${CMAKE_SOURCE_DIR})         # 顶级源代码目录的路径
 message(${CMAKE_BINARY_DIR})         # 顶层构建目录的路径
 message(${CMAKE_CURRENT_SOURCE_DIR}) # 当前处理的 CMakeLists.txt 文件所在的源代码目录的路径
-message(${CMAKE_CURRENT_BINARY_DIR}) # 当前处理的 CMakeLists.txt 文件所在的二进制目录的路径
+message(${CMAKE_CURRENT_BINARY_DIR}) # 当前处理的 CMakeLists.txt 文件所在的构建目录的路径
 message(${CMAKE_CURRENT_LIST_FILE})  # 当前处理的 CMakeLists.txt 文件的完整路径，包括文件名
 message(${CMAKE_MODULE_PATH})        # 指定额外的模块查找路径的列表
 message(${CMAKE_BUILD_TYPE})         # 当前构建的类型，例如 Debug、Release
 message(${CMAKE_CXX_STANDARD})       # C++ 标准
 message(${CMAKE_C_STANDARD})         # C 标准
+message(${PROJECT_NAME})             # 当前项目名
 
 # set
 set(var1 "test variable")
@@ -260,8 +262,22 @@ message(${PORT})
 # GREATER_EQUAL
 
 # 字符串比较
-# STREQUAL
+# STRLESS
 # ...
+
+# 版本比较
+# VERSION_LESS
+# ...
+
+# 文件属性
+# IS_DIRECTORY
+if(IS_DIRECTORY "./")
+	message(yes)
+endif()
+# IS_SYMLINK
+
+# 文件时间戳比较
+# IS_NEWER_THAN
 
 if(${CMAKE_VERSION} LESS 3.28.0)
     message("version too low")
@@ -280,7 +296,7 @@ endif()
 
 # foreach
 
-# foreach([loop_var] [max])
+## foreach([loop_var] RANGE [max])
 foreach(var RANGE 3) # [0, 3]
     message(${var})
 endforeach()
@@ -648,12 +664,14 @@ project(generate-libraries CXX)
 file(GLOB SRC ${PROJECT_SOURCE_DIR}/src/*.cpp)
 include_directories(${PROJECT_SOURCE_DIR}/include)
 
+# generate static library
 set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
-add_library(test STATIC ${SRC})
+add_library(test STATIC ${SRC}) # Unix
 ## add_library(libtest STATIC ${SRC}) # Windows
 
+# generate shared library
 ## set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/dll)
-## add_library(test SHARED ${SRC})
+## add_library(test SHARED ${SRC}) # Unix
 ## add_library(libtest SHARED ${SRC}) # Windows
 ```
 
@@ -682,7 +700,7 @@ project(call-lib CXX)
 
 include_directories(${PROJECT_SOURCE_DIR}/include)
 link_directories(${PROJECT_SOURCE_DIR}/lib)
-link_libraries(test)
+link_libraries(test) # Unix
 ## link_libraries(libtest) # Windows
 add_executable(app main.cpp)
 ```
@@ -732,7 +750,7 @@ project(call-so CXX)
 include_directories(${PROJECT_SOURCE_DIR}/include)
 link_directories(${PROJECT_SOURCE_DIR}/so)
 add_executable(app main.cpp)
-target_link_libraries(app PUBLIC test)
+target_link_libraries(app PUBLIC test) # Unix
 ## target_link_libraries(app PUBLIC libtest) # Windows
 
 # Windows 上需要让动态库和可执行文件处于同一目录
@@ -780,6 +798,8 @@ target_include_directories(app PUBLIC ${PROJECT_BINARY_DIR})
 ```cpp
 // ./config.h
 #define CMAKE_CXX_STANDARD ${CMAKE_CXX_STANDARD}
+#define PROJECT_SOURCE_DIR "${PROJECT_SOURCE_DIR}"
+#define CMAKE_VERSION "${CMAKE_VERSION}"
 
 // ./main.cpp
 #include <iostream>
@@ -787,6 +807,8 @@ target_include_directories(app PUBLIC ${PROJECT_BINARY_DIR})
 
 int main(int argc, char const *argv[]) {
     std::cout << CMAKE_CXX_STANDARD << std::endl;
+    std::cout << PROJECT_SOURCE_DIR << std::endl;
+    std::cout << CMAKE_VERSION << std::endl;
     return 0;
 }
 ```
