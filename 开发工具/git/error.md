@@ -153,3 +153,9 @@ To add an exception for this directory, call:
 git config --global --add safe.directory "*"
 ```
 
+> ```cmd
+> # 当前用户的详细信息，所属用户组和权限
+> whoami /all
+> ```
+>
+> 
