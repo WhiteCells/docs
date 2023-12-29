@@ -134,3 +134,22 @@ https 方式连接远程仓库时出现报错
 git config --global http.sslVerify true
 ```
 
+### error007
+
+```sh
+fatal: detected dubious ownership in repository at 'D:/distake/code'
+'D:/distake/code' is owned by:
+        'S-1-5-32-544'
+but the current user is:
+        'S-1-5-21-3863718942-992295975-852214126-1001'
+To add an exception for this directory, call:
+
+        git config --global --add safe.directory D:/distake/code
+```
+
+解决方法：
+
+```sh
+git config --global --add safe.directory "*"
+```
+
