@@ -156,6 +156,13 @@ message([[hello
 world]])
 # hello
 # world
+
+message(STATUS "to do")
+# -- to do
+
+message(FATAL_ERROR "error message")
+# CMake Error at test.cmake:25 (message):
+#   error message
 ```
 
 #### set
