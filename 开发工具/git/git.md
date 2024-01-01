@@ -290,6 +290,12 @@ git checkout -- [file]
 git checkout -- .
 ```
 
+### 删除未跟踪
+
+```sh
+git clean -df
+```
+
 ## 查看差异
 
 ```sh

@@ -41,13 +41,13 @@ add_executable(app main.cpp)
 ## 添加将子目录到构建中，并处理该目录的 CMakeLists.txt 文件
 add_subdirectory(${PROJECT_SOURCE_DIR}/src)
 
-## 指定 include 查找头文件路径
+## 为所有目标指定头文件搜索路径
 include_directories(${PROJECT_SOURCE_DIR}/include)
 
 ## 指定目标所依赖的库文件或目标文件
 target_link_libraries(app PUBLIC testlib)
 
-## 指定目标所需的头文件目录
+## 为特定目标指定头文件搜索路径
 target_include_directories(app PUBLIC ${PROJECT_BINARY_DIR})
 
 ## 将指定宏定义添加到目标的编译定义中
@@ -168,11 +168,11 @@ message(FATAL_ERROR "error message")
 #### set
 
 ```cmake
-# 变量名有两种，CMake 提供、自定义
+# 变量名有两种，CMake 内置、自定义
 # 变量名区分大小写
 # 变量名不能包含空格
 # 变量名不能以数字开头
-# 避免使用 CMake 关键字
+# 避免使用关键字和内置变量
 # 变量存储时都是字符串
 
 # ${var_name} # 获取变量
@@ -188,6 +188,10 @@ message(${CMAKE_BUILD_TYPE})         # 当前构建的类型，例如 Debug、Re
 message(${CMAKE_CXX_STANDARD})       # C++ 标准
 message(${CMAKE_C_STANDARD})         # C 标准
 message(${PROJECT_NAME})             # 当前项目名
+message(${LIBRARY_OUTPUT_PATH})      # 生成的库的输出路径
+message(${EXECUTABLE_OUTPUT_PATH})   # 生成的目标的输出路径
+# set 内置变量时不需要 ${}
+set(PROJECT_NAME hello-cmake)
 
 # set
 set(var1 "test variable")
@@ -298,6 +302,16 @@ if(1 EQUAL "1")
     message("equal") # equal
 else()
     message("not equal")
+endif()
+
+if(APPLE)
+  message("current OS is Apple")
+elseif(UNIX)
+  message("current OS is UNIX")
+elseif(WIN32)
+  message("current OS is Windows")
+else()
+  message("current OS is unknown")
 endif()
 
 
@@ -631,8 +645,6 @@ int main(int argc, char const *argv[]) {
 
 ### Static And Dynamic Libraries
 
-#### Generate
-
 Windows 静态库 libxxx.lib，动态库 libxxx.dll （需要全名）
 
 Unix 静态库 libxxx.a，动态库 libxxx.so （只需要给出 xxx，默认带 lib 前缀）
@@ -643,12 +655,12 @@ Unix 静态库 libxxx.a，动态库 libxxx.so （只需要给出 xxx，默认带
 file() # 搜索源文件
 
 # 生成静态库
-add_library(test STATIC ${SRC}) # Unix
-## add_library(libtest STATIC ${SRC}) # Windows
+add_library(test STATIC ${SRC}) # Unix -> libtest.a
+## add_library(test STATIC ${SRC}) # Windows -> test.lib 
 
 # 生成动态库
-add_library(test SHARED ${SRC}) # Unix
-## add_library(libtest SHARED ${SRC}) # Windows
+add_library(test SHARED ${SRC}) # Unix -> libtest.so
+## add_library(test SHARED ${SRC}) # Windows -> test.dll
 
 ${LIBRARY_OUTPUT_PATH} # 库导出目录
 ```
@@ -663,6 +675,8 @@ ${LIBRARY_OUTPUT_PATH} # 库导出目录
     * CMakeLists.txt
 ```
 
+#### Generate Static library
+
 ```cmake
 # ./CMakeLists.txt
 cmake_minimum_required(VERSION 3.20.0)
@@ -671,14 +685,27 @@ project(generate-libraries CXX)
 file(GLOB SRC ${PROJECT_SOURCE_DIR}/src/*.cpp)
 include_directories(${PROJECT_SOURCE_DIR}/include)
 
-# generate static library
 set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
+
+# generate static library
 add_library(test STATIC ${SRC}) # Unix
 ## add_library(libtest STATIC ${SRC}) # Windows
+```
+
+#### Generate Dynamic library
+
+```cmake
+# ./CMakeLists.txt
+cmake_minimum_required(VERSION 3.20.0)
+project(generate-libraries CXX)
+
+file(GLOB SRC ${PROJECT_SOURCE_DIR}/src/*.cpp)
+include_directories(${PROJECT_SOURCE_DIR}/include)
+
+set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 
 # generate shared library
-## set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/dll)
-## add_library(test SHARED ${SRC}) # Unix
+add_library(test SHARED ${SRC}) # Unix
 ## add_library(libtest SHARED ${SRC}) # Windows
 ```
 
@@ -694,7 +721,7 @@ add_library(test STATIC ${SRC}) # Unix
     - include
         * test.h
     - lib
-        * libtest.a
+        * libtest.a # Unix
         # libtest.lib # Windwos
     * CMakeLists.txt
     * main.cpp
@@ -743,7 +770,7 @@ int main(int argc, char const *argv[]) {
     - include
         * test.h
     - dll
-        * libtest.so
+        * libtest.so # Unix
         # libtest.dll # Windows
     * CMakeLists.txt
     * main.cpp
@@ -827,7 +854,7 @@ int main(int argc, char const *argv[]) {
 1. 用 option 定义变量
 2. 在子 CMakeList.txt 中根据变量 ON 或 OFF 修改源文件及 target_compile_definitions
 3. 修改源文件根据变量选择代码
-4. 执行命令是 -D<变量>=ON/OFF 进行条件编译
+4. 执行命令时 -D<变量>=ON/OFF 进行条件编译
 
 ```sh
 # 项目树
@@ -866,7 +893,6 @@ include_directories(${PROJECT_SOURCE_DIR}/include)
 add_subdirectory(src)
 add_executable(app main.cpp)
 target_link_libraries(app PUBLIC libtest)
-target_link_libraries(app PUBLIC ${PROJECT_SOURCE_DIR}/include)
 ```
 
 ```cpp
