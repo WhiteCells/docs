@@ -1,16 +1,19 @@
 [wsl official documents](https://learn.microsoft.com/zh-cn/windows/wsl/install)
 
-系统要求：Windows 10 版本 2004 及以上（内部版本 19041 及以上）或 Windows 11  
+系统要求：Windows 10 版本 2004 及以上（内部版本 19041 及以上）或 Windows 11
 
-管理员模式下打开 PowerShell 或 Windows 命令提示符
+以管理员打开 PowerShell
+
+```powershell
+# 启用 适用于 Linux 的 Windows 子系统 功能并重启
+Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
+```
 
 ```sh
 wsl --list --online # 查看可安装列表
 wsl --install -d Ubuntu # 需要代理，否则很慢
 wsl --set-version Ubuntu 2 # wsl2
 ```
-
-
 
 ```sh
 explorer.exe . # 打开子系统当前路径
