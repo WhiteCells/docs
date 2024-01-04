@@ -45,7 +45,18 @@ git config --global core.editor [editor]
 git config --global --edit
 
 # 生成密钥，需要权限
-ssh-keygen -t rsa -C "123456@gmail.com"
+# ssh-keygen -t rsa -C "123456@gmail.com"
+ssh-keygen -t rsa
+ssh-keygen -t dsa
+ssh-keygen -t ecdsa
+ssh-keygen -t ed25519
+-b # 设置密钥长度
+-t # 指定密钥类型 (默认 RSA)
+-f # 指定密钥文件名
+-C # 添加备注
+-N # 设置新密钥的密码
+-p # 更改指定密钥密码
+-y # 输出特定私钥对应的公钥
 
 # 同时配置 github 和 gitee 的 ssh key
 ssh-keygen -t rsa -C "123456@gmail.com" -f "id_rsa_github"
