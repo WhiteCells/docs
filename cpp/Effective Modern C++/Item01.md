@@ -13,7 +13,7 @@ void f(ParamType param);
 f(expr);
 ```
 
-在编译期间，编译器使用 `expr` 对 `T` 和 `ParamType` 两个类型进行推导。这两个类型通常不同，因为 `ParamType` 可能包括了 `const` 和引用的修饰。
+在编译期间，编译器使用 `expr` 对 `T` 和 `ParamType` 两个类型进行推导。这两个类型通常不同，因为 `ParamType` 可能包括了 `const` 和 `&` 的修饰。
 
 #### case1: ParamType 是一个指针或引用，但不是通用引用
 
