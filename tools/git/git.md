@@ -1,6 +1,6 @@
-## 下载与配置
+## 安装与配置
 
-### Linux 版本安装
+### Linux
 
 ```sh
 # Debian、Ubuntu
@@ -19,7 +19,7 @@ sudo pacman -S git
 sudo zypper install git
 ```
 
-### Windows 版本安装
+### Windows
 
 [git 下载](https://git-scm.com/)
 
@@ -88,7 +88,7 @@ Get-Content C:/Users/[Username]/.ssh/id_rsa.pub | Set-Clipboard
 
 # 检查通信
 ssh -T git@github.com
-# 会提示确认连接（yes），显示 Hi UserName You've successfully authenticated, but GitHub does not provide shell access. 表示成功
+# 会提示确认连接（yes），显示 Hi [UserName] You've successfully authenticated, but GitHub does not provide shell access. 表示成功
 ```
 
 ## 初始化仓库
