@@ -25,7 +25,7 @@ cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
 默认为 `powersave` 调整为 `performance`
 
 ```sh
-echo performance | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
+sudo echo performance | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
 ```
 
 也可以使用 `cpupower` 工具调整 CPU 频率调节器：
