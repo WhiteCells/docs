@@ -78,7 +78,7 @@ delete part override
 
 修改文件 `/etc/default/grub` 文件修改系统引导设置
 
-取消注释 `GRUB_SAVEDEFAULT='true'` 使得每一次启动使用上一次选择的惨淡项目，还需要 `GRUB_DEFAULT` 为 `saved`
+取消注释 `GRUB_SAVEDEFAULT='true'` 使得每一次启动使用上一次选择，还需要 `GRUB_DEFAULT` 为 `saved`
 
 更新 grub 设置：
 
@@ -86,7 +86,7 @@ delete part override
 sudo update-grub
 ```
 
-### 双系统蓝牙设备问题
+### 双系统蓝牙设备问题（不再适用）
 
 安装 chntpw 工具：
 

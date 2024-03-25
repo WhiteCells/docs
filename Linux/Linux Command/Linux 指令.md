@@ -108,7 +108,7 @@ r-x: 其他组的权限
 `man` 查询命令 `command` 的说明文档
 
 ```sh
-man command
+man [command]
 ```
 
 man 文档有 9 个类别
@@ -126,7 +126,7 @@ man 文档有 9 个类别
 `whatis` 显示命令 `command` 所在的文档类别
 
 ```sh
-whatis command
+whatis [command]
 ```
 
 ### 查看路径
@@ -134,12 +134,18 @@ whatis command
 查看程序所在路径
 
 ```sh
-which command
+which [command]
 ```
 
 查看程序的搜索路径
 
 ```sh
-where command
+where [command]
+```
+
+查看程序的搜索路径
+
+```sh
+whereis [command]
 ```
 
