@@ -48,11 +48,12 @@
 
 `$\lvert x \rvert$` or `$|x|$` 绝对值 $|x|$ 
 
-$C_n^m$  `$C_n^m$ ` 组合
+`$C_n^m$ ` 组合 $C_n^m$
 
 多行公式
 
 ```
+$$
 \left\{
 \begin{array}{l}
 a_1x+b_1y+c_1z=d_1\\
@@ -60,6 +61,8 @@ a_2x+b_2y+c_2z=d_2\\
 a_3x+b_3y+c_1z=d_3
 \end{array}
 \right.
+$$
+
 ```
 
 $$
@@ -70,6 +73,17 @@ a_2x+b_2y+c_2z=d_2\\
 a_3x+b_3y+c_1z=d_3
 \end{array}
 \right.
+$$
+
+$$
+\begin{equation}
+\dot{{x}}=f({x})
+=\left\{
+	\begin{array}{ll}
+		f_{1}({x}) & \boldsymbol{x} \in S_{1} \\
+		f_{2}({x}) & \boldsymbol{x} \in S_{2}
+	\end{array}\right.
+\end{equation}
 $$
 
 
@@ -260,3 +274,30 @@ $$
 
 全屏：F11
 
+### UML
+
+代码块中增加 `mermaid` 标识
+
+| 关系  | 含义 |
+| ----- | ---- |
+| --\|> | 继承 |
+| ..\|> | 实现 |
+| --o   | 聚合 |
+| --*   | 组合 |
+| ..>   | 依赖 |
+| -->   | 关联 |
+
+实现
+
+```mermaid
+classDiagram
+class A{
+    
+}
+
+class B {
+    
+}
+
+B..|>A
+```
