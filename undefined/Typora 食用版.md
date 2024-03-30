@@ -276,6 +276,8 @@ $$
 
 ### UML
 
+[UML mermaid](https://mermaid.js.org/intro/)
+
 代码块中增加 `mermaid` 标识
 
 | 关系  | 含义 |
