@@ -6,11 +6,11 @@
 [Desktop Entry]
 Encoding=UTF-8
 Version=1.0                                     # 程序版本
-Name[en_US]=yEd                                 # 程序名称
+Name=yEd                                        # 程序名称
 GenericName=GUI Port Scanner                    # 程序全称
 Exec=java -jar /opt/yed-3.11.1/yed.jar          # 程序执行路径，可带参数
 Terminal=false                                  # 是否在终端中运行
-Icon[en_US]=/opt/yed-3.11.1/icons/yicon32.png   # 图标路径
+Icon=/opt/yed-3.11.1/icons/yicon32.png          # 图标路径
 Type=Application                                # 快捷方式类型
 Categories=Application                          # 菜单类别
 Comment[en_US]=yEd Graph Editor                 # 工具提示
