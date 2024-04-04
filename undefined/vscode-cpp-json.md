@@ -229,31 +229,33 @@ F5 进行调试程序时，会在 `launch.json` 搜索对应的配置
 ```json
 {
     // 字体大小
-    "editor.fontSize": 19,
+    "editor.fontSize": 20,
     // 字体
     "editor.fontFamily": "Hack",
     // vcFormat
     "C_Cpp.formatting": "vcFormat",
-    "C_Cpp.vcFormat.indent.preserveComments": true,
-    "C_Cpp.vcFormat.indent.withinParentheses": "alignToParenthesis",
     "C_Cpp.vcFormat.newLine.beforeOpenBrace.function": "sameLine",
     "C_Cpp.vcFormat.newLine.beforeOpenBrace.lambda": "sameLine",
-    "C_Cpp.vcFormat.indent.lambdaBracesWhenParameter": false,
     "C_Cpp.vcFormat.newLine.beforeOpenBrace.namespace": "sameLine",
     "C_Cpp.vcFormat.newLine.beforeOpenBrace.type": "sameLine",
+    "C_Cpp.vcFormat.newLine.beforeElse": false,
+    "C_Cpp.vcFormat.newLine.beforeCatch": false,
+    "C_Cpp.vcFormat.newLine.beforeOpenBrace.block": "sameLine",
     "C_Cpp.vcFormat.space.aroundAssignmentOperator": "ignore",
     "C_Cpp.vcFormat.space.aroundBinaryOperator": "ignore",
     "C_Cpp.vcFormat.space.aroundTernaryOperator": "ignore",
     "C_Cpp.vcFormat.space.pointerReferenceAlignment": "right",
     "C_Cpp.vcFormat.wrap.preserveBlocks": "allOneLineScopes",
+    "C_Cpp.vcFormat.indent.preserveComments": true,
+    "C_Cpp.vcFormat.indent.withinParentheses": "alignToParenthesis",
+    "C_Cpp.vcFormat.indent.lambdaBracesWhenParameter": false,
     "C_Cpp.vcFormat.indent.caseContentsWhenBlock": true,
     "C_Cpp.vcFormat.indent.caseLabels": true,
-    "C_Cpp.vcFormat.newLine.beforeElse": false,
-    "C_Cpp.vcFormat.newLine.beforeCatch": false,
-    "C_Cpp.vcFormat.newLine.beforeOpenBrace.block": "sameLine",
     "C_Cpp.vcFormat.space.withinInitializerListBraces": false,
     "C_Cpp.vcFormat.space.beforeInitializerListOpenBrace": true,
     "C_Cpp.inlayHints.parameterNames.suppressWhenArgumentContainsName": false,
+    // namespace
+    "C_Cpp.vcFormat.indent.namespaceContents": false,
     // 插入不替换右侧
     "[cpp]": {
         // 控制接受补全时是否覆盖单词，开启后会导致 "" 头文件多出 "
@@ -261,8 +263,6 @@ F5 进行调试程序时，会在 `launch.json` 搜索对应的配置
     },
     // enter 不接受建议
     "editor.acceptSuggestionOnEnter": "off",
-    // 关闭滚动条缩略图
-    "editor.minimap.enabled": false,
     // 关闭编辑器中是通过拖放来移动选中内容
     "editor.dragAndDrop": false,
     // 编辑器失去焦点时保存文件
@@ -271,16 +271,10 @@ F5 进行调试程序时，会在 `launch.json` 搜索对应的配置
     "editor.formatOnSave": false,
     // 换行格式化
     "editor.formatOnType": true,
-    // icon 主题
-    "material-icon-theme.folders.theme": "classic",
-    "workbench.iconTheme": "material-icon-theme",
     // 单个子目录不简化
     "explorer.compactFolders": false,
-    // 终端
+    // 终端的字号
     "terminal.integrated.fontSize": 17,
-    // 驼峰翻译
-    "varTranslation.baiduSecret": "20230210001556885,6143tJPi4ZLyIyWwLfNK",
-    "varTranslation.translationEngine": "baidu",
     // 面板位置(调试控制台...)
     "workbench.panel.defaultLocation": "right",
     // 更新
@@ -289,16 +283,6 @@ F5 进行调试程序时，会在 `launch.json` 搜索对应的配置
     "update.showReleaseNotes": false,
     // 鼠标悬停提示位于下方
     "editor.hover.above": false,
-
-    // CMake
-    "cmake.showOptionsMovedNotification": false,
-    // CMake 项目目录打开时自动配置
-    "cmake.configureOnOpen": true,
-    // CMake 显示状态栏
-    "cmake.options.statusBarVisibility": "compact",
-    // CMake 失败，关闭询问调试器进行配置
-    "cmake.showConfigureWithDebuggerNotification": false,
-
     // Linux window title
     "window.titleBarStyle": "custom",
     // title
@@ -316,13 +300,44 @@ F5 进行调试程序时，会在 `launch.json` 搜索对应的配置
     "editor.stickyScroll.enabled": false,
     // 关闭拓展自动更新
     "extensions.autoUpdate": false,
-    
-    // 关闭格式引擎
-    "C_Cpp.formatting": "disabled",
-    // 关闭代码着色
-    "C_Cpp.enhancedColorization": "disabled",
-    // 非活动工作区文件使用 CPU
+    // 非活动工作区文件 CPU 占用
     "C_Cpp.workspaceParsingPriority": "low",
+    // 缩略图
+    "editor.minimap.enabled": false,
+    // 关闭拓展建议
+    "extensions.ignoreRecommendations": true,
+    // markdown size
+    "markdown.preview.fontSize": 19,
+    // git 在没有暂存的更改时提交所有更改
+    "git.enableSmartCommit": true,
+    // git 同步 Git 存储库前不用进行确认
+    "git.confirmSync": false,
+    // git 控制是应打开工作区父文件夹中的存储库还是打开的文件
+    "git.openRepositoryInParentFolders": "never",
+    /*****************************************************************/
+    /******************* plugin settings configuration ***************/
+    /******************* plugin settings configuration ***************/
+    /******************* plugin settings configuration ***************/
+    /*****************************************************************/
+    // material-icon config
+    "material-icon-theme.folders.theme": "classic",
+    "workbench.iconTheme": "material-icon-theme",
+    /******************************************************************/
+    // 驼峰翻译
+    "varTranslation.baiduSecret": "20230210001556885,6143tJPi4ZLyIyWwLfNK",
+    "varTranslation.translationEngine": "baidu",
+    /******************************************************************/
+    // CMake
+    "cmake.showOptionsMovedNotification": false,
+    // CMake 项目目录打开时自动配置
+    "cmake.configureOnOpen": false,
+    // CMake 失败，关闭询问调试器进行配置
+    "cmake.showConfigureWithDebuggerNotification": false,
+    // CMake 头文件
+    "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
+    // cmake status bar
+    "cmake.options.statusBarVisibility": "compact",
+    /******************************************************************/
 }
 ```
 
@@ -386,6 +401,13 @@ F5 进行调试程序时，会在 `launch.json` 搜索对应的配置
             "#endif // _${TM_FILENAME_BASE/(.*)/${1:/upcase}/}_H_"
         ],
         "description": "头文件防止重复包含"
+    },
+    "头文件": {
+        "prefix": "#head",
+        "body": [
+            "_${TM_FILENAME_BASE/(.*)/${1:/upcase}/}_H_",
+        ],
+        "description": "头文件"
     },
     "Author info": {
         "prefix": "#author",
