@@ -151,7 +151,7 @@ int main(int argc, char *argv[]) {
 
 虽然 lambda 表达式内修改 x 不会影响外部 x，但是会影响下次调用 lambda 表达式时 x 的值。
 
-**值捕获的变量**在 lambda 表达式定义的时候已固定，修改外部变量的值，lambda 表达式捕获的值就不会再变化：
+**值捕获的变量**在 lambda 表达式定义的时候已固定，修改外部变量的值，lambda 表达式捕获的值不会再变化：
 
 ```cpp
 #include <iostream>
@@ -172,7 +172,7 @@ int main(int argc, char *argv[]) {
 
 lambda 表达式中还有 3 中特殊的捕获方法，分别是 `[this]`、`[=]`、`[&]`。
 
-捕获 `this` ，使用在类的成员函数中：
+捕获 `this` 可以使用 `this` 类型的成员变量和函数：
 
 ```cpp
 #include <iostream>
@@ -202,13 +202,32 @@ int main(int argc, char *argv[]) {
 `[=]` 为捕获全部变量的值：
 
 ```cpp
+#include <iostream>
 
+int main(int argc, char *argv[]) {
+    int x = 1;
+    auto foo = [=] {
+        // x += 1; // compilation failed
+        return 0;
+    }();
+    return 0;
+}
 ```
 
 `[&]` 捕获全部变量的引用：
 
 ```cpp
+#include <iostream>
 
+int main(int argc, char *argv[]) {
+    int x = 1;
+    auto foo = [&] {
+        x += 1;
+        return 0;
+    }();
+    std::cout << x << std::endl; // 2
+    return 0;
+}
 ```
 
-### lambda 表达式实现原理
+### 3. lambda 表达式实现原理

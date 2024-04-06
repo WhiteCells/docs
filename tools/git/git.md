@@ -73,9 +73,10 @@ Host github.com
 
 Host gitee.com
   User 123456@gmail.com
-  Hostname gitee.com
+  Hostname ssh.gitee.com
   PreferredAuthentications publickey
   IdentityFile ~/.ssh/id_rsa_gitee
+  Port 443
 
 # Linux 查看公钥
 cat ~/.ssh/id_rsa.pub
