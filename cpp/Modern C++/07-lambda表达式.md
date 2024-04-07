@@ -230,4 +230,17 @@ int main(int argc, char *argv[]) {
 }
 ```
 
-### 3. lambda 表达式实现原理
+### 3. 无状态 lambda 表达式
+
+C++ 标准中无状态 lambda 表达式可以隐式转换为函数指针：
+
+```cpp
+int main(int argc, char *argv[]) {
+    auto f1 = [](void(*)()) {};
+    f1([] {});
+
+    auto f2 = [](void(&)()) {};
+    f2(*[] {});
+    return 0;
+}
+```
