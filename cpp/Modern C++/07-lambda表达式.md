@@ -232,7 +232,7 @@ int main(int argc, char *argv[]) {
 
 ### 3. 无状态 lambda 表达式
 
-C++ 标准中无状态 lambda 表达式可以隐式转换为函数指针：
+C++ 标准中无状态 lambda 表达式（捕获列表为空）可以隐式转换为函数指针：
 
 ```cpp
 int main(int argc, char *argv[]) {
@@ -244,3 +244,30 @@ int main(int argc, char *argv[]) {
     return 0;
 }
 ```
+
+### 4. 广义捕获
+
+C++14 标准中定义了广义捕获，广义捕获是两种捕获方式：简单捕获和初始化捕获。
+
+C++14 引入初始化捕获，解决的简单捕获只能捕获 lambda 表达式定义上下文的变量，而无法捕获表达式结果及自定义捕获变量名：
+
+```cpp
+int main() {
+    int x = 1;
+    auto foo = [x = x + 1] { return x; };
+}
+```
+
+以上代码在 C++14 标准之前是无法通过编译，C++11 只支持简单捕获。捕获列表中 `x = x + 1` 跨越了两个作用域，等号左侧的变量 `x` 存在于 lambda 表达式的作用域，等号右侧的变量 `x` 存在于 main 函数的作用域，lambda 表达式中无法使用 main 函数作用域下的 `x`。
+
+初始化捕获可以使移动操作减少运行开销：
+
+```cpp
+std::string str = "string";
+auto foo = [s = std::move(str)] { return s; };
+```
+
+
+
+### 5. 
+
