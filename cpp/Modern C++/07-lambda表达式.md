@@ -249,7 +249,7 @@ int main(int argc, char *argv[]) {
 
 C++14 标准中定义了广义捕获，广义捕获是两种捕获方式：简单捕获和初始化捕获。
 
-C++14 引入初始化捕获，解决的简单捕获只能捕获 lambda 表达式定义上下文的变量，而无法捕获表达式结果及自定义捕获变量名：
+C++14 引入初始化捕获，解决了简单捕获只能捕获 lambda 表达式定义上下文的变量，而无法捕获表达式结果及自定义捕获变量名：
 
 ```cpp
 int main() {
@@ -258,7 +258,7 @@ int main() {
 }
 ```
 
-以上代码在 C++14 标准之前是无法通过编译，C++11 只支持简单捕获。捕获列表中 `x = x + 1` 跨越了两个作用域，等号左侧的变量 `x` 存在于 lambda 表达式的作用域，等号右侧的变量 `x` 存在于 main 函数的作用域，lambda 表达式中无法使用 main 函数作用域下的 `x`。
+以上代码在 C++14 标准之前是无法通过编译，C++11 只支持简单捕获。捕获列表中 `x = x + 1` 有两个作用域，等号左侧的变量 `x` 存在于 lambda 表达式的作用域，等号右侧的变量 `x` 存在于 main 函数的作用域，lambda 表达式中无法使用 main 函数作用域下的 `x`。
 
 初始化捕获可以使移动操作减少运行开销：
 
@@ -267,7 +267,71 @@ std::string str = "string";
 auto foo = [s = std::move(str)] { return s; };
 ```
 
+异步调用 `this` 对象，防止 lambda 表达式被调用时因原始 `this` 对象被析构造成未定义的行为：
 
+```cpp
+#include <iostream>
+#include <future>
 
-### 5. 
+class Work {
+public:
+    Work() : value_(1) {}
+    std::future<int> spawn() {
+        return std::async([=]() -> int {return value_;});
+    }
+private:
+    int value_;
+};
 
+std::future<int> foo() {
+    Work work;
+    return work.spawn();
+    // work destruct
+}
+
+int main(int argc, char *argv[]) {
+    std::future<int> f = foo();
+    f.wait();
+    std::cout << "f.get() = " << f.get() << std::endl;
+    return 0;
+}
+```
+
+在 C++11 标准中 `f.get()` 实际上返回了 32767，为了解决这个问题，需要将对象复制到 lambda 表达式内：
+
+```cpp
+class Work {
+public:
+    Work() : value_(1) {}
+    std::future<int> spawn() {
+        return std::async([=, tmp = *this]() -> int {return tmp.value_;});
+    }
+private:
+    int value_;
+};
+```
+
+将 `*this` 复制到 tmp 对象中，即使 `this` 所指的对象析构了也不会影响 lambda 表达式的计算。
+
+### 5.  泛型 lambda 表达式
+
+C++14 标准使 lambda 具备模板函数的能力，称为泛型 lambda 表达式：
+
+```cpp
+#include <iostream>
+#include <string>
+
+int main(int argc, char *argv[]) {
+    auto foo = [](auto a) { return a; };
+    int i = foo(1);
+    std::string str = foo("string");
+    std::cout << str << i << std::endl;
+    return 0;
+}
+```
+
+### 常量 lambda 表达式和捕获 *this
+
+C++17 标准对 lambda 表达式的两处增强：常量 lambda 表达式和捕获 `*this`。
+
+常量
