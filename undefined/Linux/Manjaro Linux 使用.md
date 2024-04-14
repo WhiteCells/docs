@@ -100,8 +100,8 @@ yay -S clash-for-windows
 # nekoray-bin
 yay -S nekoray-bin
 
-# warp
-yay -S cloudflare-warp-bin
+# java
+yay -S jdk-openjdk
 
 # visual-studio-code-bin
 yay -S visual-studio-code-bin
