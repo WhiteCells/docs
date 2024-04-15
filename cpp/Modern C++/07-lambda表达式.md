@@ -330,7 +330,7 @@ int main(int argc, char *argv[]) {
 }
 ```
 
-### 常量 lambda 表达式和捕获 *this
+### 6. 常量 lambda 表达式和捕获 *this
 
 C++17 标准对 lambda 表达式的两处增强：常量 lambda 表达式和捕获 `*this`。
 
