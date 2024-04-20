@@ -1,6 +1,6 @@
 ### CMake Features
 
-CMake 是一个开源的、跨平台的自动化构建工具
+[CMake](https://github.com/Kitware/CMake) 是一个开源的、跨平台的自动化构建工具
 
 1. 跨平台：可以在多种操作系统上运行
 2. 生成多种构建系统的文件：可以生成多种构建系统的构建文件，包括 Unix Makefiles、Ninja、MSVC 项目文件等
@@ -108,7 +108,7 @@ cmake -P test.cmake
 # 包方式安装
 sudo apt install cmake
 
-# 源码编译方式安装
+# 源码编译方式安装（Ubuntu）
 # 安装编译工具
 sudo apt install build-essential
 # 下载源码
@@ -127,6 +127,29 @@ cmake --version
 ```
 
 ### CMake Syntax
+
+#### built-in variables
+
+```cmake
+CMAKE_CXX_STANDARD
+# 指定 C++ 标准
+
+CMAKE_CXX_STANDARD_REUQUIRED
+# 为 ON 时（默认），如果指定的 C++ 标准编译器不支持，则 CMake 配置失败
+# 为 OFF 时，CMake 将寻找编译器支持的最近的标准
+
+CMAKE_CXX_EXTENSIONS
+# 开启或关闭编译器指定的拓展
+
+PROJECT_NAME
+PROJECT_VERSION
+PROJECT_IS_TOP_LEVEL
+PROJECT_LABEL
+PROJECT_SOURCE_DIR
+PROJECT_BINARY_DIR
+```
+
+
 
 #### message
 
