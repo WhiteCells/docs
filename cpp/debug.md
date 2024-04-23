@@ -61,6 +61,17 @@ const 修饰的成员函数只能调用 const 成员函数。
 
 使用 `CMakeLists.txt` 中 `include_directories` 可以简化 `include` 包含的路径名，但项目较大时，建议完整路径，防止名称冲突。
 
-
-
 `dynamic_cast` 在进行动态类型转换，如果转换不安全会返回一个空指针（指针类型），或者抛出 `std::bad_cast` 异常（引用类型）。
+
+`std::distance` 函数用于计算两个迭代器之间的元素数量：
+
+```cpp
+std::vector<int> v {1, 2, 3};
+std::vector<int>::iterator it1 = v.begin();
+std::cout << "it1 value: " << *it1 << std::endl;  // 1
+std::vector<int>::iterator it2 = v.end() - 1;
+std::cout << "it2 value: " << *it2 << std::endl; // 3
+std::cout << std::distance(it1, it2) << std::endl; // 2
+std::cout << std::distance(it2, it1) << std::endl; // -2
+```
+
