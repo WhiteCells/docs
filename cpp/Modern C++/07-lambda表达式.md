@@ -334,4 +334,36 @@ int main(int argc, char *argv[]) {
 
 C++17 标准对 lambda 表达式的两处增强：常量 lambda 表达式和捕获 `*this`。
 
-常量
+使用类中成员需要初始化捕获 `*this` 对象，在捕获列表复制一份 `*this` 指向的对象到 `tmp`，然后使用 `tmp`，为了更方便的复制和使用 `*this` 对象，C++17 可以在捕获列表中直接添加 `*this`，然后在 lambda 表达式函数体中直接使用 `this` 所指向对象的成员：
+
+```cpp
+class Work {
+public:
+    Work() : value_(1) {}
+    std::future<int> spawn() {
+        return std::async([=, *this]() -> int {return value_;});
+    }
+private:
+    int value_;
+};
+```
+
+`*this` 语法让程序生成了一个 `*this` 对象的副本并存储在 lambda 表达式内。
+
+### 7. 捕获 [=, this]
+
+C++20 标准引入 `[=, this]` 语法。
+
+`[=]` 可以捕获 `this` 指针，`[=, *this]` 会捕获 `this`对象的副本，但是不易区分，所以 C++20 标准引入 `[=, this]` 语法，实际含义与 `[=]` 相同，目的是为了区分 `[=, *this]`。
+
+C++20 标准强调以 `[=, this]` 代替 `[=]`。
+
+### 8. 模板语法的泛型 lambda 表达式
+
+C++20 标准中添加模板对 lambda 表达式的支持：
+
+```cpp
+[]<typename T>(T t) {}
+```
+
+### 9. 可构造和可赋值的无状态 lambda 表达式
