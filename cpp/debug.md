@@ -75,3 +75,25 @@ std::cout << std::distance(it1, it2) << std::endl; // 2
 std::cout << std::distance(it2, it1) << std::endl; // -2
 ```
 
+
+
+引用成员必须在构造对象时立即初始化：
+
+```cpp
+struct A {
+    int &a_;
+};
+
+A a; // 无法引用 "A" 的默认构造函数 -- 它是已删除的函数
+```
+
+```cpp
+struct A {
+    A(int &v) : a_(v) {}
+    int &a_;
+};
+
+int val = 1;
+A a(val);
+```
+
