@@ -1,6 +1,6 @@
 ### LaTex Math Symbols
 
-[Latex](https://kapeli.com/cheat_sheets/LaTeX_Math_Symbols.docset/Contents/Resources/Documents/index)
+[Latex Documents](https://kapeli.com/cheat_sheets/LaTeX_Math_Symbols.docset/Contents/Resources/Documents/index)
 
 `$x_{2}$` 下标 $x_{2}$
 
@@ -136,7 +136,9 @@ $\bigcap\limits_{i=1}^n\dfrac{1}{n^2}$
 
 $\bigcap\limits_{i=1}^n\dfrac{1}{n^2}$
 
-### 任务列表
+### Markdown 
+
+#### 任务列表
 
 ```
 - [ ]
@@ -144,7 +146,7 @@ $\bigcap\limits_{i=1}^n\dfrac{1}{n^2}$
 
 快捷键 ctrl + shift + x
 
-### 引用
+#### 引用
 
 ```
 > 
@@ -152,7 +154,7 @@ $\bigcap\limits_{i=1}^n\dfrac{1}{n^2}$
 
 快捷键 ctrl + shift + q 
 
-### 链接
+#### 链接
 
 ```
 [显示内容](网址)
@@ -160,7 +162,7 @@ $\bigcap\limits_{i=1}^n\dfrac{1}{n^2}$
 
 快捷键 ctrl + k
 
-### 脚注
+#### 脚注
 
 ```
 [^文本]
@@ -170,7 +172,7 @@ $\bigcap\limits_{i=1}^n\dfrac{1}{n^2}$
 
 
 
-### 图片
+#### 图片
 
 ```
 ![显示的文字](图片路径)
@@ -178,7 +180,7 @@ $\bigcap\limits_{i=1}^n\dfrac{1}{n^2}$
 
 快捷键 ctrl + shift + i
 
-### 表格
+#### 表格
 
 ```
 | | |回车
@@ -186,7 +188,7 @@ $\bigcap\limits_{i=1}^n\dfrac{1}{n^2}$
 
 快捷键 ctrl + t
 
-### 公式
+#### 公式
 
 行中公式
 
@@ -201,7 +203,7 @@ $$
 $$
 ```
 
-### 代码块
+#### 代码块
 
 当行代码
 
@@ -220,7 +222,7 @@ $$
 
 快捷键 ctrl + shift + k
 
-### 文本操作
+#### 文本操作
 
 **加粗** ctrl + b
 
@@ -230,7 +232,7 @@ $$
 
 ~~删除线~~ alt + shift + 5
 
-### Typora 操作
+#### Typora 操作
 
 偏好：ctrl + , 
 
