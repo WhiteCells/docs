@@ -42,7 +42,7 @@ nekoray 设置：
 
 [EDtunnel](https://github.com/3Kmfi6HP/EDtunnel)
 
-cloudflare 创建 Worker，编辑代码，将项目 _worker.js 复制代码至 cloudflare workers 中的 worker.js 修改 `userID` ，使用工具[生成 UUID](https://1024tools.com/uuid) 填写为生成 UUID，worker.js 中 `let proxyIp` 是 中转 ip，作用是中转流量，没有中转 ip 会访问不了由 cloudflare 托管的网站
+cloudflare 创建 Worker，编辑代码，将项目 _worker.js 复制代码至 cloudflare workers 中的 worker.js 修改 `userID` ，使用工具生成 UUID填写为生成 UUID，worker.js 中 `let proxyIp` 是 中转 ip，作用是中转流量，没有中转 ip 会访问不了由 cloudflare 托管的网站
 
 [CloudFlare 优先 IP](https://stock.hostmonit.com/CloudFlareYes)
 
