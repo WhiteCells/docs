@@ -1,1 +1,0 @@
-系统环境变量 `POWERSHELL_UPDATECHECK` 设置为 off（没有则新建）
