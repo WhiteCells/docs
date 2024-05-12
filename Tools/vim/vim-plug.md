@@ -1,20 +1,20 @@
 [vim-plug](https://github.com/junegunn/vim-plug.git)
 
-Unix
+### Unix
 
 ```sh
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 ```
 
-Windows
+### Windows
 
 ```powershell
 iwr -useb https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim |`
     ni $HOME/vimfiles/autoload/plug.vim -Force
 ```
 
-`.vimrc` 文件
+### rc 文件
 
 ```sh
 vim ~/.vimrc
