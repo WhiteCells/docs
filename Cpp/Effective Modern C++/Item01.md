@@ -15,7 +15,7 @@ f(expr);
 
 在编译期间，编译器使用 `expr` 对 `T` 和 `ParamType` 两个类型进行推导。这两个类型通常不同，因为 `ParamType` 可能包括了 `const` 和 `&` 的修饰。
 
-#### case1: ParamType 是一个指针或引用，但不是通用引用
+#### case1: ParamType 是一个指针或引用
 
 1. 如果 `expr` 的类型是一个引用，忽略引用部分
 2. 然后剩下的部分决定 `T`，然后 `T` 与形参匹配得出最终 `ParamType`
