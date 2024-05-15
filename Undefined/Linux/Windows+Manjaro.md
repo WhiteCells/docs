@@ -85,38 +85,3 @@ delete part override
 ```sh
 sudo update-grub
 ```
-
-### 双系统蓝牙设备问题（不再适用）
-
-安装 chntpw 工具：
-
-```sh
-yay -S chntpw
-```
-
-Linux 中挂载 Widnows 磁盘，进入 `/Windows/System32/config/`，使用 chntpw 工具：
-
-```sh
-chntpw -e SYSTEM
-ls
-cd ControlSet001
-cd Services
-cd BTHPORT
-cd Parameters
-cd Keys
-ls
-cd <key name>
-hex <device ip>
-#
-#(...)\BTHPORT\Parameters\Keys\ec2e9831904c> hex 3a910eb02472
-#Value <3a910eb02472> of type REG_BINARY (3), data length 16 [0x10]
-#:00000  64 58 43 FC 7E FB 51 BD 6F 1F 8B 7C FF 9D A4 1C dXC.~.Q.o..|....
-# 将 64 58 43 FC 7E FB 51 BD 6F 1F 8B 7C FF 9D A4 1C
-# 省去空格，然后复制，替换 /var/lib/bluetooth/<device ip> 中的 key 的值
-```
-
- 重启蓝牙服务：
-
-```sh
-systemctl restart bluetooth
-```
