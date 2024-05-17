@@ -137,3 +137,4 @@ class D : C {
 };
 ```
 
+`implicit_cast`
