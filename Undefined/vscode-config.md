@@ -1,6 +1,4 @@
-### Cpp
-
-#### c_cpp_properties.json
+### c_cpp_properties.json
 
 配置 cpp 版本，Intellisense 代码提示，编译器路径
 
@@ -50,7 +48,7 @@
 
 
 
-#### launch.json
+### launch.json
 
 F5 进行调试程序时，会在 `launch.json` 搜索对应的配置
 
@@ -128,7 +126,7 @@ F5 进行调试程序时，会在 `launch.json` 搜索对应的配置
 
 
 
-#### setting.json
+### setting.json
 
 工作区配置
 
@@ -153,7 +151,7 @@ F5 进行调试程序时，会在 `launch.json` 搜索对应的配置
 
 
 
-#### tasks.json
+### tasks.json
 
 ```json
 // Windows
@@ -226,7 +224,7 @@ F5 进行调试程序时，会在 `launch.json` 搜索对应的配置
 }
 ```
 
-#### Setting JSON
+### Setting JSON
 
 ```json
 {
@@ -436,19 +434,4 @@ F5 进行调试程序时，会在 `launch.json` 搜索对应的配置
     },
 }
 ```
-
-### Expand
-
-- C/C++
-- CMake
-- CMake Tools
-- Git Graph
-- Markdown All in One
-- Markdown Preview Mermaid Support
-- Mermaid Markdown Syntax Highlighting
-- Material Icon Theme
-- Mxmind mind map
-- MySQL Shell for VS code
-- Qt tools
-- Remote-SSH
 

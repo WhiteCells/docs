@@ -54,7 +54,8 @@ Linux 中生成 ssh 密钥，已经存在则不需要生成
 ```shell
 cd ~/.ssh/
 ssh-keygen -t rsa
-# 路径 ~/.ssh/ 下创建一个文件 authorized_keys 
+# 路径 ~/.ssh/ 下创建一个文件 authorized_keys
+touch ~/.ssh/authorized_keys
 # authorized_keys 为配置文件 /etc/ssh/sshd_config 中的名称
 # 将 Windows 公钥内容复制到该文件
 vim ~/.ssh/authorized_keys
