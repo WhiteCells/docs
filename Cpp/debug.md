@@ -141,4 +141,9 @@ class D : C {
 
 前置声明需要写在命名空间内，如果类 `Evnet` 在命名空间 `A` 内，则在其他文件中前置声明 `Event`  则需要将该前置声明写在 `namespace A {}` 内。
 
-对于 `namespace` 应尽量少用 `using namespace`
+对于 `namespace` 应尽量少用 `using namespace`，以免污染命名空间。
+
+静态成员变量受访问限定符限制。静态成员函数在实现时，需要脚上类名作用域。
+
+
+
