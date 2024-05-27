@@ -71,3 +71,25 @@ Host [name]
     IdentityFile ~/.ssh/id_rsa_linux
 ```
 
+### 使用 sshpass 自动连接服务器
+
+安装 `sshpass`：
+
+```sh
+yay -S sshpass
+```
+
+使用脚本：
+
+```sh
+#!/bin/bash
+
+# 定义 SSH 连接的相关信息
+SSH_USER="user"
+SSH_HOST="host"
+SSH_PASSWORD="password"
+
+# 使用 sshpass 命令进行 SSH 连接
+sshpass -p "$SSH_PASSWORD" ssh "$SSH_USER"@"$SSH_HOST"
+```
+
