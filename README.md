@@ -1,11 +1,5 @@
 ### docs
 
-```cpp
-
-
-
-```
-
 - Alogrithm
 - Base
 - Cpp
