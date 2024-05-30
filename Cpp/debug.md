@@ -153,4 +153,14 @@ class D : C {
 
 类中定义类或结构体不必 `private`，因为类或结构体只是类型定义。
 
- 
+---
+
+```c
+struct A {
+    struct Val {
+        int x;
+    } val;
+};
+```
+
+`struct A` 结构体中声明了 `Val` 结构体的变量。
