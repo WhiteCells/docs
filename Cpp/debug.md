@@ -164,3 +164,7 @@ struct A {
 ```
 
 `struct A` 结构体中声明了 `Val` 结构体的变量。
+
+---
+
+`override` 关键字要在修饰函数的 `const` 关键字之后。
