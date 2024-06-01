@@ -168,3 +168,16 @@ struct A {
 ---
 
 `override` 关键字要在修饰函数的 `const` 关键字之后。
+
+---
+
+C++11 引入的一种强类型枚举类型：
+
+```cpp
+enum class State {
+    START,
+    STOPPED
+};
+State s;
+```
+
