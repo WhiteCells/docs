@@ -8,10 +8,8 @@ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 g++ 版本低导致无法使用 `std::thread`
 
-[github-mingw-builds-binaries/releases](https://github.com/niXman/mingw-builds-binaries/releases)
+下载新版本 [github-mingw-builds-binaries/releases](https://github.com/niXman/mingw-builds-binaries/releases)
 
-下载新版本
-
-`-std=c++11`
+指定编译器使用的 C++ 标准 `-std=c++11`
 
 遇到 `std::cout` 调试出错，我的错误在根目录下 `libstdc++-6.dll` 没有替换，解决方法直接删除 system32 目录下的这个文件，让编译要找的文件直接到环境变量中去找。

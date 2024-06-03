@@ -6,6 +6,8 @@
 git clone git@github.com:chenshuo/muduo.git
 ```
 
+muduo 依赖于 boost 库，需要在环境安装 boost。
+
 ### 编译
 
 ```sh
