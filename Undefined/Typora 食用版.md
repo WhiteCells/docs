@@ -107,7 +107,7 @@ $\lim\limits_{n\to\infin}(1+\dfrac{1}{n})^n=e$
 #### 累加
 
 ```
-$\sum\limits_{i=1}^n\dfrac{1}{n^2}$
+$\sum\limits_{i=1}^{n}\dfrac{1}{n^2}$
 ```
 
 $\sum\limits_{i=1}^n\dfrac{1}{n^2}$
