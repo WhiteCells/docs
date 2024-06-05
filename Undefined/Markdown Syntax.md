@@ -52,7 +52,7 @@
 
 多行公式
 
-```
+```markdown
 $$
 \left\{
 \begin{array}{l}
@@ -62,7 +62,6 @@ a_3x+b_3y+c_1z=d_3
 \end{array}
 \right.
 $$
-
 ```
 
 $$
@@ -90,15 +89,15 @@ $$
 
 #### 积分
 
-```
-$\iint\limits_D\left(\dfrac{\partial Q}{\partial x}-\dfrac{\partial P}{\partial y}\right){\rm d}x{\rm d}y=\oint\limits_LP{\rm d}x+Q{\rm d}y$
+```latex
+$\iint\limits_{D} \left(\dfrac{\partial Q}{\partial x}-\dfrac{\partial P}{\partial y}\right){\rm d}x{\rm d}y=\oint\limits_LP{\rm d}x+Q{\rm d}y$
 ```
 
 $\iint\limits_D\left(\dfrac{\partial Q}{\partial x}-\dfrac{\partial P}{\partial y}\right){\rm d}x{\rm d}y=\oint\limits_LP{\rm d}x+Q{\rm d}y$
 
 #### 极限
 
-```
+```latex
 $\lim\limits_{n\to\infin}(1+\dfrac{1}{n})^n=e$
 ```
 
@@ -106,32 +105,32 @@ $\lim\limits_{n\to\infin}(1+\dfrac{1}{n})^n=e$
 
 #### 累加
 
-```
-$\sum\limits_{i=1}^{n}\dfrac{1}{n^2}$
+```latex
+$\sum\limits_{i=1}^{n} \dfrac{1}{n^2}$
 ```
 
 $\sum\limits_{i=1}^n\dfrac{1}{n^2}$
 
 #### 累乘
 
-```
-$\prod\limits_{i=1}^n\dfrac{1}{n^2}$
+```latex
+$\prod\limits_{i=1}^{n} \dfrac{1}{n^2}$
 ```
 
 $\prod\limits_{i=1}^n\dfrac{1}{n^2}$
 
 #### 交集
 
-```
-$\bigcup\limits_{i=1}^n\dfrac{1}{n^2}$
+```latex
+$\bigcup\limits_{i=1}^{n} \dfrac{1}{n^2}$
 ```
 
 $\bigcup\limits_{i=1}^n\dfrac{1}{n^2}$
 
 #### 并集
 
-```
-$\bigcap\limits_{i=1}^n\dfrac{1}{n^2}$
+```latex
+$\bigcap\limits_{i=1}^{n} \dfrac{1}{n^2}$
 ```
 
 $\bigcap\limits_{i=1}^n\dfrac{1}{n^2}$
@@ -140,74 +139,73 @@ $\bigcap\limits_{i=1}^n\dfrac{1}{n^2}$
 
 #### 任务列表
 
-```
+```markdown
 - [ ]
 ```
 
-快捷键 ctrl + shift + x
+快捷键：<kbd>ctrl</kbd> <kbd>shift</kbd> <kbd>x</kbd>
 
 #### 引用
 
-```
+```markdown
 > 
 ```
 
-快捷键 ctrl + shift + q 
+快捷键：<kbd>ctrl</kbd> <kbd>shift</kbd> <kbd>q</kbd> 
 
 #### 链接
 
-```
+```markdown
 [显示内容](网址)
 ```
 
-快捷键 ctrl + k
+快捷键：<kbd>ctrl</kbd> <kbd>k</kbd>
 
 #### 脚注
 
-```
+```markdown
 [^文本]
 
 [^文本]:解释说明
 ```
 
-
-
 #### 图片
 
-```
+```markdown
 ![显示的文字](图片路径)
 ```
 
-快捷键 ctrl + shift + i
+快捷键：<kbd>ctrl</kbd> <kbd>shift</kbd> <kbd>i</kbd>
 
 #### 表格
 
-```
+```markdown
 | | |回车
 ```
 
-快捷键 ctrl + t
+快捷键：<kbd>ctrl</kbd> <kbd>t</kbd>
 
 #### 公式
 
-行中公式
+行内公式
 
-```
-$$
+```latex
+$x_1$
+$$x_1$$
 ```
 
-独立公式 快捷键 ctrl + shift + m
+多行公式
 
-```
+```latex
 $$
 $$
 ```
 
 #### 代码块
 
-当行代码
+单行代码
 
-快捷键：ctrl + shift + ~
+快捷键：<kbd>ctrl</kbd> <kbd>shift</kbd> <kbd>~</kbd>
 
 ```
 `code`
@@ -220,67 +218,27 @@ $$
 ~~~
 ```
 
-快捷键 ctrl + shift + k
+快捷键 <kbd>ctrl</kbd> <kbd>shift</kbd> <kbd>k</kbd>
 
 #### 文本操作
 
-**加粗** ctrl + b
+**加粗** <kbd>ctrl</kbd> <kbd>b</kbd>
 
-*倾斜* ctrl + i
+*倾斜* <kbd>ctrl</kbd> <kbd>i</kbd>
 
-<u>下划线</u> ctrl + u
+<u>下划线</u> <kbd>ctrl</kbd> <kbd>u</kbd>
 
-~~删除线~~ alt + shift + 5
+~~删除线~~ <kbd>alt</kbd> <kbd>shift</kbd> <kbd>5</kbd>
 
-#### Typora 操作
-
-偏好：ctrl + , 
-
-关闭：ctrl + w
-
-快速打开：ctrl + p
-
-打开：ctrl + o
-
-新建窗口：ctrl + shift + n
-
-新建：ctrl + n
-
-大纲：ctrl + shift + 1
-
-文档列表：ctrl + shift + 2
-
-文件树：ctrl + shift + 3
-
-实际大小：ctrl + shift + 9
-
-显示/隐藏侧边栏：ctrl + shift + l
-
-减少缩进：ctrl + [ 
-
-增加缩进： Ctrl + ] 
-
-提升标题等级：Ctrl + =
-
-降低标题等级：Ctrl + -
-
-选取一整行：ctrl + l
-
-开发者工具：shift + F12
-
-查找：F3、ctrl + f
-
-专注模式：F8
-
-打字机模式：F9
-
-全屏：F11
+==高亮==
 
 ### UML
 
 [UML mermaid](https://mermaid.js.org/intro/)
 
-代码块中增加 `mermaid` 标识
+#### classDiagram
+
+代码块中增加 **classDiagram** 标识
 
 | 关系  | 含义 |
 | ----- | ---- |
@@ -291,17 +249,110 @@ $$
 | ..>   | 依赖 |
 | -->   | 关联 |
 
-实现
+##### 继承
+
+~~~markdown
+```mermaid
+classDiagram
+class A
+class B
+B --|> A
+```
+~~~
 
 ```mermaid
 classDiagram
-class A{
-    
-}
+class A
+class B
+B --|> A
+```
 
-class B {
-    
-}
+##### 实现
 
+~~~markdown
+```mermaid
+classDiagram
+class A
+class B
 B..|>A
+```
+~~~
+
+```mermaid
+classDiagram
+class A
+class B
+B..|>A
+```
+
+##### 聚合
+
+~~~markdown
+```mermaid
+classDiagram
+class A
+class B
+A --o B
+```
+~~~
+
+```mermaid
+classDiagram
+class A
+class B
+A --o B
+```
+
+##### 组合
+
+~~~markdown
+```mermaid
+classDiagram
+class A
+class B
+A --* B
+```
+~~~
+
+```mermaid
+classDiagram
+class A
+class B
+A --* B
+```
+
+##### 依赖
+
+~~~markdown
+```mermaid
+classDiagram
+class A
+class B
+A ..> B
+```
+~~~
+
+```mermaid
+classDiagram
+class A
+class B
+A ..> B
+```
+
+##### 关联
+
+~~~markdown
+```mermaid
+classDiagram
+class A
+class B
+A --> B
+```
+~~~
+
+```mermaid
+classDiagram
+class A
+class B
+A --> B
 ```
