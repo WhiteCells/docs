@@ -55,7 +55,7 @@ int pthread_create(pthread_t *restrict thread,
         - arg: 线程函数的参数
 
     // return:
-        - 成功返回 0，失败返回 errno，并且 *thread 内容未定义
+        - 成功返回 0，失败返回错误码，并且 *thread 内容未定义
 ```
 
 ### 等待线程
@@ -76,7 +76,7 @@ int pthread_join(pthread_t thread, void **retval);
                   并让 *__thread_return 指向该内存区域
 
     // return:
-        - 成功返回 0，失败返回 errno
+        - 成功返回 0，失败返回错误码
 ```
 
 ### 分离线程
@@ -94,7 +94,7 @@ int pthread_detach(pthread_t thread);
         - thread: 设置为可分离的线程的线程 ID
 
     // return:
-        - 成功返回 0，失败返回 errno
+        - 成功返回 0，失败返回错误码
 ```
 
 ### 线程的属性
@@ -113,7 +113,7 @@ union pthread_attr_t
 
 #### pthread_getattr_np
 
-函数 `pthread_getattr_np` 用于获取线程属性联合体，使用该函数之前需要定义 `_GNU_SOURCE` 宏，当不需要属性联合体时应使用 `pthread_attr_destroy` 进行销毁。
+函数 `pthread_getattr_np` 用于获取线程属性联合体，使用该函数之前需要在 `pthread.h` 前定义 `_GNU_SOURCE` 宏，当不需要属性联合体时应使用 `pthread_attr_destroy` 进行销毁。
 
 ```c
 #define _GNU_SOURCE
@@ -126,7 +126,7 @@ int pthread_getattr_np(pthread_t thread, pthread_attr_t *attr);
         - attr: 传出参数，返回线程属性联合体
 
     // return:
-        - 成功返回 0，失败返回 errno
+        - 成功返回 0，失败返回错误码
 
     // note:
         - 使用该函数前需要在 pthread.h 前定义宏 _GNU_SOURCE
@@ -145,7 +145,7 @@ int pthread_attr_init(pthread_attr_t *attr);
         - attr: 传出参数，需要初始化的线程属性联合体
 
     // return:
-        - 成功返回 0，失败返回 errno
+        - 成功返回 0，失败返回错误码
 ```
 
 #### pthread_attr_destroy
@@ -153,13 +153,15 @@ int pthread_attr_init(pthread_attr_t *attr);
 函数 `pthread_attr_destroy` 用于销毁 `pthread_getattr_np` 获取的线程属性联合体。
 
 ```c
+#include <pthread.h>
+
 // 销毁线程属性联合体
 int pthread_attr_destroy(pthread_attr_t *attr);
     // parameter:
         - attr: 传出参数，需要销毁的线程属性联合体
 
     // return:
-        - 成功返回 0，失败返回 errno
+        - 成功返回 0，失败返回错误码
 ```
 
 ##### 分离状态
@@ -214,7 +216,7 @@ int pthread_attr_getdetachstate(const pthread_attr_t *attr,
         - detachstate: 传出参数，线程属性联合体的分离状态值
 
     // return:
-        - 成功返回 0，失败返回 errno
+        - 成功返回 0，失败返回错误码
 ```
 
 ##### 栈尺寸
@@ -236,7 +238,7 @@ int pthread_attr_setstacksize(pthread_attr_t *attr,
         - stacksize: 设置的栈尺寸（字节）
 
     // return:
-        - 成功返回 0，失败返回 errno
+        - 成功返回 0，失败返回错误码
 ```
 
 ###### pthread_attr_getstacksize
@@ -254,7 +256,7 @@ int pthread_attr_getstacksize(const pthread_attr_t *restrict attr,
         - stacksize: 传出参数，栈尺寸（字节）
     
     // return:
-        - 成功返回 0，失败返回 errno
+        - 成功返回 0，失败返回错误码
 ```
 
 ##### 调度策略
@@ -334,25 +336,46 @@ Linux 下，线程的结束通常有以下情况：
 
 ###### pthread_exit
 
-函数 `pthread_exit` 用于退出进程。
+函数 `pthread_exit` 用于结束线程。
 
 ```c
+#include <pthread.h>
 
+// 结束线程
+[[noreturn]] void pthread_exit(void *retval);
+    // parameter:
+        - retval: 线程函数终止后通过 retval 记录返回值
+                  使用 pthread_join 第二个参数接受
 ```
 
 ##### 被动结束
 
 ###### pthread_kill
 
-函数 `pthread_kill` 用于给指定进程发送信号，用于进程间通信
+函数 `pthread_kill` 用于给指定线程发送信号，用于线程间通信，接受线程的函数必须先用 `sigaction` 函数注册信号的处理函数。 
+
+信号通常是大于 0 的值，当等于 0 时，可用于探测线程是否存在。
+
+向指定线程发送信号，如果指定线程不进行处理，则按信号的默认行为影响整个**进程**，如果给一个线程发送 `SIGQUIT` 信号，线程没有处理，则整个进程推出。
 
 ```c
+#include <signal.h>
 
+// 给指定线程发送信号
+int pthread_kill(pthread_t thread, int sig);
+    // parameter:
+        - thread: 线程 ID
+        - sig: 信号
+    
+    // return:
+        - 成功返回 0，失败返回错误码，并且不发送信号
+          ESRCH：线程不存在
+          EINVAL：信号不合法
 ```
 
 ###### pthread_cancel
 
-函数 `pthread_cancel`
+函数 `pthread_cancel` 用于取消指定线程执行。
 
 ```c
 
