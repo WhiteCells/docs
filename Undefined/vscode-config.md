@@ -46,7 +46,7 @@
 }
 ```
 
-
+`includePath` 参数 `${workspaceFolder}/**` 会递归的分析工作目录下的所有文件。
 
 ### launch.json
 
