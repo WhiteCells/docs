@@ -1,5 +1,7 @@
 ### ssh 连接 Linux
 
+#### Linux
+
 ```sh
 # 安装 ssh 服务
 sudo pacman -S openssh
@@ -22,6 +24,8 @@ sudo systemctl status sshd
 # 安装 net-tools
 sudo pacman -S net-tools
 ```
+
+### Windows
 
 下载 [Xshell](https://www.xshell.com/zh/free-for-home-school/) 和 [Xftp](https://www.xshell.com/zh/free-for-home-school/)
 
