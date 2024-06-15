@@ -160,6 +160,7 @@ yay -S timeshift
 yay -S wps-office-mui-zh-cn  wps-office-cn
 yay -S wps-office-fonts ttf-wps-fonts ttf-ms-fonts
 yay -S freetype2-wps # 解决字体变粗问题
+yay -S libtiff5 # 解决导出 PDF 错误
 
 # motrix
 yay -S motrix-bin
