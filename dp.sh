@@ -8,6 +8,6 @@ cd $project_source_dir
 
 git add .
 git commit -m "update"
-git push -u origin mai
+git push -u origin main
 
 read
