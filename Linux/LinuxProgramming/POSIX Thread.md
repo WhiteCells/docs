@@ -354,7 +354,7 @@ Linux 下，线程的结束通常有以下情况：
 
 函数 `pthread_kill` 用于给指定线程发送信号，用于线程间通信，接受线程的函数必须先用 `sigaction` 函数注册信号的处理函数。 
 
-信号通常是大于 0 的值，当等于 0 时，可用于探测线程是否存在。
+信号通常是大于 0 的值，当等于发送 0 时，然后判断返回值可**用于探测线程是否存活**。
 
 向指定线程发送信号，如果指定线程不进行处理，则按信号的默认行为影响整个**进程**，如果给一个线程发送 `SIGQUIT` 信号，线程没有处理，则整个进程退出（应避免使用 `pthread_kill` 终止线程，因为这这会导致资源泄漏或数据不一致的问题）。
 
@@ -375,10 +375,82 @@ int pthread_kill(pthread_t thread, int sig);
 
 ###### pthread_cancel
 
-函数 `pthread_cancel` 用于取消指定线程执行。
+函数 `pthread_cancel` 用于取消指定线程执行。发送成功不代表被取消的线程会立即停止运行，只有在被取消线程下次调用系统函数和 C 库函数（如 `printf`）或者调用函数 `pthread_testcancel` （让内核检查是否需要取消当前线程）时，才会真正的结束被取消的线程。在线程执行的过程中，检查是否有未响应取消信号的地方，称为**取消点**，常见的取消点在 `printf`、`pthrad_testcancel`、`read`、`write`、`sleep` 等函数调用地方。如果被取消线程停止运行，将自动返回常量 `PTHREAD_CANCELED`（-1），可以通过 `pthread_join` 获取这个返回值。
 
 ```c
+#include <pthread.h>
 
+// 取消指定线程的执行，发送取消请求
+// 发送成功不代表被取消的线程会立即停止运行
+int pthread_cancel(pthread_t thread);
+    // parameter:
+        - thread: 线程 ID
+
+    // return:
+        - 成功返回 0，失败返回错误码
+```
+
+###### pthread_testcancel
+
+`pthread_testcancel` 函数用于让内核检查是否需要取消当前线程。
+
+```c
+#include <pthread.h>
+
+// 让内核检查是否需要取消当前线程
+void pthread_testcancel(void);
+```
+
+##### 线程退出时的清理机会
+
+被动结束是其他线程要求其结束，这种退出方式是不可预见的，是一种异常终止，无论是正常终止还是异常终止，都需要保证线程终止时能顺利的释放自己所占用的资源，尤其是锁资源。
+
+线程为了访问临界资源而为其加锁，如果在访问时线程被其他线程取消，且取消成功，则该临界资源将永远处于加锁状态。
+
+```c
+void *foo(void *arg) {
+    pthread_mutex_lock(&mtx);
+    pthread_testcancel(); // 其他线程对该线程发送取消请求
+    pthread_mutex_unlock(&mtx); // 锁未被释放
+}
+```
+
+因此需要一种机制来确保线程在异常退出能释放所占资源。
+
+###### pthread_cleanup_push
+
+函数 `pthread_cleanup_push` 用于将函数压入清理函数**栈**，必须与 `pthread_cleanup_pop` 成对使用。
+
+**清理函数运行的三种情况**：
+
+1. 线程主动结束
+2. `pthread_cleanup_pop` 传入参数为 0
+3. 线程异常终止
+
+```c
+#include <pthread.h>
+
+// 将函数压入清理函数栈
+void pthread_cleanup_push(void (*routine)(void *), void *arg);
+    // parameter:
+        - routine: 清理函数的指针
+        - arg: 清理函数的参数
+```
+
+
+
+###### pthraed_cleanup_pop
+
+函数 `pthread_cleanup_pop` 将函数从清理函数栈中退出。
+
+```c
+#include <pthread.h>
+
+// 弹出栈顶清理函数，并选择是否执行清理函数 
+void pthread_cleanup_pop(int execute);
+    // parameter:
+        - execute: 选择弹出栈顶清理函数的同时，是否执行清理函数
+                   非 0 时表示执行清理函数
 ```
 
 
