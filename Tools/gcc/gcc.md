@@ -54,8 +54,6 @@ gcc app.i -S -o app.s # 生成汇编文件
 gcc app.s -c -o app.o # 生成目标文件
 ```
 
-
-
 如果直接写 -S 或者 -c
 
 ```shell
