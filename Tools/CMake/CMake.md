@@ -64,6 +64,9 @@ aux_source_directory(<directory> <variable>)
 ## 根据指定的通配符模式获取文件列表，并将结果存储到变量中
 file(GLOB SRC ${PROJECT_SOURCE_DIR}/src/*.cpp)
 
+## 设置可执行文件的输出路径
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin)
+
 ### 静态库和动态库
 ## 设置库的输出路径
 set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/dll)
