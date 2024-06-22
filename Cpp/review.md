@@ -84,11 +84,72 @@ const & 可以接受的参数类型范围更大，可以接受左值或右值。
 
 智能指针是 C++ 标准库中提供的模板类，用于自动管理动态分配的内存。
 
-- std::unique_ptr：独占所有权，不可拷贝，只能移动，
-- std::shared_ptr：共享所有权，可以拷贝和移动，
-- std::weak_ptr：不拥有所有权，可以拷贝和移动，不影响对象的生命周期，不改变 `use_count`，是一种访问 `std::shared_ptr` 管理的对象的弱引用方式。
+- `std::unique_ptr`：独占所有权，不可拷贝，只能移动，
+- `std::shared_ptr`：共享所有权，可以拷贝和移动，
+- `std::weak_ptr`：不拥有所有权，可以拷贝和移动，不影响对象的生命周期，不改变 `use_count`，是一种访问 `std::shared_ptr` 管理的对象的弱引用方式。
+- `std::auto_ptr`：C++98 引入，C++11 弃用。其是所有权移动，在复制和赋值操作中会转移所有权，同时其不是线程安全的。
 
-std::weak_ptr 和 std::shared_ptr 之间的关系是互补的，std::weak_ptr 提供了一种不增加对象
+`std::weak_ptr` 和 `std::shared_ptr` 之间的关系是互补的。
+
+`std::weak_ptr` 是一种不增加对象引用计数的弱引用机制，常用于解决循环引用问题。
+
+`std::weak_ptr` 提供了 `expired()`，允许检查其所指向的对象是否不存在（过期）。
+
+`std::weak_ptr` 可以通过 `lock()` 临时转换为 `std::shared_ptr`，`lock()` 会检查 `std::shared_ptr` 指向的对象是否存在。
+
+`std::make_shared` 是专门用于创建 `std::shared_ptr` 的工厂函数，是模板函数，只需一次内存分配，使用了 RAII，直接创建对象并将其管理权交给 `std::shared_ptr`。
+
+`std::make_unique` 类似于 `std::make_shared`，但是其在 C++14 及以上中才支持。
+
+不建议先 `new` 然后在使用 `std::shared_ptr` 的拷贝构造，因为如果 `std::shared_ptr` 发生异常，则 `new` 的内存就不会释放，从而造成内存泄漏。
+
+```cpp
+class A {};
+std::shared_ptr<A> ptr1 = std::make_shared<A>();
+
+// recommended
+std::shared_ptr<A> ptr1 = std::make_shared<A>();
+
+// not recommended
+A *ptr_A = new A();
+std::shared_ptr<A> ptr2 = std::shared_ptr<A>(ptr_A);
+ptr_A = nullptr; // essential, prevent dangling pointers and double release, clarify ownership
+```
+
+
+
+### 资源获取即初始化 RAII
+
+RAII（Resource Acquisition Is Initialization）是一种**资源管理策略**（内存、文件句柄、网络连接等）。将资源的生命周期与对象的生命周期绑定在一起，资源的获取和释放都通过**对象的构造和析构来管理**，从而确保资源在对象生命周期结束时自动释放。
+
+### delete 和 deletep[] 的区别
+
+`delete` 用于释放单个动态分配的对象，`delete[]` 用于释放使用 `new []` 关键字动态分配的数组。
+
+`new []` 与 `delete []` 对应，`new` 与 `delete` 对应。
+
+### 组合和继承
+
+组合是 **has-a** 关系，包含组件类的对象作为成员。
+
+继承是 **is-a** 关系，继承父类的属性和方法。
+
+继承的缺点：
+
+- 子类和父类耦合度高，父类的修改可能影响子类
+- 多层继承可能出现复杂的继承体系，难以维护
+
+### 常用设计模式
+
+- 单例设计模式：
+- 工厂设计模式：
+- 观察者模式：
+- 策略模式：
+- 模板方法设计模式：
+
+### 运行时类型识别 RTTI
+
+C++ 是静态类型语言，
 
 
 
