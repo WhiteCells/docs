@@ -119,6 +119,8 @@ C++11 中，派生类能够重用基类定义的构造函数。
 
 ### 左值引用
 
+基础数据类型大多数情况下，传值比传引用快。
+
 ### 前置递增和后置递增
 
 前置递增先增加后使用，后置递增是先使用后递增。
@@ -271,7 +273,9 @@ int main(int argc, char *argv[]) {
 
 #### class 与 struct
 
-成员的默认访问权限不同，struct 默认为 public，class 默认为 public。
+成员的默认访问权限不同，struct 默认为 public，class 默认为 private。
+
+默认继承方式不同，struct 默认为 public 继承，class 默认为 private 继承。
 
 #### union
 
