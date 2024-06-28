@@ -30,7 +30,7 @@
 
 ```shell
 vim Makefile
-# vim makefile 
+# vim makefile
 ```
 
 测试项目树
