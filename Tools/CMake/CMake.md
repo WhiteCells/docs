@@ -98,7 +98,7 @@ cmake -B build
 ## 以 build 目录下的文件构建项目
 cmake --build build
 
-## 执行名为 test 的 CMake 脚本文件
+## 执行名为 test 的 CMake 文件
 cmake -P test.cmake
 ```
 
