@@ -15,7 +15,7 @@ yay -S qt6-tools
 
 ### Visual Studio Code
 
-安装插件 `Qt Tools` 便于编辑 ui 文件
+安装插件 `Qt Tools` 便于编辑 **.ui** 文件
 
 在 Window10 平台发现以下问题（Linux 正常）：
 
@@ -49,7 +49,11 @@ yay -S qt6-tools
 
 ui 文件闪退问题，设置插件 `拓展->Qt VS Tools->Options->General` 中 `Qt Designer` 下 `Run in detached window` 修改为 `true` 
 
-无法打印 `qDebug` 信息，设置项目属性，修改 `链接器->系统->子系统` 为控制台
+无法打印 `qDebug` 信息，设置项目属性，修改 `链接器 -> 系统 -> 子系统` 选为控制台
+
+### Qt Creator
+
+Qt Creator 无法打印 `qDebug` 信息时，`项目 -> 运行 -> 在终端中运行`
 
 ### Qt6 CMakeLists
 
@@ -104,6 +108,8 @@ private:
 
 ```cpp
 // .cpp
+#include "ui_login.h" // ui_ 前缀加上 .ui 文件名
+
 LoginDialog::LoginDialog(QWidget *parent = nullptr) : 
     ui(new Ui::LoginDialog) { // 初始化 ui
     
