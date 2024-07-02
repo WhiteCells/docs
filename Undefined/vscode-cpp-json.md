@@ -233,7 +233,7 @@ F5 进行调试程序时，会在 `launch.json` 搜索对应的配置
     // 字体大小
     "editor.fontSize": 20,
     // 字体
-    "editor.fontFamily": "Hack",
+    "editor.fontFamily": "Hack, '微软雅黑'", // 第一个英文，第二个中文
     // vcFormat
     "C_Cpp.formatting": "vcFormat",
     "C_Cpp.vcFormat.newLine.beforeOpenBrace.function": "sameLine",
