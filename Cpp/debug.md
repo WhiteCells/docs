@@ -197,3 +197,80 @@ State s;
 
 ---
 
+类成员变量初始化顺序
+
+错误的初始化顺序：
+
+```cpp
+// cserver.h
+class CServer {
+public:
+    CServer(net::io_context &, unsigned short &);
+    // ...
+private:
+    tcp::acceptor acceptor_;
+    net::io_context &ioc_;
+    tcp::socket socket_;
+};
+```
+
+```cpp
+// cserver.cpp
+CServer::CServer(net::io_context &ioc, unsigned short &port) : 
+    ioc_(ioc),
+    acceptor_(ioc_, tcp::endpoint(tcp::v4(), port)),
+    socket_(ioc_) {
+
+}
+```
+
+正确的初始化顺序：
+
+```cpp
+// cserver.h
+class CServer {
+public:
+    CServer(net::io_context &, unsigned short &);
+    // ...
+private:
+    net::io_context &ioc_;
+    tcp::acceptor acceptor_;
+    tcp::socket socket_;
+};
+```
+
+```cpp
+// cserver.cpp
+CServer::CServer(net::io_context &ioc, unsigned short &port) : 
+    ioc_(ioc),
+    acceptor_(ioc_, tcp::endpoint(tcp::v4(), port)),
+    socket_(ioc_) {
+
+}
+```
+
+或者：
+
+```cpp
+// cserver.h
+class CServer {
+public:
+    CServer(net::io_context &, unsigned short &);
+    // ...
+private:
+    tcp::acceptor acceptor_;
+    net::io_context &ioc_;
+    tcp::socket socket_;
+};
+```
+
+```cpp
+// cserver.cpp
+CServer::CServer(net::io_context &ioc, unsigned short &port) : 
+    acceptor_(ioc, tcp::endpoint(tcp::v4(), port)),
+    ioc_(ioc),
+    socket_(ioc) {
+
+}
+```
+
