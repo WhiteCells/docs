@@ -7,7 +7,7 @@ sudo mv xxx.ttf /usr/share/fonts
 cd /usr/share/fonts
 sudo mkfontscale
 sudo mkfontdir
-fc-cache
+sudo fc-cache -fv
 
 # 查看指定语言的字体是否安装
 fc-list :lang=zh

@@ -131,7 +131,11 @@ class C {
 public:
     typedef long long ll2;
     using ui2 = int;
+    
+    void foo(ll1 val);
 };
+
+void C::foo(C::ll1 val) {}
 
 class D : C {
     ll1 a = 1; // error
@@ -139,6 +143,30 @@ class D : C {
     ui1 c = 1; // error
     ui2 c = 1;
 };
+```
+
+`using` 和 `typedef` 定义的类型作为函数返回类型时，需要加上类作用域：
+
+```cpp
+#ifndef _TEST_H_
+#define _TEST_H_
+
+class A {
+    using ll1 = long long;
+    typedef long long ll2;
+    ll1 foo(ll1);
+    ll2 foo(ll2);
+};
+
+A::ll1 A::foo(ll1) {
+
+}
+
+A::ll2 A::foo(ll2) {
+    
+}
+
+#endif // _TEST_H_
 ```
 
 前置声明需要写在命名空间内，如果类 `Evnet` 在命名空间 `A` 内，则在其他文件中前置声明 `Event`  则需要将该前置声明写在 `namespace A {}` 内。
