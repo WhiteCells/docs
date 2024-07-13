@@ -1,8 +1,10 @@
 ### gRPC 简介
 
+[github grpc](https://github.com/grpc/grpc)
+
 [gRPC C++ quickstart](https://grpc.io/docs/languages/cpp/quickstart/)
 
-gRPC 是 Google 开发的高性能、开源的远程调用（RPC）框架，使客户端想调用本地服务一样调用远程服务，并提供多种语言支持。
+gRPC 是 Google 开发的高性能、开源的远程调用（RPC）框架，使客户端方便客户端调用远程服务，并提供多种语言支持。
 
 gRPC 使用 Protocol Buffers 作为数据格式，可以在不同的平台上进行应用程序之间的通信，采用 HTTP/2 的协议，提供高效、可拓展的远程调用功能，并带有负载均衡、认证、监控等功能。方便用户管理和维护分布式系统。
 
@@ -84,7 +86,7 @@ sudo make install
 popd
 ```
 
-#### 使用 gRPC
+#### 使用 Protobuf
 
 ```sh
 protoc -I=. --cpp_out=. --grpc_out=. --plugin=protoc-gen-grpc=`which grpc_cpp_plugin` message.proto
@@ -108,5 +110,18 @@ protoc \
 
 # 指定编译的 .proto 文件
 message.proto
+```
+
+#### CMakeLists
+
+```cmake
+find_package(ProtoBuf CONFIG REQUIRED)
+find_package(gRPC CONFIG REQUIRED)
+
+target_link_libraries(app PRIVATE
+    protobuf::libprotobuf
+    gRPC::grpc++_reflection
+    gRPC::grpc++
+)
 ```
 
