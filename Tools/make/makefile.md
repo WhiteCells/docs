@@ -244,7 +244,7 @@ $(wildcard ./*.c ./src/*.c)
 # 返回 main.c add.c sub.c mult.c div.c
 ```
 
-$(patsubst <patter>, <replacement>, <text>)
+$(patsubst \<patter\>, \<replacement\>, \<text\>)
 
 - 功能：查看 <text> 中的单词（单词以空格、tab、回车、换行 进行分隔）是否符合模式 <pattern>，如果匹配的话，则以 <replacement> 替换。
 - <pattern> 可以包括通配符 %，表示任意长度的字符串。如果 <replacemet> 中也包含 %，那么，<replacement> 中的这个 % 将是 <pattern> 中的那个 % 所代表的字符串。（\% 表示字符 %，% 表示通配符）

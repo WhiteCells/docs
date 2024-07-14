@@ -305,3 +305,7 @@ CServer::CServer(net::io_context &ioc, unsigned short &port) :
 ---
 
 当出现未定义方法时，特别注意检查 CMake  等配置文件是否将新增的文件添加进行编译。
+
+---
+
+使用 CMake 的 `install(EXPORT ...)` 命令安装库的安装目录才有 `.cmake` 文件

@@ -102,36 +102,6 @@ cmake --build build
 cmake -P test.cmake
 ```
 
-### Windows CMake
-
-[CMake installation](https://cmake.org/download/)
-
-默认生成 MSVC 构建文件
-
-### Linux CMake
-
-```sh
-# 包方式安装
-sudo apt install cmake
-
-# 源码编译方式安装（Ubuntu）
-# 安装编译工具
-sudo apt install build-essential
-# 下载源码
-sudo wget https://cmake.org/files/v3.28/cmake-3.28.0.tar.gz
-# 解压源码
-tar -zxvf cmake-3.28.0.tar.gz
-cd cmake-3.28.0
-# 配置编译参数
-./configure
-# 编译
-sudo make
-# 安装
-sudo make install
-# 检查是否安装成功
-cmake --version
-```
-
 ### CMake Syntax
 
 #### built-in variables
@@ -988,3 +958,68 @@ $ .\build\Debug\app.exe
 // $ ./build/app
 test2
 ```
+
+### config flie
+
+复制配置文件到可执行文件目录：
+
+```cmake
+configure_file(
+    ${PROJECT_SOURCE_DIR}/config.ini
+    ${PROJECT_BINARY_DIR}/config.ini
+    COPYONLY
+)
+```
+
+### find_libraries
+
+查找指定路径下查找指定的库文件：
+
+```cmake
+find_libraries(
+    redis_lib
+    NAMES hiredis
+    PATH /usr/local/lib
+)
+```
+
+### find_package
+
+```cmake
+find_package(gRPC CONFIG REQUIRED)
+```
+
+### include_directories
+
+包含项目包含的头文件：
+
+```cmake
+include_directories(
+    ${PROJECT_SOURCE_DIR}
+)
+```
+
+### link_directories
+
+```cmake
+
+```
+
+### link_libraries
+
+```cmake
+
+```
+
+### target_link_directories
+
+```cmake
+
+```
+
+### target_link_libraries
+
+```cmake
+
+```
+
