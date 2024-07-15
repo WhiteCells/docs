@@ -10,7 +10,9 @@ gRPC 使用 Protocol Buffers 作为数据格式，可以在不同的平台上进
 
 ### Linux gRPC
 
-#### 克隆 gRPC 仓库
+#### 源码安装
+
+##### 克隆 gRPC 仓库
 
 ```sh
 git clone --recurse-submodules -b v1.65.0 --depth 1 --shallow-submodules https://github.com/grpc/grpc
@@ -27,7 +29,7 @@ git clone \
 https://github.com/grpc/grpc
 ```
 
-#### 构建和安装  gRPC 和 Protocol Buffers
+##### 构建和安装  gRPC 和 Protocol Buffers
 
 ```sh
 export INSTALL_DIR=$HOME/.local
