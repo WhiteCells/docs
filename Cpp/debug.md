@@ -308,4 +308,4 @@ CServer::CServer(net::io_context &ioc, unsigned short &port) :
 
 ---
 
-使用 CMake 的 `install(EXPORT ...)` 命令安装库，安装目录才有 `.cmake` 文件
+什么时候需要封装数据：当数据的修改会对整个对象的其他内容产生影响时，这个数据需要封装。

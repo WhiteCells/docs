@@ -959,7 +959,7 @@ $ .\build\Debug\app.exe
 test2
 ```
 
-### config flie
+### configure_file
 
 复制配置文件到可执行文件目录：
 
@@ -973,7 +973,7 @@ configure_file(
 
 ### find_libraries
 
-查找指定路径下查找指定的库文件：
+查找指定路径下查找指定的动态库文件：
 
 ```cmake
 find_libraries(
@@ -999,6 +999,14 @@ include_directories(
 )
 ```
 
+### include
+
+包含 .cmake 所在的目录
+
+```cmake
+
+```
+
 ### link_directories
 
 ```cmake
@@ -1018,6 +1026,8 @@ include_directories(
 ```
 
 ### target_link_libraries
+
+静态库使用 target_link_libraries
 
 ```cmake
 
