@@ -1,39 +1,34 @@
 ### 套接字地址结构
 
-#### 通用套接字数据结构
+#### 套接字数据结构
 
 ```c
+#include <sys/socket.h>
+
 // 通用套接字地址类型的定义
 struct sockaddr {
-    sa_family_t sa_family;   /* 协议族 */
-    char        sa_data[14]; /* 协议族数据 */        
-}
+    sa_family_t     sa_family;      /* Address family */
+    char            sa_data[];      /* Socket address */
+};
 ```
-
-`sockaddr` 在头文件 `sys/socket.h` 中。
 
 通用套接字地址类型可以在不同协议族之间进行强制转换。
 
-协议族类型为 `sa_family_t`，是 `unsigned short` 类型，因此成员变量 `sa_family` 的长度为 16 个字节。
+在网络编程中几乎所有的**套接字函数**都用 `sockaddr` 为参数。
 
-#### 实际使用的套接字数据结构
-
-在网络编程中几乎所有的**套接字函数**都用 `sockaddr` 为参数，例如 `bind()` 函数原型：
+但是使用 `struct sockaddr` 不方便进行设置，一般采用结构 `struct sockaddr_in` 进行设置，定义如下：
 
 ```c
-int bind(int socket,                     /* 套接字文件描述符 */
-         const struct sockaddr *address, /* 套接字地址结构 */
-         socklen_t address_len);         /* 套接字地址结构的长度 */
-```
+#include <sys/socket.h>
 
-但是使用 `struct sockaddr` 不方便进行设置，在以太网中，一般采用结构 `struct sockaddr_in` 进行设置，位于，定义如下：
-
-```c
 struct sockaddr_in {
     sa_family_t     sin_family;     /* AF_INET */
     in_port_t       sin_port;       /* Port number */
     struct in_addr  sin_addr;       /* IPv4 address */
 };
+
+typedef uint32_t in_addr_t;
+typedef uint16_t in_port_t;
 ```
 
 IP 地址结构体 `struct in_addr` 定义如下：
