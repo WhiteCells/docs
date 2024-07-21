@@ -4,5 +4,5 @@
 
 `setStyleSheet` 传入 QSS 样式的字符串。
 
-调用 QSS 的文件一定要放到资源文件 `.qrc`
+`.qrc` 资源文件需要引入被调用的 QSS 文件
 
