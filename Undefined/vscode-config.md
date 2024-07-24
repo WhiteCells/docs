@@ -324,7 +324,7 @@ F5 进行调试程序时，会在 `launch.json` 搜索对应的配置
     "workbench.iconTheme": "material-icon-theme",
     /******************************************************************/
     // 驼峰翻译
-    "varTranslation.baiduSecret": "20230210001556885,6143tJPi4ZLyIyWwLfNK",
+    "varTranslation.baiduSecret": "6143tJPi4ZLyIyWwLfNK",
     "varTranslation.translationEngine": "baidu",
     /******************************************************************/
     // CMake

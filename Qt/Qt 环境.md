@@ -122,6 +122,17 @@ LoginDialog::LoginDialog(QWidget *parent = nullptr) :
 qt_add_executable(app ${PROJECT_SOURCES} login.ui)
 ```
 
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
+```
+
 ### 添加 .qrc 文件
 
 ```sh
