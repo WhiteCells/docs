@@ -558,6 +558,8 @@ int main(int argc, char *argv[]) {
 
 修饰虚函数
 
+修饰类
+
 #### mutable
 
 `mutable` 用于修饰类中的成员变量，被修饰成员变量可以在 const 成员函数中被修改。
