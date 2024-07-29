@@ -317,3 +317,11 @@ CServer::CServer(net::io_context &ioc, unsigned short &port) :
 ---
 
 当派生类无法访问基类的公有或保护方法时，检查继承的访问限定符。
+
+---
+
+智能指针所包含类型不能只前置声明。
+
+---
+
+`unordered_map` 的 `operator[]` 没有 const 方法。
