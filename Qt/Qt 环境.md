@@ -157,10 +157,9 @@ qt_add_executable(app ${PROJECT_SOURCES} resource.qrc)
         <file>/ico/avator.png</file>
     </qresource>
     <qresource prefix="/QSS">
-        <file>/qss/style.css</file>
+        <file alias="style">/qss/style.qss</file>
     </qresource>
 </RCC>
 ```
 
-使用资源文件：`":/ICO/ico/avator.png"`
-
+使用资源文件：`":/ICO/ico/avator.png"` `:/QSS/style`
