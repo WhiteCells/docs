@@ -324,4 +324,8 @@ CServer::CServer(net::io_context &ioc, unsigned short &port) :
 
 ---
 
-`unordered_map` 的 `operator[]` 没有 const 方法。
+`unordered_map` 的 `operator[]` 没有 const 方法。当类成员函数是常函数，且类中有 `unordered_map` 成员变量时，无法使用 `operator[]` 方法，因为该方法可能修改类成员变量。
+
+---
+
+`friend class ClassName` 与 `friend ClassName` 语义相同
