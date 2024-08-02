@@ -329,3 +329,20 @@ CServer::CServer(net::io_context &ioc, unsigned short &port) :
 ---
 
 `friend class ClassName` 与 `friend ClassName` 语义相同
+
+---
+
+CMake 配置项目时，遇到未找到定义时，检查是否将源文件加入编译
+
+---
+
+？虚析构函数重写，子类不重写，不会变成虚类
+
+---
+
+`namespace AAA = BBB;` 命名空间取别名
+
+`using CCC::type;` 使用 `CCC` 命名空间下的 `type` 类型，引入命名空间中的符号
+
+`using namespace DDD;` 使用命名空间
+
