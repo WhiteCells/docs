@@ -388,3 +388,7 @@ void foo(std::shared_ptr<A> ptr) {
 ---
 
 `using` 设置类型别名，在类中受受顺序影响。
+
+---
+
+`friend` 不受访问限定符影响，友元关系不能继承。

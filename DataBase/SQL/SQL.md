@@ -21,7 +21,7 @@ SQL 可以单行或多行，默认以分号结尾。
 #### 创建数据库
 
 ```sql
-CREATE DATABASE [IF NOT EXISTS] <DataName>;
+CREATE DATABASE [IF NOT EXISTS] <DataBaseName>;
 ```
 
 `DATABASE` 关键字可以使用 `SCHEMA` 替换。
@@ -29,12 +29,44 @@ CREATE DATABASE [IF NOT EXISTS] <DataName>;
 #### 删除数据库
 
 ```sql
-DROP DATABASE [IF EXISTS] <DataName>;
+DROP DATABASE [IF EXISTS] <DataBaseName>;
 ```
 
+#### 创建表
 
+```sql
+CREATE TABLE <TableName> (
+    <field1> <type> [COMMENT <file1_comment>],
+    <field2> <type> [COMMENT <file2_comment>],
+    <field3> <type> [COMMENT <file1_comment>]
+) [COMMENT <table_comment>];
+```
 
+#### 删除表
 
+```sql
+DROP TABLE [IF EXISTS] <TableName>;
+
+-- 删除指定表，并重新创建该表
+TRUNCATE TABLE <TableName>;
+```
+
+#### 修改表
+
+```sql
+-- 添加字段
+ALTER TABLE <TabelName>
+ADD <new_field> <type> [COMMENT <field_comment>];
+
+-- 修改字段
+ALTER TABLE <TableName> CHANGE <old_field> <new_field> <type> [COMMENT <field_comment>];
+
+-- 删除字段
+ALTER TABLE <TableName> DROP <delete_field>;
+
+-- 修改表名
+ALTER TABLE <OldTableName> RENAME <NewTableName>;
+```
 
 ### DML(Data Manipulation Language)
 
