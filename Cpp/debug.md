@@ -381,7 +381,7 @@ void foo(std::shared_ptr<A> ptr) {
 }
 ```
 
----
+使用 `shared_from_this()` 前提需要类型构造完成
 
 `std::bind` 按值绑定
 
