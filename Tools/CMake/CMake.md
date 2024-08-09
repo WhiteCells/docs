@@ -959,6 +959,18 @@ $ .\build\Debug\app.exe
 test2
 ```
 
+### add_subdirectory
+
+包含子目录的 `CMakeLists.txt` 文件，将这个文件的内容加入到当前 `CMakeLists.txt`
+
+```cmake
+add_subdirectory(
+    ${PROJECT_SOURCE_DIR}/global
+)
+```
+
+
+
 ### configure_file
 
 复制配置文件到可执行文件目录：
@@ -1030,7 +1042,11 @@ include_directories(
 静态库使用 target_link_libraries
 
 ```cmake
-
+target_link_libraries(
+    ${PROJECT_NAME}
+    PRIVATE
+    ${PROJECT_SOURCE_DIR}/lib
+)
 ```
 
 ### target_include_directories
@@ -1038,6 +1054,17 @@ include_directories(
 项目包含目录
 
 ```cmake
-
+target_include_directories(
+    ${PROJECT_NAME}
+    PRIVATE
+    ${PROJECT_SOURCE_DIR}/include
+)
 ```
 
+### CMakeLists.txt 与 .cmake
+
+每个 CMake 项目的根目录都必须包含一个 `CMakeLists.txt` 文件（名称固定），定义了 CMake 版本，项目的名称、版本、要构建的目标（可执行文件、库等）、依赖项以及其他构建选项。
+
+`.cmake` 通常用于定义可重用的函数、宏和变量，定义的内容可以在 `CMakeLists.txt` 中使用（需要包含 `.cmake`  目录）。
+
+`.cmake` 也可以查找外部库、设置编译器选项或定义自定义构建规则。例如用于查找和配置外部库。

@@ -230,10 +230,10 @@ State s;
 错误的初始化顺序：
 
 ```cpp
-// cserver.h
-class CServer {
+// server.h
+class Server {
 public:
-    CServer(net::io_context &, unsigned short &);
+    Server(net::io_context &, unsigned short &);
     // ...
 private:
     tcp::acceptor acceptor_;
@@ -243,8 +243,8 @@ private:
 ```
 
 ```cpp
-// cserver.cpp
-CServer::CServer(net::io_context &ioc, unsigned short &port) : 
+// server.cpp
+Server::Server(net::io_context &ioc, unsigned short &port) : 
     ioc_(ioc),
     acceptor_(ioc_, tcp::endpoint(tcp::v4(), port)),
     socket_(ioc_) {
@@ -255,10 +255,10 @@ CServer::CServer(net::io_context &ioc, unsigned short &port) :
 正确的初始化顺序：
 
 ```cpp
-// cserver.h
-class CServer {
+// server.h
+class Server {
 public:
-    CServer(net::io_context &, unsigned short &);
+    Server(net::io_context &, unsigned short &);
     // ...
 private:
     net::io_context &ioc_;
@@ -268,8 +268,8 @@ private:
 ```
 
 ```cpp
-// cserver.cpp
-CServer::CServer(net::io_context &ioc, unsigned short &port) : 
+// server.cpp
+Server::Server(net::io_context &ioc, unsigned short &port) : 
     ioc_(ioc),
     acceptor_(ioc_, tcp::endpoint(tcp::v4(), port)),
     socket_(ioc_) {
@@ -280,10 +280,10 @@ CServer::CServer(net::io_context &ioc, unsigned short &port) :
 或者：
 
 ```cpp
-// cserver.h
-class CServer {
+// server.h
+class Server {
 public:
-    CServer(net::io_context &, unsigned short &);
+    Server(net::io_context &, unsigned short &);
     // ...
 private:
     tcp::acceptor acceptor_;
@@ -293,8 +293,8 @@ private:
 ```
 
 ```cpp
-// cserver.cpp
-CServer::CServer(net::io_context &ioc, unsigned short &port) : 
+// server.cpp
+Server::Server(net::io_context &ioc, unsigned short &port) : 
     acceptor_(ioc, tcp::endpoint(tcp::v4(), port)),
     ioc_(ioc),
     socket_(ioc) {
@@ -392,3 +392,29 @@ void foo(std::shared_ptr<A> ptr) {
 ---
 
 `friend` 不受访问限定符影响，友元关系不能继承。
+
+---
+
+`using` 声明只能在全局作用域（命名空间作用域）或函数作用域（包括成员函数作用域）。
+
+类作用域中使用 `using` 声明会导致编译错误，如果允许这种操作，那么就会在类中引入某个类型，此时就可能和类中已有类型发生命名冲突。
+
+---
+
+```cpp
+namespace {
+void foo();
+}
+```
+
+与
+
+```cpp
+static void foo();
+```
+
+效果类似，保证函数在当前编译单元使用，避免与其他文件的同名函数发生冲突。
+
+---
+
+在函数结束后，局部指针变量将被销毁，因此将其置空没有意义
