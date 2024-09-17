@@ -343,6 +343,136 @@ F5 进行调试程序时，会在 `launch.json` 搜索对应的配置
 }
 ```
 
+```json
+{
+    // 字体
+    "editor.fontFamily": "Hack",
+    // 字体大小
+    "editor.fontSize": 20,
+    // vcFormat
+    // "C_Cpp.formatting": "vcFormat",
+    // "C_Cpp.vcFormat.newLine.beforeOpenBrace.lambda": "sameLine",
+    // "C_Cpp.vcFormat.newLine.beforeOpenBrace.namespace": "sameLine",
+    // "C_Cpp.vcFormat.newLine.beforeOpenBrace.type": "sameLine",
+    // "C_Cpp.vcFormat.newLine.beforeElse": false,
+    // "C_Cpp.vcFormat.newLine.beforeCatch": false,
+    // "C_Cpp.vcFormat.newLine.beforeOpenBrace.block": "sameLine",
+    // "C_Cpp.vcFormat.space.aroundAssignmentOperator": "ignore",
+    // "C_Cpp.vcFormat.space.aroundBinaryOperator": "ignore",
+    // "C_Cpp.vcFormat.space.aroundTernaryOperator": "ignore",
+    // "C_Cpp.vcFormat.space.pointerReferenceAlignment": "right",
+    // "C_Cpp.vcFormat.wrap.preserveBlocks": "allOneLineScopes",
+    // "C_Cpp.vcFormat.indent.preserveComments": true,
+    // "C_Cpp.vcFormat.indent.caseContentsWhenBlock": true,
+    // "C_Cpp.vcFormat.indent.caseLabels": true,
+    // "C_Cpp.vcFormat.space.withinInitializerListBraces": false,
+    // "C_Cpp.vcFormat.space.beforeInitializerListOpenBrace": true,
+    // "C_Cpp.inlayHints.parameterNames.suppressWhenArgumentContainsName": false,
+    // "C_Cpp.vcFormat.indent.withinParentheses": "alignToParenthesis",
+    // "C_Cpp.vcFormat.indent.namespaceContents": false,
+    // "C_Cpp.vcFormat.indent.lambdaBracesWhenParameter": false, // lambda 表达式右括号缩进
+    // "C_Cpp.codeAnalysis.updateDelay": 500,
+    // "C_Cpp.codeAnalysis.clangTidy.enabled": true,
+    // "C_Cpp.intelliSenseUpdateDelay": 500,
+    "C_Cpp.intelliSenseEngine": "disabled",
+    // 
+    "editor.acceptSuggestionOnEnter": "off", // enter 不接受建议
+    //
+    "files.autoSave": "onFocusChange", // 保存时不格式化
+    // 
+    "editor.formatOnType": true, // 换行格式化
+    //
+    "explorer.compactFolders": false, // 单个子目录不简化
+    //
+    "terminal.integrated.fontSize": 17, // 终端的字号
+    // 
+    "workbench.panel.defaultLocation": "right", // 面板位置(调试控制台...)
+    // 更新
+    "extensions.autoCheckUpdates": false,
+    "update.mode": "none",
+    "update.showReleaseNotes": false,
+    "extensions.autoUpdate": false, // 关闭拓展自动更新
+    //
+    "editor.hover.above": false, // 鼠标悬停提示首选在线条下方显示悬停
+    //
+    "window.titleBarStyle": "custom", // Linux window title
+    // 
+    "debug.onTaskErrors": "abort", // 控制在运行预启动任务后遇到错误时
+    // 
+    "workbench.startupEditor": "none", // 启动时不显示欢迎页面
+    // alt 键滚动加速
+    // "editor.fastScrollSensitivity": 1,
+    // "workbench.list.fastScrollSensitivity": 1,
+    //
+    "editor.stickyScroll.enabled": false, // 关闭在编辑器顶部的滚动过程中显示嵌套的当前作用域
+    // 
+    "C_Cpp.workspaceParsingPriority": "low", // 非活动工作区文件 CPU 占用
+    // 
+    "extensions.ignoreRecommendations": true, // 关闭拓展建议
+    // 
+    "markdown.preview.fontSize": 19, // markdown size
+    // git 在没有暂存的更改时提交所有更改
+    "git.enableSmartCommit": true,
+    // git 同步 Git 存储库前不用进行确认
+    "git.confirmSync": false,
+    // git 控制是应打开工作区父文件夹中的存储库还是打开的文件
+    "git.openRepositoryInParentFolders": "never",
+    /******************************************************************/
+    // 驼峰翻译
+    "varTranslation.baiduSecret": "20230210001556885,6143tJPi4ZLyIyWwLfNK",
+    "varTranslation.translationEngine": "baidu",
+    /******************************************************************/
+    // CMake
+    "cmake.showOptionsMovedNotification": false,
+    "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
+    // CMake 项目目录打开时自动配置
+    "cmake.configureOnOpen": false,
+    // CMake 失败，关闭询问调试器进行配置
+    "cmake.showConfigureWithDebuggerNotification": false,
+    // cmake status bar
+    "cmake.options.statusBarVisibility": "compact",
+    "cmake.pinnedCommands": [
+        "workbench.action.tasks.runTask",
+        "workbench.action.tasks.configureTaskRunner"
+    ],
+    "cmake.showNotAllDocumentsSavedQuestion": false,
+    // 
+    "editor.dragAndDrop": false, // 控制在编辑器中是否允许通过拖放来移动选中内容。
+    "[markdown]": {
+        "diffEditor.ignoreTrimWhitespace": true
+    },
+    "window.commandCenter": false,
+    "workbench.layoutControl.enabled": false,
+    "editor.minimap.enabled": false,
+    /******************************************************************/
+    "codesnap.containerPadding": "0em",
+    "qttools.creator": "/usr/bin/qtcreator",
+    "msg.editor.wordWrap": "off",
+    "material-icon-theme.folders.theme": "classic",
+    "workbench.iconTheme": "material-icon-theme",
+    "window.customTitleBarVisibility": "auto",
+    "window.menuBarVisibility": "toggle",
+    "editor.renderWhitespace": "none",
+    "editor.renderControlCharacters": false,
+    "[c]": {
+        "editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd",
+        "editor.links": false
+    },
+    "[cpp]": {
+        "editor.links": false
+    },
+    "[go]": {
+        "editor.links": false
+    },
+    "editor.inlayHints.enabled": "offUnlessPressed",
+    "clangd.arguments": [
+        "--header-insertion=never", // 关闭头文件自动插入
+    ],
+    "python.analysis.autoImportCompletions": true,
+    "terminal.integrated.inheritEnv": false
+}
+```
+
 ### Snippets
 
 ```cpp
@@ -451,4 +581,5 @@ F5 进行调试程序时，会在 `launch.json` 搜索对应的配置
 - MySQL Shell for VS code
 - Qt tools
 - Remote-SSH
+- Open in New Window
 
