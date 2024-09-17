@@ -1,0 +1,24 @@
+### Item04: Know how to view deduced types (学会查看类型推导结果)
+
+#### IDE 编辑器
+
+在 IDE 中的代码编辑器通常可以显示程序代码中变量，函数，参数的类型，但当更复杂的类型出现时，IDE 提供的信息就几乎没有用。
+
+#### 编译器诊断
+
+使用编译器出错时提供的错误信息。
+
+```cpp
+template<typename T>
+class TD;
+```
+
+如果尝试实例化这个模板就会引出一个错误信息：
+
+```cpp
+TD<decltype(x)> x_type;
+TD<decltype(y)> y_type;
+```
+
+#### 运行时输出
+

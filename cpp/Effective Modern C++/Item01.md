@@ -1,0 +1,222 @@
+### Item01: Understand template type deduction (理解模板类型推导)
+
+考虑这样⼀个函数模板：
+
+```cpp
+template<typename T>
+void f(ParamType param);
+```
+
+调用这个函数模板：
+
+```cpp
+f(expr);
+```
+
+在编译期间，编译器使用 `expr` 对 `T` 和 `ParamType` 两个类型进行推导。这两个类型通常不同，因为 `ParamType` 可能包括了 `const` 和 `&` 的修饰。
+
+#### case1: ParamType 是一个指针或引用
+
+1. 如果 `expr` 的类型是一个引用，忽略引用部分
+2. 然后剩下的部分决定 `T`，然后 `T` 与形参匹配得出最终 `ParamType`
+
+举个例子：
+
+```cpp
+template<typename T>
+void f(T &param);    // param 是一个引用
+
+int x = 27;          // x 是 int
+const int cx = x;    // cx 是 const int
+const int &rx = cx;  // rx 是指向 const int 的引用
+
+f(x);  // T 是 int, 
+       // param 的类型是 int &
+
+f(cx); // T 是 const int
+       // param 的类型是 const int &
+
+f(rx); // T 是 const int
+       // param 的类型是 const int &
+```
+
+在 `f(cx)` 和 `f(rx)` 调用中，`cx` 和 `rx` 被指定为 `const` 值，所以 `T` 被推导为 `const int`，从而产生了 `const int &` 类型的 `param`。这对于调用者来说很重要，当他们传递一个 `const` 对象给一个引用类型的参数时，被传递的对象保留了常量性。这也是为什么向 `T&` 类型的参数传递 `const` 对象是安全的：对象 `T` 的常量性会被保留为 `T` 的一部分。
+
+在 `f(rx)` 调用中，即使 `rx` 的类型是一个引用，`T` 也会被推导为一个非引用，这是因为如果 `expr` 的类型是一个引用，将忽略引用部分。
+
+类型推导会如左值引用一样对待右值引用，通常右值只能传递给右值引用，但是在模板类型推导中这些限制将不存在。
+
+#### case2: ParamType 是一个通用引用
+
+- 如果 `expr` 是左值，`T` 和 `ParamType` 都会被推到为左值引用，这非常不寻常，第一，这是模板类型推导中唯一一种 `T` 和 `ParamType` 都被视为引用的情况。第二，虽然 `ParamType` 被声明为右值引用类型，但最后推导的结果是左值引用。
+- 如果 `expr` 是右值，就使用 case1 的推导规则
+
+举个例子：
+
+```cpp
+template<typename T>
+void f(T &&param);   // param 是一个通用引用类型
+
+int x = 27;          // x 是 int
+const int cx = x;    // cx 是 const int
+const int &rx = cx;  // rx 是指向 const int 的引用
+
+f(x);  // x 是左值, 所以 T 是 int &
+       // param 类型也是 int &
+
+f(cx); // cx 是左值, 所以 T 是 const int &
+       // param 类型也是 const int &
+
+f(rx); // rx 是左值, 所以 T 是 const int &
+       // param 类型也是 const int & 
+
+f(27); // 27 是右值, 所以 T 是 int
+       // param 类型是 int &&
+```
+
+#### case3:  ParamType 既不是指针也不是引用
+
+当 `ParamType` 既不是指针也不是引用时，将通过传值 (pass-by-value) 的方式处理。
+
+意味着无论传递什么 `param` 都会成为它的一份拷贝——一个完整的对象，事实上 `param` 成为一个新对象这一行为会影响 `T` 如何从 `expr` 中推导出结果。
+
+- 和之前一样，如果 `expr` 的类型是一个引用，忽略这个引用部分
+
+- 如果忽略引用之后 `expr` 是一个 `const`，那就再忽略 `const`，如果它是 `volatile`，也会被忽略
+
+举个例子：
+
+```cpp
+template<typename T>
+void f(T param);     // 以传值的方式处理 param
+
+int x = 27;          // x 是 int
+const int cx = x;    // cx 是 const int
+const int &rx = cx;  // rx 是指向 const int 的引用
+
+f(x);  // T 和 param 都是 int
+f(cx); // T 和 param 都是 int
+f(rx); // T 和 param 都是 int
+```
+
+即使 `cx` 和 `rx` 表示 `const` 值，`param` 也不是 `const`，这是有意义的，`param` 是一个拷贝自 `cx` 和 `rx` 且现在独立的完整对象。具有常量性的 `cx` 和 `rx` 不可修改并不代表 `param` 也是一样。这就是为什么 `expr` 的常量性或易变性在类型推导时才会被忽略：因为 `expr` 不可修改并不意味着它的拷贝也不能被修改。
+
+认识到只有在传值给形参时才会忽略常量性和易变性这一点很重要，对于形参来说指向 `const` 的指针或指向 `const` 的引用在类型推导时 `const` 都会被保留。但是考虑这样的情况，`expr` 是一个 `const` 指针，指向 `const` 对象，`expr` 通过传值传递给 `param`：
+
+```cpp
+template<typename T>
+void f(T param); // 传值
+
+const char * const ptr = "1"; // ptr 是一个常量指针, 指向常量对象
+
+f(ptr); // T 和 param 都是 const char *
+```
+
+解引用 (*) 的右边的 `const` 表示 `ptr` 本身是一个 `const`：`ptr` 不能被修改为指向其他地址，也不能被设置为 `null`。
+
+解引用 (*) 的左边的 `const` 表示 `ptr` 指向一个字符串，这个字符串是 `const`，因此字符串不能被修改。
+
+当 `ptr` 作为实参传递给 `f`，`ptr` 自身会传值给形参，根据类型推导的第三条规则，`ptr` 自身的常量性将会被忽略，所以 `param` 是 `const char*` 类型，也就是说一个常量指针指向常量对象，在类型推导中指针指向的对象的常量性会被保留，但是指针自身的常量性将会被忽略。
+
+#### 数组实参
+
+在模板类型推导中指针不同于数组，虽然他们两个是完全等价的，关于这个等价最常见的例子就是在很多上下文中数组会退化为指向它的第一个元素的指针。
+
+```cpp
+const char name[] = "J. P. Briggs"; // name 类型是 const char name[13]
+const char *ptr_to_name = name; // 数组退化为指针
+```
+
+在这里 const char* 指针 ptr_to_name 会由 name 初始化，而 name 的类型为 const char[13]，这两个类型是不一样的，但由于数组退化为指针的规则，编译器允许这样的代码。
+
+将一个数组传值给一个模板：
+
+```cpp
+template<typename T>
+void f(T param); // 传值
+
+const char name[] = "J. P. Briggs"; // name 类型是 const char name[13]
+const char *ptr_to_name = name;     // name 类型是 const char * 数组退化为指针
+
+f(name);        // T 和 param 都是 const char *
+f(ptr_to_name); // T 和 param 都是 const char *
+```
+
+从一个简单的例子开始，这里有一个函数的形参是数组：
+
+```cpp
+void myFunc(int param[]);
+```
+
+但是数组声明会被视为指针声明，这意味着 myFunc 的声明和下面声明等价的：
+
+```cpp
+void myFunc(int *param);
+```
+
+这种等价是 C 语言的产物，C++ 又建立在 C 语言的基础上，它让人产生了一种数组和指针是等价的错觉。
+
+因为数组形参会视为指针形参，所以传递给模板的一个数组类型会被推导为一个指针类型。这意味着在模板函数 f 的调用中，他的模板类型参数 T 会被推导为 `const char *`：
+
+```cpp
+f(name); // name 是一个数组，但是 T 被推导为 const char *
+```
+
+虽然函数不能接受真正的数组，但是可以接受指向数组的引用，所以可以修改 f 为传引用：
+
+```cpp
+template<typename T>
+void f(T &param); // 传引用
+```
+
+这样调用：
+
+```cpp
+f(name); // 传数组
+```
+
+T 会被推导为真正的数组！这个类型包括了数组的大小，在这个例子中 T 被推导为 const char[13]，param 则被推导为 const char(&)[13]。
+
+对模板函数声明为一个指向数组的引用使得可以在模板函数中推导出数组的大小：
+
+```cpp
+// 编译期间返回一个数组的大小的常量值
+// 数组形参没有名字，因为我们只关心数组的大小
+template<typename T, size_t N>
+constexpr size_t arraySize(T(&)[N]) noexcept {
+    return N;
+}
+
+int key_vals[] = {1, 3, 5, 7, 9, 11, 22, 25};
+int mapped_vals[arraySize(key_vals)];
+```
+
+C++ 应该想到使用 `std::array` 而不是内置的数组：
+
+```cpp
+std::array<int, ArraySize(key_vals)> mapped_vals;
+```
+
+#### 函数实参
+
+在 C++ 中不止是数组会退化为指针，函数类型也会退化为一个函数指针。
+
+```cpp
+void someFunc(int, double);
+
+template<typename T>
+void f1(T param); // 传值
+
+template<typename T>
+void f2(T &param); // 传引用
+
+f1(someFunc); // param 被推导为指向函数的指针，类型是 void(*)(int, double)
+f2(someFunc); // param 被推导为指向函数的引用，类型是 void(&)(int, double)
+```
+
+记住：
+
+- 在模板类型推导时，有引用的实参会被视为无引用，他们的引用会被忽略
+- 对于通用引用的推导，左值实参会被特殊对待
+- 对于传值类型推导，实参如果具有常量性和易变性会被忽略
+- 在模板类型推导时，数组或者函数实参会退化为指针，除非他们被用于初始化引用
