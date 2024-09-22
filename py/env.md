@@ -10,6 +10,30 @@ deactivate
 
 ## conda
 
+[Anaconda Archive](https://repo.anaconda.com/archive/)
+
+#### Linux
+
+```sh
+# 下载安装脚本
+wget https://repo.anaconda.com/archive/Anaconda3-2024.06-1-Linux-x86_64.sh
+
+# 验证安装脚本的 SHA-256 哈希值
+<sha256sum> Anaconda3-2023.07-0-Linux-x86_64.sh
+
+# 运行安装脚本
+bash Anaconda3-2023.07-0-Linux-x86_64.sh
+# 接受许可协议，选择安装目录
+
+# 配置使用的 shell
+conda init zsh
+
+# 删除 conda
+rm -rf <conda_path>
+conda init --reverse --all
+rm -rf ~/.condarc ~/.conda ~/.continum
+```
+
 常用命令：
 
 ```sh
@@ -39,11 +63,13 @@ conda env create -f environment.yml # 通过配置文件创建环境
 
 conda create -n <new_env> --clone <existing_env> # 克隆环境
 
+conda env list # 查看 conda 环境列表
+
 conda --version # conda 版本
 
 conda search <package_name> # 搜索包
 
-conda clean --all # 清理缓存s
+conda clean --all # 清理缓存
 
 conda config --remove-key <key_name> # 重置 conda 配置
 
@@ -54,7 +80,7 @@ conda config --remove-key <key_name> # 重置 conda 配置
 
 #### Linux
 
-`.bash` 配置写入：
+`.bash` 配置写入（如果不存在该配置）：
 
 ```sh
 # >>> conda initialize >>>
@@ -70,6 +96,10 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
+
+
+# or
+export PATH="/usr/local/Anaconda/bin:$PATH"
 ```
 
 `source ~/.bash` 重新加载配置。
