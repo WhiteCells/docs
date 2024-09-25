@@ -34,30 +34,28 @@ sudo pacman -S net-tools
 vscode 中插件下载 `Remote Development` 连接 Linux，在插件 SSH config 设置 HostName(ip) 和 User(Linux用户名)
 
 ```ini
-Host [name]
-    HostName [ip]
-    User [user name]
+Host <name>
+    HostName <ip>
+    User <user name>
 ```
 
 ### 公私钥认证
 
 Xshell 和 Xftp 有记住密码功能，而在 vscode 中每一次连接 Linux 都要输入密码，需要对操作主机进行公私钥认证（公钥存储在服务器上，私钥存储在本地）来避免每次连接时输入密码。
 
-Windows 中生成 ssh 密钥
+Windows 中生成 ssh 密钥：
 
 ```cmd
 cd C:/Users/Xuan/.ssh
-ssh-keygen -t rsa -f "id_rsa_linux"
+ssh-keygen -t rsa -f "id_rsa_linux_ssh"
 
 # 复制公钥到剪切板
-type C:\Users\[Name]\.ssh\id_rsa.pub | clip
+type C:\Users\<Name>\.ssh\id_rsa_linux_ssh.pub | clip
 ```
 
-Linux 中生成 ssh 密钥，已经存在则不需要生成
+Linux 添加 Windows 公钥：
 
 ```shell
-cd ~/.ssh/
-ssh-keygen -t rsa
 # 路径 ~/.ssh/ 下创建一个文件 authorized_keys
 touch ~/.ssh/authorized_keys
 # authorized_keys 为配置文件 /etc/ssh/sshd_config 中的名称
@@ -68,11 +66,11 @@ vim ~/.ssh/authorized_keys
 修改 Windows 中 vscode 插件的 Host 配置 `~/.ssh/config` ，指定私钥文件：
 
 ```ini
-Host [name]
-    HostName [ip]
-    User [user name]
+Host <name>
+    HostName <ip>
+    User <user>
     Port 22
-    IdentityFile ~/.ssh/id_rsa_linux
+    IdentityFile ~/.ssh/id_rsa_linux_ssh
 ```
 
 ### 使用 sshpass 自动连接服务器

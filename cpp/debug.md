@@ -512,4 +512,13 @@ void MainWindow::mousePressEvent(QMouseEvent *event)
 
 ---
 
-当发现 `QWidget` 的子类无法被 `addWidget()` 时，检查继承限定符。
+当发现 `QWidget` 的子类无法使用 `addWidget()` 时，检查继承限定符。
+
+当子类**对象**无法使用父类的公有方法时，检查继承限定符。
+
+---
+
+VSCode SSH 连接服务器时，Linux 服务器需要有 `wget` 和 `tar` 包。
+
+---
+
