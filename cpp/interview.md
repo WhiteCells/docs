@@ -208,6 +208,32 @@ int main(int argc, char *argv[]) {
 
 `std::string` 的 `data()` 返回指向字符串首字符的指针，`c_str()` 返回字符串的不可修改的标准 C 字符数组版本。
 
+#### std::string 和 std::string_view 的区别
+
+- `std::string` 的特点：
+  - 可变性：支持动态增长、修改和管理字符串数据。
+  - 深拷贝：当复制一个 `std::string` 对象时，会生成一个新的副本。
+- `std::string_view` 的特点：
+  - 不可变性：只提供对字符序列的只读访问。
+  - 零拷贝：仅执行现有字符数据的指针和长度，不会实际拷贝字符串数据。
+
+`std::string_view` 不管理底层数据，当 `std::string_view` 引用的是会销毁的临时对象时，就会出现悬挂指针的问题，必须确保引用的字符串在使用期间有效：
+
+```cpp
+std::string_view get_view()
+{
+    std::string str = "test";
+    return std::string_view(str);
+}
+
+int main()	
+{
+    std::cout << get_view() << std::endl; // ub
+}
+```
+
+
+
 ### int 占 4 个字节与操作系统无关
 
 ### \#pragma once 和 include guard 的区别

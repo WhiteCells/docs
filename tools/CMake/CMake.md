@@ -1068,3 +1068,44 @@ target_include_directories(
 `.cmake` 通常用于定义可重用的函数、宏和变量，定义的内容可以在 `CMakeLists.txt` 中使用（需要包含 `.cmake`  目录）。
 
 `.cmake` 也可以查找外部库、设置编译器选项或定义自定义构建规则。例如用于查找和配置外部库。
+
+---
+
+`PROJECT_SOURCE_DIR` 和 `CMAKE_CURRENT_SOURCE_DIR `的区别：
+
+`PROJECT_SOURCE_DIR` 始终指向项目根目录（既包含 `project()` 命令的 CMakeLists.txt 所在的目录）
+
+`CMAKE_CURRENT_SOURCE_DIR` 指向当前处理的 CMakeLists.txt 所在的目录。
+
+对于子目录中如果 CMakeLists.txt 中存在 `project()` 命令，则 `PROJECT_SOURCE_DIR` 为子目录所在的路径。
+
+
+
+---
+
+`CMAKE_INSTALL_PREFIX` 安装目录的前缀，
+
+`CMAKE_CXX_COMPILER` C++ 编译器的路经
+
+`CMAKE_BUILD_TYPE` 构建类型（`Debug`、`Release`）
+
+`cmake -DCMAKE_BUILD_TYPE=Release ..`
+
+---
+
+message()
+
+STATUS
+
+WARNING
+
+AUTHOR_WARNING
+
+SEND_ERROR
+
+FATAL_ERROR 立即终止 CMake 运行
+
+DEPRECATION 与弃用相关的消息
+
+
+
