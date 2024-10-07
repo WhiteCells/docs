@@ -91,8 +91,10 @@ cmake -h
 
 cmake -G "[generator-name]" -T [toolset-spec] -A [platform-name] -B [path-to-source]
 
-## 创建一个 build 目录并在此目录下生成构建文件
+## 创建一个 build 目录并在此目录下生成构建文件（CMake 3.12 之后）
 cmake -B build
+
+cmake -H <src-path> -B <build-path> # CMake 3.13 之前
 
 ## 构建文件生成之后，修改源文件后只需要使用构建文件进行构建即可
 ## 以 build 目录下的文件构建项目
@@ -124,8 +126,6 @@ PROJECT_LABEL
 PROJECT_SOURCE_DIR
 PROJECT_BINARY_DIR
 ```
-
-
 
 #### message
 
@@ -1107,5 +1107,17 @@ FATAL_ERROR 立即终止 CMake 运行
 
 DEPRECATION 与弃用相关的消息
 
+---
 
+`add_compile_options()` 添加编译选项
 
+`add_definitions()` 添加编译宏
+
+---
+
+当 CMakeListst.txt 中有多个可执行文件时：
+
+```sh
+cmake -B build
+cmake --build build target xxx_app
+```

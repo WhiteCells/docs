@@ -2,7 +2,7 @@
 
 ### HTTP Request Headers
 
-HTTP 请求头包含的字段：
+HTTP 请求头包含的字段（字段名大小写不敏感）：
 
 - Request-line：格式为 `METHOD PATH HTTP-VERSION`
   - `:method` 请求方法（如 `GET`、`POST` 等）
@@ -22,8 +22,6 @@ User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Geck
 Cookie: _octo=GH1.1.759214116.1707483329; _device_id=1f9f57c9881f9b54cdaf4e8d8b2fc986; user_session=isVtBn5; session_same_site=isNLFARn5;
 Connection: keep-alive
 ```
-
-> 浏览器终端中 `Network` 中显示 `Raw`
 
 ### HTTP Response Headers
 

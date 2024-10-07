@@ -468,20 +468,18 @@ C++ 是静态类型语言，通常在编译时类型就已经确定，但在多�
 
 ##### std::enable_shared_from_this 模板类
 
-`std::enable_shared_from_this` 用于安全地获取指向对象本身的 `shared_ptr`，即使该对象已经被 `shared_ptr` 管理。如存在回调等操作时，用于防止对象被提前析构。
+`std::enable_shared_from_this` 用于安全地获取指向对象本身的 `shared_ptr`，即使该对象已经被 `shared_ptr` 管理。如存在异步等操作时，用于防止对象被提前析构。
 
 使用方法：类需要继承 `std::enable_shared_from_this` 模板类，然后类成员函数中调用 `shared_from_this()` 返回指向对象本身的 `shared_ptr`。
 
 使用 `shared_from_this()` 需要对象构造完成。
-
-##### 智能指针及它们的区别
 
 智能指针是 C++ 标准库中提供的模板类，用于自动管理动态分配的内存。
 
 - `std::unique_ptr`：独占所有权，不可拷贝，只能移动，
 - `std::shared_ptr`：共享所有权，可以拷贝和移动，
 - `std::weak_ptr`：不拥有所有权，可以拷贝和移动，不影响对象的生命周期，不改变 `use_count`，是一种访问 `std::shared_ptr` 管理的对象的弱引用方式。
-- `std::auto_ptr`：C++98 引入，C++11 移除，C++17 中完全移除。其是所有权移动，在复制和赋值操作中会转移所有权，同时其不是线程安全的。
+- `std::auto_ptr`：C++98 引入，C++11 弃用，C++17 中完全移除。其是所有权移动，在复制和赋值操作中会转移所有权，同时其不是线程安全的。
 
 `std::weak_ptr` 和 `std::shared_ptr` 之间的关系是互补的。
 
@@ -554,12 +552,12 @@ int main(int argc, char *argv[]) {
 
 #### 引用折叠
 
-| parameter | argument | result |
-| --------- | -------- | ------ |
-| T &       | &        | T &    |
-| T &       | &&       | T &    |
-| T &&      | &        | T &    |
-| T &&      | &&       | T &&   |
+| parameter（形参） | argument（实参） | result |
+| ----------------- | ---------------- | ------ |
+| `T &`             | `&`              | `T &`  |
+| `T &`             | `&&`             | `T &`  |
+| `T &&`            | `&`              | `T &`  |
+| `T &&`            | `&&`             | `T &&` |
 
 引用折叠发生的情况：模板实例化、`auto` 类型推导、`typedef` 和别名声明、使用 `decltype` 时
 
