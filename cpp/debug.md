@@ -522,3 +522,20 @@ VSCode SSH 连接服务器时，Linux 服务器需要有 `wget` 和 `tar` 包。
 
 ---
 
+```cpp
+#include <vector>
+#include <iostream>
+
+int main(int argc, char const *argv[])
+{
+    int a[4] = {1, 2, 3, 4};
+    std::vector<int *> v{a, a + 1, a + 2, a + 3};
+    for (auto it = v.begin(); it != v.end(); ++it)
+    {
+        std::cout << **it << std::endl;
+        it = v.erase(it);
+    }
+    return 0;
+}
+```
+

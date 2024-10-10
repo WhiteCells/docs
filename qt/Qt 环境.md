@@ -4,6 +4,10 @@
 
 选择组件时在选择的版本号中选择 MinGW 或 MSVC 编译器，如需在 vs 中运行 Qt 时需选择 MSVC
 
+`Tools/mingw1120_64/bin`
+
+`C:\qc\Tools\mingw1120_64\bin`
+
 ### Linux 平台 Qt 环境
 
 ```sh
