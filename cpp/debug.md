@@ -539,3 +539,12 @@ int main(int argc, char const *argv[])
 }
 ```
 
+---
+
+abi、extern "C"
+
+OpenMP
+
+SFML
+
+jom、ninjia、CMake、msbuild、make、nmake、qmake
