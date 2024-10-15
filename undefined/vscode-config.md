@@ -338,6 +338,10 @@ F5 进行调试程序时，会在 `launch.json` 搜索对应的配置
     // cmake status bar
     "cmake.options.statusBarVisibility": "compact",
     /******************************************************************/
+    "files.exclude": {
+        "**/__pycache__": true,
+        "**/.cache": true
+    },
 }
 ```
 
