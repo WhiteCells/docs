@@ -34,5 +34,7 @@ gofmt -w xxx.go
   - 接口
   - map
 
+Go 主要包含三个目录：`src`、`pkg`、`bin` 三个目录
+
 
 

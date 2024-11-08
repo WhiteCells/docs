@@ -20,6 +20,8 @@ g++-10 main.cpp -o main
 sudo ln -s /usr/bin/g++-10 /usr/bin/g++
 
 # sudo ln -s /usr/bin/gcc-10 /usr/bin/gcc
+
+sudo apt install gdb
 ```
 
 如果出现 `ln: failed to create symbolic link '/usr/bin/g++': File exists` 错误，表示 `/usr/bin/g++` 已经存在了。
