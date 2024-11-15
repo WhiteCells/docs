@@ -316,8 +316,68 @@ print(poto.X, poto.Y)
 结构体函数：
 
 ```go
-func (poto *Poto) foo() int {
-    return poto.X + poto.Y
+func (p *Poto) add() int {
+    return p.X + p.Y
 }
 ```
+
+匿名结构体：
+
+```go
+var p struct {
+    x int
+    y int
+}
+
+p2 := struct {
+    x int
+    y int
+}{1, 2}
+```
+
+嵌套匿名结构体：
+
+```go
+type Poto struct {
+    Colo1
+    level string
+}
+
+type Colo1 struct {
+    X int
+}
+
+func main() {
+    p := Poto {Colo1: Colo1{1}, level: "l1"}
+    print(p.Colo1.X)
+}
+```
+
+结构体的 Tag：
+
+```go
+package main
+
+import (
+	"init1/mylib1"
+	"reflect"
+)
+
+type Sub struct {
+	Id  string `json:"id"`
+	Len int32  `json:"len"`
+}
+
+func main() {
+	s := Sub{"1", 100}
+	t := reflect.TypeOf(s)
+	for i := 0; i < t.NumField(); i++ {
+		field := t.Field(i)
+		jsonTag := field.Tag.Get("json")
+		print(jsonTag + "\n")
+	}
+}
+```
+
+Tag 必须遵守 `key: "value"` 的格式。
 
