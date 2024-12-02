@@ -3,7 +3,6 @@
 安装内核及 web gui 管理
 
 ```sh
-
 yay -S v2raya-bin
 ```
 

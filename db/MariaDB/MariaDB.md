@@ -42,3 +42,10 @@ sudo mysql_install_db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
 ```sh
 sudo mariadb -u root -p
 ```
+
+
+
+```sh
+sudo mysql_secure_installation
+```
+
