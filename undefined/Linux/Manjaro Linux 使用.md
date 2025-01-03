@@ -165,6 +165,8 @@ yay -S wps-office-fonts ttf-wps-fonts ttf-ms-fonts
 yay -S freetype2-wps # 解决字体变粗问题
 yay -S libtiff5 # 解决导出 PDF 错误
 
+paru -S ttf-ms-win11-auto
+
 # motrix
 yay -S motrix-bin
 ```

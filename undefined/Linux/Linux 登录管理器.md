@@ -1,4 +1,4 @@
-Manjaro Linux 系统中 `/etc/systemd/login.conf` 文件是 systemd 的登陆管理器 systemd-logind 的配置文件。systemd-logind 是一个系统服务，负责管理用户登录
+Manjaro Linux 系统中 `/etc/systemd/logind.conf` 文件是 systemd 的登陆管理器 systemd-logind 的配置文件。systemd-logind 是一个系统服务，负责管理用户登录
 
 ```ini
 #NAutoVTs=6

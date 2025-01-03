@@ -48,3 +48,41 @@ db.Where("Name LIKE ?", "%sr%").Find(&user)
 
 ### 删除
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```go
+		if err := tx.Where("farm_id = ? AND user_id = ?", farmID, userID).Delete(&model.UserFarm{}).Error; err != nil {
+			return err
+		}
+```
+
+
+
+```go
+		if err := tx.Delete(&model.UserFarm{}, "user_id = ? AND farm_id = ?", userID, farmID).Error; err != nil {
+			return err
+		}
+```
+
+
+
+```go
+		if err := tx.Delete(&model.Farm{}, farmID).Error; err != nil {
+			return err
+		}
+```
+

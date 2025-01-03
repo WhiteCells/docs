@@ -17,6 +17,17 @@ Comment[en_US]=yEd Graph Editor                 # 工具提示
 URL                                             # Type 为 Link 时访问 URL
 ```
 
+```desktop
+[Desktop Entry]
+Encoding=UTF-8
+Name=bilibili
+GenericName=bilibili
+Exec=/home/x32767/App/bilibili/bin/bilibili
+Terminal=false
+Icon=/home/x32767/App/icon/bilibili.png
+Type=Application
+```
+
 AppImage 添加桌面快捷方式
 
 添加 `.AppImage` 文件可执行权限：

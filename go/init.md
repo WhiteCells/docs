@@ -112,6 +112,9 @@ go get github.com/xxx/xxx@v1.0
 go env -w GOPROXY=https://goproxy.io,direct
 # or
 go env -w GOPROXY=https://proxy.golang.com.cn,direct
+# 
+go clean -modcache
+go mod tidy
 ```
 
 企业内部开发时，可以将似有 git 地址加入 `GOPRIVATE` 环境变量：
