@@ -165,24 +165,10 @@ yay -S wps-office-fonts ttf-wps-fonts ttf-ms-fonts
 yay -S freetype2-wps # 解决字体变粗问题
 yay -S libtiff5 # 解决导出 PDF 错误
 
+paru -S ttf-ms-win11-auto
+
 # motrix
 yay -S motrix-bin
-```
-
-fctix5 美化
-
-```sh
-git clone https://github.com/tonyfettes/fcitx5-nord.git
-mkdir -p ~/.local/share/fcitx5/themes/
-cd fcitx5-nord
-cp -r Nord-Dark/ Nord-Light/ ~/.local/share/fcitx5/themes/
-
-vim ~/.config/fcitx5/conf/classicui.conf
-# 修改 Theme=Nord-Light
-```
-
-```sh
-pacman -S fcitx5-material-color
 ```
 
 kde 桌面环境无法打开 theme store

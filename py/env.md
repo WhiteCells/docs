@@ -25,6 +25,8 @@ wget https://repo.anaconda.com/archive/Anaconda3-2024.06-1-Linux-x86_64.sh
 bash Anaconda3-2023.07-0-Linux-x86_64.sh
 # 接受许可协议，选择安装目录
 
+# 在修改 shell 配置文件时选择允许
+
 # 配置使用的 shell
 conda init zsh
 
@@ -38,6 +40,7 @@ rm -rf ~/.condarc ~/.conda ~/.continum
 
 ```sh
 conda create --name <env_name> [python=<version>] # 创建环境
+# conda create --name pyspark-env python=3.8
 
 conda activate <env_name> # 激活环境
 
@@ -134,7 +137,7 @@ pip uninstall --yes <package_name> # 强制卸载包
 
 修改源
 
-`～/.config/pip/pip.conf` 配置写入：
+`~/.config/pip/pip.conf` 配置写入（没有则创建）：
 
 ```sh
 [global]

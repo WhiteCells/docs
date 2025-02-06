@@ -18,7 +18,7 @@ package mylib1
 
 import "fmt"
 
-// 导出函数，可以从其他包访问
+// 导出函数，可以从其他包访问，fmt.Print1()
 func Print1() {
     fmt.Println("This is Print1")
 }
@@ -54,6 +54,7 @@ Go 主要包含三个目录：`src`、`pkg`、`bin` 三个目录
 
 ```sh
 go mod init project
+go mod tidy
 
 go run main.go
 
@@ -111,6 +112,9 @@ go get github.com/xxx/xxx@v1.0
 go env -w GOPROXY=https://goproxy.io,direct
 # or
 go env -w GOPROXY=https://proxy.golang.com.cn,direct
+# 
+go clean -modcache
+go mod tidy
 ```
 
 企业内部开发时，可以将似有 git 地址加入 `GOPRIVATE` 环境变量：
