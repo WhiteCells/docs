@@ -264,3 +264,6 @@ print(set1)
 set1.clear()
 ```
 
+
+
+`python` 文件名即为包名。
