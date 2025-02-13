@@ -39,44 +39,62 @@ rm -rf ~/.condarc ~/.conda ~/.continum
 常用命令：
 
 ```sh
-conda create --name <env_name> [python=<version>] # 创建环境
+# 创建环境
+conda create --name <env_name> [python=<version>]
+conda create -n <env_name> [python=<version>]
 # conda create --name pyspark-env python=3.8
+# conda create -n web-env python=3.8
 
-conda activate <env_name> # 激活环境
+# 激活环境
+conda activate <env_name>
 
-conda deactivate # 停用环境
+# 停用环境
+conda deactivate
 
-conda env remove -n <env_name> # 删除环境
+# 删除环境
+conda env remove -n <env_name>
 
-conda info --envs # 列出环境
+# 列出环境
+conda info --envs
 
-conda config --set auto_activate_base false # 关闭 base 虚拟环境自动激活
+# 关闭 base 虚拟环境自动激活
+conda config --set auto_activate_base false
 
-conda update conda # 更新 conda
+# 更新 conda
+conda update conda
 
-conda update <package_name> # 更新包
+# 更新包
+conda update <package_name>
 
-conda remove <package_name> # 删除包
+# 删除包
+conda remove <package_name>
 
-conda list # 查看已安装包
+# 查看已安装包
+conda list
 
-conda env export > environment.yml # 导出环境配置文件
+# 导出环境配置文件
+conda env export > environment.yml
 
-conda env create -f environment.yml # 通过配置文件创建环境
+# 通过配置文件创建环境
+conda env create -f environment.yml
 
-conda create -n <new_env> --clone <existing_env> # 克隆环境
+# 克隆环境
+conda create -n <new_env> --clone <existing_env>
 
-conda env list # 查看 conda 环境列表
+# 查看 conda 环境列表
+conda env list
 
-conda --version # conda 版本
+# conda 版本
+conda --version
 
-conda search <package_name> # 搜索包
+# 搜索包
+conda search <package_name>
 
-conda clean --all # 清理缓存
+# 清理缓存
+conda clean --all
 
-conda config --remove-key <key_name> # 重置 conda 配置
-
-
+# 重置 conda 配置
+conda config --remove-key <key_name>
 ```
 
 ### 配置环境

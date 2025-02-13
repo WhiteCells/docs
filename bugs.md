@@ -28,3 +28,16 @@ reboot
 go range 默认获取的是键
 
 格式化输出 `%+v`
+
+
+
+```sh
+cat /etc/os-release
+hostnamectl
+
+lscpu
+free -h
+lsblk
+df -h
+```
+
