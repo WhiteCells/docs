@@ -78,3 +78,32 @@ toRef 和 toRefs
 
 `ref` 定义对象数据类型响应式数据类型需要 `.value`。
 
+
+
+
+
+### 计算属性
+
+competed
+
+### v-model
+
+```vue
+<template>
+
+</template>
+```
+
+
+
+
+
+### watch
+
+监视数据变化
+
+- ref
+- reactive
+- 函数返回一个值
+- 包含上述内容的数组
+

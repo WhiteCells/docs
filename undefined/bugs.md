@@ -41,3 +41,23 @@ lsblk
 df -h
 ```
 
+
+
+
+
+当使用 python 使用 conda 的环境时，会可能找不到系统的环境变量：
+
+```sh
+export LD_LIBRARY_PATH=/usr/lib:$LD_LIBRARY_PATH
+```
+
+
+
+
+
+Linux sunlogin
+
+```ssh
+systemctl start runsunloginclient.service
+```
+

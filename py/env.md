@@ -155,7 +155,7 @@ pip uninstall --yes <package_name> # 强制卸载包
 
 修改源
 
-`~/.config/pip/pip.conf` 配置写入（没有则创建）：
+`<镜像加速器地址~/.config/pip/pip.conf` 配置写入（没有则创建）：
 
 ```sh
 [global]
