@@ -1,4 +1,21 @@
-### Ubuntu / Debian
+### Debian
+
+#### Debian
+
+```sh
+sudo cp /etc/apt/sources.list /etc/apt/sources.list.bak
+
+sudo vim /etc/apt/sources.list
+
+:%d
+
+deb http://mirrors.tuna.tsinghua.edu.cn/debian bookworm main contrib non-free non-free-firmware
+deb http://mirrors.tuna.tsinghua.edu.cn/debian bookworm-updates main contrib non-free non-free-firmware
+deb http://mirrors.tuna.tsinghua.edu.cn/debian bookworm-backports main contrib non-free non-free-firmware
+deb http://mirrors.tuna.tsinghua.edu.cn/debian-security bookworm-security main contrib non-free non-free-firmware
+```
+
+#### Ubuntu
 
 ```sh
 # 备份源配置文件
@@ -29,37 +46,32 @@ deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-security main restricted 
 sudo apt update
 ```
 
-### CentOS / RHEL
+### RHEL
 
-- 更新源配置文件：`/etc/yum.repos.d/CentOS-Base.repo`
-- 使用文本编辑器打开该文件：
-  ```sh
-  sudo nano /etc/yum.repos.d/CentOS-Base.repo
-  ```
-- 在文件中找到 `[base]`、`[updates]`、`[extras]` 等段落，并将其中的 `baseurl` 地址替换为你想要使用的更新源地址。
-- 保存并关闭文件。
-- 运行以下命令以清除缓存并更新软件包列表：
-  ```sh
-  sudo yum clean all
-  sudo yum update
-  ```
+#### RedHel
 
-### Arch Linux
+#### CentOS
 
-- 更新源配置文件：`/etc/pacman.d/mirrorlist`
-- 使用文本编辑器打开该文件：
-  ```sh
-  sudo nano /etc/pacman.d/mirrorlist
-  ```
-- 在文件开头添加一个井号 `#`，注释掉所有现有的镜像源。
-- 在文件中添加你想要使用的更新源地址，可以从 Arch Linux 官方镜像列表中选择合适的源。
-- 保存并关闭文件。
-- 运行以下命令以同步软件包数据库：
-  ```sh
-  sudo pacman -Sy
-  ```
+```sh
+sudo vim /etc/yum.repos.d/CentOS-Base.repo
 
-在修改更新源之前，最好备份原始配置文件，以防出现问题。此外，确保更新源是可靠和稳定的，以确保系统的安全性和稳定性。
+
+
+sudo yum clean all
+sudo yum update
+```
+
+
+
+### Arch
+
+#### Arch Linux
+
+```sh
+sudo vim /etc/pacman.d/mirrorlist
+
+sudo pacman -Syu
+```
 
 ### 开源镜像站
 

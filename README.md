@@ -1,38 +1,22 @@
-### docs
+认证授权（JSON Web Token（jwt））
 
-- Alogrithm
-- Base
-- C
-- Cpp
-- DataBase
-- Linux
-- OOP
-- Project
-- Qt
-- Tools
-- Undefined
+定时任务（cron）
 
-
-
-JSON Web Token
-
-定时任务
-
-redis 持久化
+redis 集群与持久化
 
 压力测试
 
-接口限流
-
-QPS 每个用户限流
+QPS 用户限流
 
 事务
 
-分布式，数据同步
+微服务（micro）
 
-消息队列
+分布式
+
+消息队列（kafka，MQTT）
 
 分表分库
 
-MQTT
+
 
