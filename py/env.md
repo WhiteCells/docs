@@ -22,7 +22,7 @@ wget https://repo.anaconda.com/archive/Anaconda3-2024.06-1-Linux-x86_64.sh
 <sha256sum> Anaconda3-2023.07-0-Linux-x86_64.sh
 
 # 运行安装脚本
-bash Anaconda3-2023.07-0-Linux-x86_64.sh
+bash Anaconda3-2024.06-1-Linux-x86_64.sh
 # 接受许可协议，选择安装目录
 
 # 在修改 shell 配置文件时选择允许
