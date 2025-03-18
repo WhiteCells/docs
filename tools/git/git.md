@@ -26,10 +26,10 @@ sudo zypper install git
 ### 配置
 
 ```sh
-# 配置用户名，用来辨识是谁提交的内容
+# 配置全局用户名，用来辨识是谁提交的内容
 git config --global user.name "UserName" 
 
-# 配置邮箱
+# 配置全局邮箱
 git config --global user.email 123456@gmail.com
 
 # 查看配置用户信息
@@ -63,14 +63,16 @@ ssh-keygen -f "github"
 
 # 修改 .ssh/config
 Host github.com
-  User 123456@gmail.com
-  Hostname ssh.github.com
+  User git
+  # Hostname ssh.github.com
+  Hostname github.com
   PreferredAuthentications publickey
   IdentityFile ~/.ssh/id_rsa_github
-  Port 443
+  IdentitiesOnly yes
+  # Port 443
 
 Host gitee.com
-  User 123456@gmail.com
+  User git
   Hostname ssh.gitee.com
   PreferredAuthentications publickey
   IdentityFile ~/.ssh/id_rsa_gitee
