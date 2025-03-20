@@ -15,6 +15,8 @@ wsl --install -d Ubuntu # 需要代理，否则很慢
 wsl --set-version Ubuntu 2 # 切换 Ubuntu 为 wsl2
 wsl --set-default-version 2 # WSL2 设为默认版本
 wsl --set-default <linux-name> # 默认启动
+wsl --unregister <linux-name> # 删除指定系统
+wsl --shutdown # 关闭所有 WSL
 ```
 
 WSL 中命令
@@ -23,19 +25,6 @@ WSL 中命令
 explorer.exe . # 打开子系统当前路径
 
 cd /mnt/ # 进入本地磁盘挂载
-```
-
-powershell 中命令
-
-```sh
-# 关闭所有 WSL
-wsl --shutdown
-
-# WSL 删除指定系统
-wsl --unregister [distribution_name]
-
-# WSL 指定默认启动系统
-wsl --set-default [distribution_name]
 ```
 
 Linux 默认的 shell 在 gdb 调试时补全 program 会出现卡顿，考虑切换 shell

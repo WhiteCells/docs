@@ -47,5 +47,11 @@ sudo mariadb -u root -p
 
 ```sh
 sudo mysql_secure_installation
+sudo mysql
+```
+
+```sql
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '10101';
+FLUSH PRIVILEGES;
 ```
 
