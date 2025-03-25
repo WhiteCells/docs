@@ -20,3 +20,4 @@ QPS 用户限流
 
 
 
+pnpm config set verify-store-integrity false
