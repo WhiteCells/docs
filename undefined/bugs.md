@@ -61,3 +61,15 @@ Linux sunlogin
 systemctl start runsunloginclient.service
 ```
 
+
+
+VirtualBox Windwos 无法从无人参与应答文件读取<ProductKey> 设置
+
+解决方法：在存储中将控制器下的软驱移除。
+
+VirtualBox 格式转换
+
+```sh
+VBoxManage convertfromraw <image>.img <img>.vdi --format VDI
+```
+

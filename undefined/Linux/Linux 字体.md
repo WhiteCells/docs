@@ -22,3 +22,8 @@ fc-list :lang=zh
 原因：Linux 中会有大量的 Noto 字体，在选择字体时，加载字体会异常的卡顿。
 
 解决方法：建议将 Noto 字体进行从 `/usr/share/fonts` 移植其他地方进行备份。
+
+
+
+
+
