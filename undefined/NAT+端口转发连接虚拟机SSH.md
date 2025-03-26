@@ -18,5 +18,7 @@ SSH 连接时，可以将 root 允许连接打开：
 vim /etc/ssh/sshd_config
 # 修改
 PermitRootLogin yes
+# Password
+# BindAddress
 ```
 
