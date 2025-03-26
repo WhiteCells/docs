@@ -73,3 +73,33 @@ VirtualBox 格式转换
 VBoxManage convertfromraw <image>.img <img>.vdi --format VDI
 ```
 
+
+
+解决 `curl raw.githubusercontent.com` 速度慢问题：
+
+```sh
+echo "185.199.108.133 raw.githubusercontent.com" | sudo tee -a /etc/hosts
+echo "185.199.109.133 raw.githubusercontent.com" | sudo tee -a /etc/hosts
+echo "185.199.110.133 raw.githubusercontent.com" | sudo tee -a /etc/hosts
+echo "185.199.111.133 raw.githubusercontent.com" | sudo tee -a /etc/hosts
+```
+
+vps 包管理器默认使用 IPv6，强制包管理器使用 IPv4：
+
+```sh
+echo 'Acquire::ForceIPv4 "true";' | sudo tee /etc/apt/apt.conf.d/99force-ipv4
+```
+
+或者禁用 IPv4
+
+```sh
+sudo sysctl -w net.ipv6.conf.all.disable_ipv6=1
+sudo sysctl -w net.ipv6.conf.default.disable_ipv6=1
+sudo sysctl -w net.ipv6.conf.lo.disable_ipv6=1
+
+# 启用
+sudo sysctl -w net.ipv6.conf.all.disable_ipv6=0
+sudo sysctl -w net.ipv6.conf.default.disable_ipv6=0
+sudo sysctl -w net.ipv6.conf.lo.disable_ipv6=0
+```
+
