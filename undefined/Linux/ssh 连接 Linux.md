@@ -60,6 +60,7 @@ Linux 添加 Windows 公钥：
 # authorized_keys 为配置文件 /etc/ssh/sshd_config 中的名称
 # 将 Windows 公钥内容复制到该文件
 vim ~/.ssh/authorized_keys
+# 当有多个主机连接同一服务器时，在该文件新的一行填写其他主机的公钥
 ```
 
 修改 Windows 中 vscode 插件的 Host 配置 `~/.ssh/config` ，指定私钥文件：

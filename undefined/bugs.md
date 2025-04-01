@@ -90,7 +90,7 @@ vps 包管理器默认使用 IPv6，强制包管理器使用 IPv4：
 echo 'Acquire::ForceIPv4 "true";' | sudo tee /etc/apt/apt.conf.d/99force-ipv4
 ```
 
-或者禁用 IPv4
+或者禁用 IPv4（重启后失效）
 
 ```sh
 sudo sysctl -w net.ipv6.conf.all.disable_ipv6=1
