@@ -103,3 +103,10 @@ sudo sysctl -w net.ipv6.conf.default.disable_ipv6=0
 sudo sysctl -w net.ipv6.conf.lo.disable_ipv6=0
 ```
 
+
+
+
+
+### bug
+
+.service 会不断的重启服务（有参数时），占用端口

@@ -84,3 +84,6 @@ docker 设置代理
 }
 ```
 
+
+
+version 需要加，用于适配低版本 docker。
