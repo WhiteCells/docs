@@ -18,6 +18,3 @@ QPS 用户限流
 
 分表分库
 
-
-
-pnpm config set verify-store-integrity false

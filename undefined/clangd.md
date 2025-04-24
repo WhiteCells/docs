@@ -96,3 +96,11 @@ AllowShortFunctionsOnASingleLine: true  # 允许短函数在一行内放置
 }
 ```
 
+`.clangd` 配置文件：
+
+```.clangd
+CompileFlags:
+  Add: [-Wall, -Wextra, -std=c++17]
+  Remove: [-mno-direct-extern-access]
+```
+

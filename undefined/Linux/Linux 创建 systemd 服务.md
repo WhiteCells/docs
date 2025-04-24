@@ -111,3 +111,10 @@ sudo systemctl daemon-reload
 sudo systemctl enable xxx.service
 ```
 
+启动脚本中如果有 `nohup` 的话需要指定存储 pid 的文件，否则不要 `nohup`。
+
+```sh
+# 查询服务启动时的详细日志输出
+journalctl -u <xxx>.service
+```
+
