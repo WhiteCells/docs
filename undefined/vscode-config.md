@@ -439,3 +439,59 @@ F5 进行调试程序时，会在 `launch.json` 搜索对应的配置
 }
 ```
 
+
+
+```json
+{
+    "editor.fontSize": 20, // 字体大小
+    "editor.fontFamily": "Hack", // 字体
+    "terminal.integrated.fontSize": 17, // 终端的字号
+    "workbench.panel.defaultLocation": "right", // 面板位置(调试控制台...)
+    "window.menuBarVisibility": "compact", // 
+    "chat.commandCenter.enabled": false, // 
+    "workbench.editor.enablePreview": false, // 关闭预览
+    "[cpp]": {
+        "editor.links": false, // 关闭下划线
+    },
+    "editor.acceptSuggestionOnEnter": "off", // enter 不接受建议
+    "editor.dragAndDrop": false, // 关闭编辑器中是通过拖放来移动选中内容
+    "files.autoSave": "onFocusChange", // 编辑器失去焦点时保存文件
+    "editor.formatOnSave": false, // 保存时不格式化
+    "editor.formatOnType": true, // 换行时格式化
+    "explorer.compactFolders": false, // 不简化单个子目录
+    "extensions.autoCheckUpdates": false, // 关闭拓展自动更新
+    "extensions.autoUpdate": false, // 关闭拓展自动更新
+    "update.mode": "none",
+    "update.showReleaseNotes": false,
+    "editor.hover.above": false, // 鼠标悬停提示位于下方
+    "window.titleBarStyle": "custom", // Linux window title
+    "workbench.layoutControl.enabled": false,
+    "window.commandCenter": false,
+    "debug.onTaskErrors": "abort", // 控制在运行预启动任务后遇到错误时
+    "workbench.startupEditor": "none", // 启动时不显示欢迎页面
+    "editor.fastScrollSensitivity": 1, // alt 键滚动加速
+    "workbench.list.fastScrollSensitivity": 1,
+    "editor.stickyScroll.enabled": false, // 关闭在编辑器顶部的滚动过程中显示嵌套的当前作用域
+    "C_Cpp.workspaceParsingPriority": "low", // 非活动工作区文件 CPU 占用
+    "editor.minimap.enabled": false, // 关闭缩略图
+    "extensions.ignoreRecommendations": true, // 关闭拓展建议
+    "markdown.preview.fontSize": 19, // markdown size
+    // git 控制是应打开工作区父文件夹中的存储库还是打开的文件
+    "git.openRepositoryInParentFolders": "never",
+    "material-icon-theme.folders.theme": "classic", // material-icon config
+    "workbench.iconTheme": "material-icon-theme",
+    "cmake.configureOnOpen": false, // CMake 项目目录打开时不自动配置
+    "cmake.showConfigureWithDebuggerNotification": false, // CMake 失败，关闭询问调试器进行配置
+    "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools", // CMake 头文件
+    "cmake.options.statusBarVisibility": "compact", // cmake status bar
+    "files.exclude": { // 包含可能被忽略的文件夹
+        "**/__pycache__": true,
+        "**/.cache": true,
+    },
+    "terminal.integrated.defaultProfile.linux": "zsh",
+    "security.workspace.trust.untrustedFiles": "open",
+    "C_Cpp.intelliSenseEngine": "disabled", // 有 clangd 是关闭 intelliSenseEngine
+    "qt-ui.customWidgetsDesignerExePath": "/usr/bin/designer6",
+}
+```
+
