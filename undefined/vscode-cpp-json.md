@@ -545,24 +545,26 @@ F5 进行调试程序时，会在 `launch.json` 搜索对应的配置
         "prefix": "#author",
         "body": [
             "/*",
-            " * @Author: Author",
+			" * @File: ${TM_FILENAME}",
+            " * @Author: WhiteCells",
             " * @Date: $CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE $CURRENT_HOUR:$CURRENT_MINUTE:$CURRENT_SECOND",
-            " * @Last Modified by: Author",
+            " * @Last Modified by: WhiteCells",
             " * @Last Modified time: $CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE $CURRENT_HOUR:$CURRENT_MINUTE:$CURRENT_SECOND",
             " * @Description: $0",
-            "*/",
+            " */",
         ],
         "description": "作者信息"
     },
     "main": {
         "prefix": "main",
         "body": [
-            "int main(int argc, char *argv[]) {",
+            "int main(int argc, char *argv[])",
+			"{",
             "\t$0",
             "\treturn 0;",
             "}",
         ],
-        "description": "多行注释"
+        "description": "主函数"
     },
 }
 ```

@@ -94,3 +94,20 @@ version 需要加，用于适配低版本 docker。
 docker cp <local_path> <container_name>:<container_path>
 ```
 
+
+
+docker 配置代理
+
+```sh
+sudo tee /etc/systemd/system/docker.service.d/http-proxy.conf <<EOF
+[Service]
+Environment="HTTP_PROXY=http://127.0.0.1:2080"
+Environment="HTTPS_PROXY=http://127.0.0.1:2080"
+Environment="NO_PROXY=localhost,127.0.0.1"
+EOF
+
+sudo systemctl daemon-reexec
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+```
+
