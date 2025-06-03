@@ -548,3 +548,7 @@ OpenMP
 SFML
 
 jom、ninjia、CMake、msbuild、make、nmake、qmake
+
+---
+
+`switch` 的多个 `case` 是共用一个作用域的
