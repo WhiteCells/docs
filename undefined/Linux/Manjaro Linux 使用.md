@@ -178,3 +178,9 @@ rm ~/.config/Trolltech.conf
 kbuildsycoca5 --noincremental
 ```
 
+paru 出现错误时，尝试更新 rust：
+
+```sh
+rustup default stable
+```
+
