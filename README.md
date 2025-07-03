@@ -8,7 +8,7 @@ redis 集群与持久化
 
 QPS 用户限流
 
-事务
+事务（由 Service 层控制）
 
 微服务（micro）
 
