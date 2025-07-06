@@ -1,14 +1,4 @@
-## venv
-
-常用命令：
-
-```sh
-deactivate
-```
-
-
-
-## conda
+### conda
 
 [Anaconda Archive](https://repo.anaconda.com/archive/)
 
@@ -125,7 +115,7 @@ export PATH="/usr/local/Anaconda/bin:$PATH"
 
 `source ~/.bash` 重新加载配置。
 
-## pip
+### pip
 
 常用命令：
 
