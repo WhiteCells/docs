@@ -552,3 +552,7 @@ jom、ninjia、CMake、msbuild、make、nmake、qmake
 ---
 
 `switch` 的多个 `case` 是共用一个作用域的
+
+---
+
+C++的类成员方法无法作为C的Callback，因为C++的类成员方法隐含 `this` 指针。
