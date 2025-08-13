@@ -23,3 +23,25 @@ make
 sudo make install
 ```
 
+
+
+启动 AppImage 时错误：
+
+```
+----------------------------------------------------------------------------------------------------
+~/dev/app » ./MoeKoe                                                                    cells@white
+dlopen(): error loading libfuse.so.2
+
+AppImages require FUSE to run. 
+You might still be able to extract the contents of this AppImage 
+if you run it with the --appimage-extract option. 
+See https://github.com/AppImage/AppImageKit/wiki/FUSE 
+for more information
+```
+
+解决方法：
+
+```sh
+paru -S fuse2
+```
+
