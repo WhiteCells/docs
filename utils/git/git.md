@@ -88,7 +88,7 @@ notepad C:/Users/[Username]/.ssh/id_rsa.pub
 # PowerShell 复制到剪切板
 Get-Content C:/Users/[Username]/.ssh/id_rsa.pub | Set-Clipboard
 
-# 检查通信
+# 在操作远程仓库之前先检查通信
 ssh -T git@github.com
 # 会提示确认连接（yes），显示 Hi [UserName] You've successfully authenticated, but GitHub does not provide shell access. 表示成功
 ```
