@@ -512,6 +512,12 @@ git config --global https.proxy https://127.0.0.1:1111
 git config --global http.proxy http://127.0.0.1:1111
 ```
 
+## 第三方库 Git Submodule
+
+```sh
+git submodule add https://github.com/xxx/thirdparty.git third_party
+```
+
 ## 分支
 
 ### 分支说明
