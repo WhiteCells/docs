@@ -161,3 +161,17 @@ trusted-host = pypi.tuna.tsinghua.edu.cn
 [global]
 index-url = https://pypi.org/simple
 ```
+
+
+
+### uv
+
+```sh
+uv init --name ws-server-test --python 3.10
+uv add <package>
+uv remove <package>
+uv tree
+
+uv export > requirements.txt
+```
+
