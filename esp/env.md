@@ -18,3 +18,16 @@ sudo pacman -Syu linux612-headers linux612 # 安装对应的内核版本系列
 sudo modprobe ftdi_sio
 ```
 
+权限问题：
+
+[Errno 13] could not open port /dev/ttyUSB0: [Errno 13] Permission denied: '/dev/ttyUSB0'
+
+```sh
+~ » ls -l /dev/ttyUSB0                                                                                                                    6 ↵ cells@pc
+crw-rw---- 1 root uucp 188, 0  1月14日 17:36 /dev/ttyUSB0
+```
+
+```sh
+sudo usermod -aG uucp $USER
+```
+
