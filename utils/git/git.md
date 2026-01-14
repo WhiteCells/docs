@@ -116,6 +116,18 @@ git submodule update --init --recursive
 
 # 更新子模块
 git submodule update --remote
+
+# 添加子模块
+git submodule add https://github.com/user/libfoo external/libfoo
+
+# 删除子模块
+rm -rf <path-to-submodule>
+git submodule deinit -f <path-to-submodule>
+git rm -f <path-to-submodule>
+rm -rf .git/modules/<path-to-submodule>
+
+# 查看子模块
+git submodule status
 ```
 
 ## 区域和文件状态
