@@ -31,10 +31,42 @@ crw-rw---- 1 root uucp 188, 0  1月14日 17:36 /dev/ttyUSB0
 sudo usermod -aG uucp $USER
 ```
 
+记得注销。
+
 .clangd 警告问题：
 
 ```.clangd
 CompileFlags:
   Remove: [-std=c++*, -f*, -m*]
+```
+
+OpenOCD 问题：
+
+无法调试
+
+```sh
+sudo cp \
+$IDF_PATH/tools/tools/openocd-esp32/v0.12.0-esp32-20250707/openocd-esp32/share/openocd/contrib/60-openocd.rules \
+/etc/udev/rules.d/
+
+sudo udevadm control --reload-rules
+sudo udevadm trigger
+```
+
+然后重新插拔 ESP32
+
+查看权限变化：
+
+```sh
+ls -l /dev/bus/usb/*/*
+```
+
+修改 rule：
+
+```.rules
+# cat 99-espusb.rules                                                             cells@white
+# ESP-Prog / ESP32 USB-JTAG
+# SUBSYSTEM=="usb", ATTR{idVendor}=="303a", MODE="0666", GROUP="plugdev"
+SUBSYSTEM=="usb", ATTR{idVendor}=="303a", MODE="0666"
 ```
 
