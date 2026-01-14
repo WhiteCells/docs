@@ -31,3 +31,10 @@ crw-rw---- 1 root uucp 188, 0  1月14日 17:36 /dev/ttyUSB0
 sudo usermod -aG uucp $USER
 ```
 
+.clangd 警告问题：
+
+```.clangd
+CompileFlags:
+  Remove: [-std=c++*, -f*, -m*]
+```
+
