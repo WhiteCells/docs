@@ -8,14 +8,18 @@ git lfs pull
 ---
 
 ```sh
-# 查看 N 卡占用
-nvitop
+# 查看显卡占用
+nvitop # 也可以查看A卡或I卡
 nvidia-smi
 ```
 
 ---
 
-google可以访问，但是插件账号无法访问，尝试切换 DNS
+google可以访问，但是插件和账号都无法正常访问，尝试切换 DNS
+
+---
+
+clangd 的索引依赖于 Ninja 生成的 compile_commands.json 文件
 
 ---
 
