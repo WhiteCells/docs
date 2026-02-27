@@ -25,6 +25,12 @@ clangd 的索引依赖于 Ninja 生成的 compile_commands.json 文件
 cmake -B build -G Ninja
 ```
 
+使用 CMake 时需要使用如下设置以开启 compile_commands.json 导出：
+
+```cmake
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+```
+
 ---
 
 ```sh
@@ -76,4 +82,84 @@ add_executable(${PROJECT_NAME} src/test.cpp)
 -- Detecting CXX compile features
 -- Detecting CXX compile features - done
 ```
+
+---
+
+```sh
+docker run --name fs1 \
+  -p 5060:5060/tcp -p 5060:5060/udp \
+  -p 5080:5080/tcp -p 5080:5080/udp \
+  -p 8021:8021/tcp \
+  -p 5066:5066/tcp \
+  -p 7443:7443/tcp \
+  -p 8081:8081/tcp -p 8082:8082/tcp \
+  -p 16384-32768:16384-32768/udp \
+  fs
+
+docker run --name fs1 \
+  -p 8081:8081/tcp -p 8082:8082/tcp \
+  -p 16384-32768:16384-32768/udp \
+  fs
+  
+docker run --name fs1 \
+  -p 16384-32768:16384-32768/udp \
+  fs
+
+docker run --name fs1 \
+  --userland-proxy=false \
+  -p 5060:5060/tcp -p 5060:5060/udp \
+  -p 5080:5080/tcp -p 5080:5080/udp \
+  -p 8021:8021/tcp \
+  -p 5066:5066/tcp \
+  -p 7443:7443/tcp \
+  -p 8081:8081/tcp -p 8082:8082/tcp \
+  fs
+  
+
+docker run --name fs1 fs
+
+docker run --name fs1 --network host fs
+
+
+docker run \
+  --name fs1 \
+  --network host \
+  -v $(pwd)/conf:/usr/local/freeswitch/conf \
+  -v $(pwd)/recordings:/usr/local/freeswitch/recordings \
+  -v $(pwd)/log:/usr/local/freeswitch/log \
+  fs
+
+docker run \
+  --name fs1 \
+  --network host \
+  -v ./conf:/etc/freeswitch \
+  -v ./recordings:/var/lib/freeswitch/recordings \
+  -v ./log:/var/log/freeswitch \
+  fs
+
+docker run \
+  --name fs1 \
+  --network host \
+  -u $(id -u):$(id -g) \
+  -v $(pwd)/conf:/usr/local/freeswitch/conf \
+  -v $(pwd)/recordings:/usr/local/freeswitch/recordings \
+  -v $(pwd)/log:/usr/local/freeswitch/log \
+  fs
+
+docker run -d \
+  --name fs1 \
+  -e TZ=Asia/Shanghai \
+  --network host \
+  fs
+
+docker run -d \
+  --name fs2 \
+  -e TZ=Asia/Shanghai \
+  --network host \
+  fs
+```
+
+---
+
+需要 push 的仓库，在 clone 仓库时不建议使用 --depth 1
 
