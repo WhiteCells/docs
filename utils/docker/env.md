@@ -65,11 +65,9 @@ docker 设置代理
 ```json
 {
   "proxies": {
-    "default": {
-      "httpProxy": "http://127.0.0.1:2080",
-      "httpsProxy": "http://127.0.0.1:2080",
-      "noProxy": "localhost,127.0.0.1"
-    }
+    "http-proxy": "http://127.0.0.1:2080",
+    "https-proxy": "http://127.0.0.1:2080",
+    "no-proxy": "localhost,127.0.0.1"
   }
 }
 ```
