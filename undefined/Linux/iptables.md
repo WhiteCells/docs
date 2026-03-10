@@ -21,4 +21,8 @@ iptables -D INPUT -p tcp --dport 6277 -j REJECT
 # 按照需要删除
 iptables -L --line-numbers
 iptables -D INPUT 14
+
+# 插入指定位置
+# iptables 是按顺序执行规则
+iptables -I INPUT 4 -p tcp --dport 7890 -j ACCEPT
 ```
