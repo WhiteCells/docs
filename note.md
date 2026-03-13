@@ -163,3 +163,8 @@ docker run -d \
 
 需要 push 的仓库，在 clone 仓库时不建议使用 --depth 1
 
+---
+
+```sh
+tree -L 1 --dirsfirst
+```
