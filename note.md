@@ -168,3 +168,66 @@ docker run -d \
 ```sh
 tree -L 1 --dirsfirst
 ```
+
+```sh
+vim /etc/fail2ban/jail.d/sshd.local
+```
+
+```sh
+[sshd]
+enabled = true
+port    = 7890
+# 如果你改了 SSH 端口（比如 22022），这里要写成 port = 22022
+
+# 日志检测模式：normal, ddos, extra 或 aggressive
+# aggressive 会监测非法用户尝试（像你日志里的 user01/user02）
+mode    = aggressive
+
+# 强制指定后端。如果 systemd 不行，我们换成文件读取
+backend = auto
+# 指定日志路径（Debian/Ubuntu 通常是这个）
+logpath = /var/log/auth.log
+
+# 封禁策略
+findtime  = 10m
+maxretry  = 3
+bantime   = 24h
+
+# 封禁动作：如果你用的是 ufw，改用 ufw；如果用 nftables，确保环境已装
+banaction = iptables-multiport
+```
+
+```sh
+fail2ban-client status sshd
+
+# 实时看 fail2ban 自己的日志
+tail -f /var/log/fail2ban.log
+
+# 看 ssh 登录失败日志
+tail -f /var/log/auth.log
+
+# 手动 ban IP
+fail2ban-client set sshd banip 1.2.3.4
+
+# 解封 IP
+fail2ban-client set sshd unbanip 1.2.3.4
+
+# 重新加载 fail2ban-client 配置
+fail2ban-client reload
+```
+
+时区
+
+```sh
+timedatectl
+```
+
+```sh
+date
+ls -l /etc/localtime
+cat /etc/timezone   # 部分发行版有这个文件
+timedatectl list-timezones
+timedatectl list-timezones | grep Shanghai
+timedatectl set-timezone Asia/Shanghai
+```
+
