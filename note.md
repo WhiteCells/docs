@@ -231,3 +231,8 @@ timedatectl list-timezones | grep Shanghai
 timedatectl set-timezone Asia/Shanghai
 ```
 
+sing-box
+
+```sh
+sudo sing-box run -c config.json
+```
