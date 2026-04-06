@@ -31,3 +31,11 @@ paru -S kubectl
 paru -S virtualbox
 paru -S nginx
 ```
+
+```sh
+mkdir -p ~/.config/environment.d
+cat > ~/.config/environment.d/99-fcitx5.conf << 'EOF'
+QT_IM_MODULES=wayland;fcitx
+QT_IM_MODULE=fcitx
+EOF
+```
