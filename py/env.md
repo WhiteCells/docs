@@ -8,6 +8,9 @@
 # 下载安装脚本
 wget https://repo.anaconda.com/archive/Anaconda3-2024.06-1-Linux-x86_64.sh
 
+# miniconda
+curl -O https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+
 # 验证安装脚本的 SHA-256 哈希值
 <sha256sum> Anaconda3-2023.07-0-Linux-x86_64.sh
 
