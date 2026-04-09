@@ -214,6 +214,8 @@ fail2ban-client set sshd unbanip 1.2.3.4
 
 # 重新加载 fail2ban-client 配置
 fail2ban-client reload
+
+sudo cat /var/log/auth.log | grep "sshd"
 ```
 
 时区

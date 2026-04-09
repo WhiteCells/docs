@@ -39,3 +39,9 @@ QT_IM_MODULES=wayland;fcitx
 QT_IM_MODULE=fcitx
 EOF
 ```
+
+更新镜像源
+
+```sh
+sudo cachyos-rate-mirrors
+```
