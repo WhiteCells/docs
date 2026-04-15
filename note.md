@@ -159,6 +159,16 @@ docker run -d \
   fs
 ```
 
+```sh
+docker run \
+  --name mysql8 \
+  -e MYSQL_ROOT_PASSWORD=123456 \
+  -e MYSQL_DATABASE=mydb \
+  -p 3307:3306 \
+  -v mysql_data:/var/lib/mysql \
+  mysql:8.0
+```
+
 ---
 
 需要 push 的仓库，在 clone 仓库时不建议使用 --depth 1
