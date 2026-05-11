@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="560" viewBox="0 0 980 560" role="img" aria-labelledby="title desc">
+  <title id="title">ESP32-S3 I2S microphone wiring</title>
+  <desc id="desc">INMP441 I2S microphone connected to ESP32-S3 GPIO5 BCLK, GPIO6 WS, GPIO7 DIN, 3V3 and GND.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f7f9fb; }
+      .board { fill: #174a67; stroke: #0b2d40; stroke-width: 3; }
+      .module { fill: #dbe7ef; stroke: #6f8491; stroke-width: 2; }
+      .mic { fill: #ffffff; stroke: #4d5b63; stroke-width: 3; }
+      .hole { fill: #20262b; }
+      .pin { fill: #ffffff; stroke: #0b2d40; stroke-width: 1.5; }
+      .label { font: 20px sans-serif; fill: #17232b; }
+      .small { font: 16px sans-serif; fill: #33444f; }
+      .tiny { font: 13px sans-serif; fill: #33444f; }
+      .wire-red { fill: none; stroke: #d63b31; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+      .wire-black { fill: none; stroke: #20262b; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+      .wire-blue { fill: none; stroke: #2276d2; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+      .wire-green { fill: none; stroke: #188a55; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+      .wire-orange { fill: none; stroke: #e28c18; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+      .wire-purple { fill: none; stroke: #7b4ab2; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+    </style>
+  </defs>
+  <rect class="bg" width="980" height="560"/>
+  <text class="label" x="60" y="42">Experiment 3: I2S Microphone RMS</text>
+
+  <rect class="board" x="75" y="82" width="315" height="410" rx="18"/>
+  <rect class="module" x="150" y="160" width="160" height="115" rx="10"/>
+  <text class="label" x="164" y="212">ESP32-S3</text>
+  <text class="small" x="157" y="240">I2S Master RX</text>
+  <rect class="module" x="172" y="96" width="115" height="36" rx="8"/>
+  <text class="small" x="190" y="120">USB-C</text>
+
+  <circle class="pin" cx="370" cy="150" r="10"/><text class="small" x="280" y="156">3V3</text>
+  <circle class="pin" cx="370" cy="210" r="10"/><text class="small" x="284" y="216">GND</text>
+  <circle class="pin" cx="370" cy="270" r="10"/><text class="small" x="242" y="276">GPIO5 BCLK</text>
+  <circle class="pin" cx="370" cy="330" r="10"/><text class="small" x="256" y="336">GPIO6 WS</text>
+  <circle class="pin" cx="370" cy="390" r="10"/><text class="small" x="246" y="396">GPIO7 DIN</text>
+
+  <rect class="mic" x="610" y="132" width="230" height="300" rx="18"/>
+  <text class="label" x="682" y="178">INMP441</text>
+  <circle class="hole" cx="725" cy="245" r="42"/>
+  <circle cx="725" cy="245" r="18" fill="#6f8491"/>
+  <text class="small" x="681" y="317">I2S Mic</text>
+
+  <circle class="pin" cx="610" cy="150" r="9"/><text class="small" x="628" y="156">VCC</text>
+  <circle class="pin" cx="610" cy="210" r="9"/><text class="small" x="628" y="216">GND</text>
+  <circle class="pin" cx="610" cy="270" r="9"/><text class="small" x="628" y="276">SCK</text>
+  <circle class="pin" cx="610" cy="330" r="9"/><text class="small" x="628" y="336">WS</text>
+  <circle class="pin" cx="610" cy="390" r="9"/><text class="small" x="628" y="396">SD</text>
+  <circle class="pin" cx="725" cy="432" r="9"/><text class="small" x="742" y="438">L/R -> GND</text>
+
+  <path class="wire-red" d="M370 150 C455 150 525 150 610 150"/>
+  <path class="wire-black" d="M370 210 C455 210 525 210 610 210"/>
+  <path class="wire-blue" d="M370 270 C455 270 525 270 610 270"/>
+  <path class="wire-green" d="M370 330 C455 330 525 330 610 330"/>
+  <path class="wire-orange" d="M370 390 C455 390 525 390 610 390"/>
+  <path class="wire-black" d="M725 432 C720 480 470 482 370 210"/>
+
+  <text class="tiny" x="430" y="252">BCLK clock</text>
+  <text class="tiny" x="430" y="312">WS frame sync</text>
+  <text class="tiny" x="430" y="374">Audio data to ESP32-S3</text>
+  <rect x="70" y="512" width="850" height="32" rx="6" fill="#e8eef2"/>
+  <text class="small" x="88" y="534">Use 3V3 for INMP441. Keep I2S wires short and make sure GND is solid.</text>
+</svg>

@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="560" viewBox="0 0 980 560" role="img" aria-labelledby="title desc">
+  <title id="title">ESP32-S3 GPIO PWM ADC wiring</title>
+  <desc id="desc">ESP32-S3 connected to LED with resistor, button to ground, and potentiometer to GPIO4 ADC.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f7f9fb; }
+      .board { fill: #174a67; stroke: #0b2d40; stroke-width: 3; }
+      .module { fill: #dbe7ef; stroke: #6f8491; stroke-width: 2; }
+      .pin { fill: #ffffff; stroke: #0b2d40; stroke-width: 1.5; }
+      .label { font: 18px sans-serif; fill: #17232b; }
+      .small { font: 15px sans-serif; fill: #33444f; }
+      .tiny { font: 13px sans-serif; fill: #33444f; }
+      .wire-red { fill: none; stroke: #d63b31; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+      .wire-black { fill: none; stroke: #20262b; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+      .wire-blue { fill: none; stroke: #2276d2; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+      .wire-green { fill: none; stroke: #188a55; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+      .wire-orange { fill: none; stroke: #e28c18; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+      .part { fill: #ffffff; stroke: #5f6c75; stroke-width: 2; }
+    </style>
+  </defs>
+  <rect class="bg" x="0" y="0" width="980" height="560"/>
+
+  <rect class="board" x="70" y="70" width="310" height="410" rx="18"/>
+  <rect class="module" x="145" y="150" width="160" height="115" rx="10"/>
+  <text class="label" x="158" y="202">ESP32-S3</text>
+  <text class="small" x="151" y="232">Dev Board</text>
+  <rect class="module" x="168" y="82" width="115" height="36" rx="8"/>
+  <text class="small" x="184" y="106">USB-C</text>
+
+  <circle class="pin" cx="360" cy="150" r="10"/><text class="small" x="226" y="156">GPIO2 LED PWM</text>
+  <circle class="pin" cx="360" cy="220" r="10"/><text class="small" x="224" y="226">GPIO0 BUTTON</text>
+  <circle class="pin" cx="360" cy="290" r="10"/><text class="small" x="237" y="296">GPIO4 ADC</text>
+  <circle class="pin" cx="360" cy="360" r="10"/><text class="small" x="297" y="366">3V3</text>
+  <circle class="pin" cx="360" cy="430" r="10"/><text class="small" x="301" y="436">GND</text>
+
+  <text class="label" x="70" y="35">Experiment 1: LED + Button + Potentiometer</text>
+
+  <rect class="part" x="600" y="104" width="95" height="56" rx="8"/>
+  <text class="small" x="626" y="138">220R</text>
+  <polygon points="760,120 760,180 820,150" fill="#f4d03f" stroke="#8a6d00" stroke-width="3"/>
+  <line x1="820" y1="120" x2="820" y2="180" stroke="#8a6d00" stroke-width="4"/>
+  <text class="small" x="748" y="210">LED</text>
+
+  <path class="wire-green" d="M360 150 C450 150 500 132 600 132"/>
+  <path class="wire-green" d="M695 132 C720 132 735 150 760 150"/>
+  <path class="wire-black" d="M820 150 C890 150 900 430 360 430"/>
+
+  <rect class="part" x="610" y="215" width="150" height="74" rx="10"/>
+  <line x1="640" y1="252" x2="690" y2="252" stroke="#33444f" stroke-width="5"/>
+  <line x1="715" y1="252" x2="735" y2="252" stroke="#33444f" stroke-width="5"/>
+  <text class="small" x="646" y="315">Button</text>
+  <path class="wire-blue" d="M360 220 C455 220 505 252 610 252"/>
+  <path class="wire-black" d="M760 252 C845 252 865 430 360 430"/>
+
+  <circle class="part" cx="670" cy="395" r="54"/>
+  <path d="M636 430 L704 360" stroke="#56636d" stroke-width="5"/>
+  <circle cx="670" cy="395" r="8" fill="#56636d"/>
+  <text class="small" x="624" y="474">10k Potentiometer</text>
+  <text class="tiny" x="602" y="344">3V3</text>
+  <text class="tiny" x="738" y="344">GND</text>
+  <text class="tiny" x="654" y="340">Wiper</text>
+  <path class="wire-red" d="M360 360 C470 360 515 342 622 360"/>
+  <path class="wire-black" d="M360 430 C470 430 520 448 718 430"/>
+  <path class="wire-orange" d="M360 290 C470 290 545 315 670 341"/>
+
+  <rect x="54" y="505" width="872" height="34" rx="6" fill="#e8eef2"/>
+  <text class="small" x="70" y="528">Power rule: all modules share GND. ADC input must stay between GND and 3V3.</text>
+</svg>

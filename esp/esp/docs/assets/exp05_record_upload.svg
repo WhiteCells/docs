@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="600" viewBox="0 0 1040 600" role="img" aria-labelledby="title desc">
+  <title id="title">ESP32-S3 record and upload system</title>
+  <desc id="desc">Button triggers ESP32-S3 to record from INMP441 microphone, buffer PCM, connect Wi-Fi, and upload to a computer HTTP server.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f7f9fb; }
+      .board { fill: #174a67; stroke: #0b2d40; stroke-width: 3; }
+      .box { fill: #ffffff; stroke: #4d5b63; stroke-width: 2.5; }
+      .module { fill: #dbe7ef; stroke: #6f8491; stroke-width: 2; }
+      .pin { fill: #ffffff; stroke: #0b2d40; stroke-width: 1.5; }
+      .label { font: 20px sans-serif; fill: #17232b; }
+      .small { font: 16px sans-serif; fill: #33444f; }
+      .tiny { font: 13px sans-serif; fill: #33444f; }
+      .wire-red { fill: none; stroke: #d63b31; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+      .wire-black { fill: none; stroke: #20262b; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+      .wire-blue { fill: none; stroke: #2276d2; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+      .wire-green { fill: none; stroke: #188a55; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+      .wire-orange { fill: none; stroke: #e28c18; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+      .arrow { fill: none; stroke: #2276d2; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; marker-end: url(#arrow); }
+    </style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#2276d2"/>
+    </marker>
+  </defs>
+  <rect class="bg" width="1040" height="600"/>
+  <text class="label" x="55" y="42">Experiment 5: Button Record + HTTP POST Upload</text>
+
+  <rect class="board" x="70" y="92" width="300" height="390" rx="18"/>
+  <rect class="module" x="142" y="168" width="155" height="100" rx="10"/>
+  <text class="label" x="156" y="212">ESP32-S3</text>
+  <text class="small" x="138" y="240">I2S + Wi-Fi</text>
+  <circle class="pin" cx="350" cy="135" r="9"/><text class="small" x="280" y="141">3V3</text>
+  <circle class="pin" cx="350" cy="180" r="9"/><text class="small" x="284" y="186">GND</text>
+  <circle class="pin" cx="350" cy="225" r="9"/><text class="small" x="233" y="231">GPIO5 BCLK</text>
+  <circle class="pin" cx="350" cy="270" r="9"/><text class="small" x="247" y="276">GPIO6 WS</text>
+  <circle class="pin" cx="350" cy="315" r="9"/><text class="small" x="238" y="321">GPIO7 DIN</text>
+  <circle class="pin" cx="350" cy="405" r="9"/><text class="small" x="232" y="411">GPIO0 Button</text>
+  <circle class="pin" cx="350" cy="450" r="9"/><text class="small" x="284" y="456">GND</text>
+
+  <rect class="box" x="505" y="105" width="185" height="245" rx="16"/>
+  <text class="label" x="560" y="145">INMP441</text>
+  <circle cx="598" cy="210" r="36" fill="#20262b"/>
+  <circle cx="598" cy="210" r="15" fill="#6f8491"/>
+  <circle class="pin" cx="505" cy="135" r="8"/><text class="small" x="520" y="141">VCC</text>
+  <circle class="pin" cx="505" cy="180" r="8"/><text class="small" x="520" y="186">GND</text>
+  <circle class="pin" cx="505" cy="225" r="8"/><text class="small" x="520" y="231">SCK</text>
+  <circle class="pin" cx="505" cy="270" r="8"/><text class="small" x="520" y="276">WS</text>
+  <circle class="pin" cx="505" cy="315" r="8"/><text class="small" x="520" y="321">SD</text>
+
+  <path class="wire-red" d="M350 135 C405 135 450 135 505 135"/>
+  <path class="wire-black" d="M350 180 C405 180 450 180 505 180"/>
+  <path class="wire-blue" d="M350 225 C405 225 450 225 505 225"/>
+  <path class="wire-green" d="M350 270 C405 270 450 270 505 270"/>
+  <path class="wire-orange" d="M350 315 C405 315 450 315 505 315"/>
+
+  <rect class="box" x="505" y="385" width="150" height="70" rx="10"/>
+  <line x1="532" y1="420" x2="580" y2="420" stroke="#33444f" stroke-width="5"/>
+  <line x1="604" y1="420" x2="628" y2="420" stroke="#33444f" stroke-width="5"/>
+  <text class="small" x="543" y="482">Button</text>
+  <path class="wire-blue" d="M350 405 C410 405 450 420 505 420"/>
+  <path class="wire-black" d="M655 420 C700 420 700 500 350 450"/>
+
+  <rect class="box" x="735" y="90" width="235" height="135" rx="16"/>
+  <text class="label" x="780" y="135">Wi-Fi Router</text>
+  <text class="small" x="786" y="168">2.4 GHz LAN</text>
+  <path class="arrow" d="M370 115 C545 38 615 52 735 128"/>
+
+  <rect class="box" x="735" y="300" width="235" height="165" rx="16"/>
+  <text class="label" x="778" y="345">Computer</text>
+  <text class="small" x="770" y="378">PCM upload server</text>
+  <rect x="765" y="405" width="175" height="36" rx="6" fill="#e8eef2"/>
+  <text class="tiny" x="778" y="428">/upload -> .pcm</text>
+  <path class="arrow" d="M850 225 C860 252 862 270 850 300"/>
+  <path class="arrow" d="M370 315 C570 315 610 342 735 368"/>
+  <text class="small" x="475" y="356">HTTP POST 16 kHz / 16 bit / mono</text>
+
+  <rect x="65" y="525" width="910" height="38" rx="7" fill="#e8eef2"/>
+  <text class="small" x="84" y="550">One button press records 3 seconds: 16000 samples/s * 2 bytes * 3 s = 96000 bytes.</text>
+</svg>

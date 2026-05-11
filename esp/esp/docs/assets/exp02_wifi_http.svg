@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="520" viewBox="0 0 980 520" role="img" aria-labelledby="title desc">
+  <title id="title">ESP32-S3 Wi-Fi HTTP flow</title>
+  <desc id="desc">ESP32-S3 connects to a 2.4 GHz Wi-Fi router and sends HTTP GET requests to a server.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f8faf8; }
+      .box { fill: #ffffff; stroke: #4d5b63; stroke-width: 2.5; }
+      .board { fill: #174a67; stroke: #0b2d40; stroke-width: 3; }
+      .module { fill: #dbe7ef; stroke: #6f8491; stroke-width: 2; }
+      .label { font: 20px sans-serif; fill: #17232b; }
+      .small { font: 16px sans-serif; fill: #33444f; }
+      .tiny { font: 13px sans-serif; fill: #33444f; }
+      .arrow { fill: none; stroke: #2276d2; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; marker-end: url(#arrow); }
+      .wifi { fill: none; stroke: #188a55; stroke-width: 5; stroke-linecap: round; }
+    </style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#2276d2"/>
+    </marker>
+  </defs>
+  <rect class="bg" width="980" height="520"/>
+  <text class="label" x="60" y="42">Experiment 2: Wi-Fi Station + HTTP GET</text>
+
+  <rect class="board" x="80" y="130" width="230" height="260" rx="18"/>
+  <rect class="module" x="125" y="198" width="140" height="82" rx="10"/>
+  <text class="label" x="142" y="235">ESP32-S3</text>
+  <text class="small" x="133" y="262">Wi-Fi STA</text>
+  <rect class="module" x="143" y="146" width="100" height="34" rx="8"/>
+  <text class="small" x="166" y="169">USB</text>
+
+  <rect class="box" x="410" y="135" width="190" height="250" rx="18"/>
+  <text class="label" x="452" y="180">Router</text>
+  <text class="small" x="446" y="212">2.4 GHz Wi-Fi</text>
+  <circle cx="505" cy="280" r="12" fill="#188a55"/>
+  <path class="wifi" d="M455 270 Q505 220 555 270"/>
+  <path class="wifi" d="M430 250 Q505 175 580 250"/>
+  <path class="wifi" d="M405 230 Q505 130 605 230"/>
+
+  <rect class="box" x="700" y="150" width="210" height="220" rx="18"/>
+  <text class="label" x="762" y="196">HTTP</text>
+  <text class="small" x="746" y="228">Server / API</text>
+  <rect x="735" y="265" width="140" height="46" rx="6" fill="#e8eef2"/>
+  <text class="tiny" x="747" y="293">GET TEST_URL</text>
+
+  <path class="arrow" d="M310 260 C350 228 375 228 410 250"/>
+  <path class="arrow" d="M600 260 C640 228 665 228 700 250"/>
+  <path class="arrow" d="M700 312 C655 350 640 350 600 320"/>
+  <path class="arrow" d="M410 312 C365 350 350 350 310 320"/>
+
+  <text class="small" x="330" y="218">Connect</text>
+  <text class="small" x="626" y="218">HTTP GET</text>
+  <text class="small" x="628" y="374">Response</text>
+  <text class="small" x="330" y="374">Log status</text>
+
+  <rect x="78" y="430" width="834" height="48" rx="8" fill="#e8eef2"/>
+  <text class="small" x="98" y="460">ESP32-S3 supports 2.4 GHz Wi-Fi. Use event callbacks for connect, disconnect, and got IP.</text>
+</svg>

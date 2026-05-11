@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="560" viewBox="0 0 980 560" role="img" aria-labelledby="title desc">
+  <title id="title">ESP32-S3 I2S amplifier wiring</title>
+  <desc id="desc">MAX98357A I2S amplifier connected to ESP32-S3 GPIO15 BCLK, GPIO16 WS, GPIO17 DOUT, power, ground, and speaker.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f7f9fb; }
+      .board { fill: #174a67; stroke: #0b2d40; stroke-width: 3; }
+      .module { fill: #dbe7ef; stroke: #6f8491; stroke-width: 2; }
+      .amp { fill: #ffffff; stroke: #4d5b63; stroke-width: 3; }
+      .speaker { fill: #f0f3f5; stroke: #4d5b63; stroke-width: 3; }
+      .pin { fill: #ffffff; stroke: #0b2d40; stroke-width: 1.5; }
+      .label { font: 20px sans-serif; fill: #17232b; }
+      .small { font: 16px sans-serif; fill: #33444f; }
+      .tiny { font: 13px sans-serif; fill: #33444f; }
+      .wire-red { fill: none; stroke: #d63b31; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+      .wire-black { fill: none; stroke: #20262b; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+      .wire-blue { fill: none; stroke: #2276d2; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+      .wire-green { fill: none; stroke: #188a55; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+      .wire-orange { fill: none; stroke: #e28c18; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+      .sound { fill: none; stroke: #7b4ab2; stroke-width: 4; stroke-linecap: round; }
+    </style>
+  </defs>
+  <rect class="bg" width="980" height="560"/>
+  <text class="label" x="60" y="42">Experiment 4: I2S Speaker Tone</text>
+
+  <rect class="board" x="70" y="82" width="315" height="410" rx="18"/>
+  <rect class="module" x="145" y="160" width="160" height="115" rx="10"/>
+  <text class="label" x="159" y="212">ESP32-S3</text>
+  <text class="small" x="159" y="240">I2S Master TX</text>
+  <rect class="module" x="168" y="96" width="115" height="36" rx="8"/>
+  <text class="small" x="186" y="120">USB-C</text>
+
+  <circle class="pin" cx="365" cy="150" r="10"/><text class="small" x="280" y="156">5V/3V3</text>
+  <circle class="pin" cx="365" cy="210" r="10"/><text class="small" x="284" y="216">GND</text>
+  <circle class="pin" cx="365" cy="270" r="10"/><text class="small" x="231" y="276">GPIO15 BCLK</text>
+  <circle class="pin" cx="365" cy="330" r="10"/><text class="small" x="245" y="336">GPIO16 WS</text>
+  <circle class="pin" cx="365" cy="390" r="10"/><text class="small" x="224" y="396">GPIO17 DOUT</text>
+
+  <rect class="amp" x="570" y="120" width="220" height="300" rx="18"/>
+  <text class="label" x="628" y="165">MAX98357A</text>
+  <text class="small" x="646" y="195">I2S Amp</text>
+  <rect x="645" y="230" width="70" height="70" rx="10" fill="#e8eef2" stroke="#6f8491" stroke-width="2"/>
+  <text class="tiny" x="657" y="270">AMP</text>
+
+  <circle class="pin" cx="570" cy="150" r="9"/><text class="small" x="588" y="156">VIN</text>
+  <circle class="pin" cx="570" cy="210" r="9"/><text class="small" x="588" y="216">GND</text>
+  <circle class="pin" cx="570" cy="270" r="9"/><text class="small" x="588" y="276">BCLK</text>
+  <circle class="pin" cx="570" cy="330" r="9"/><text class="small" x="588" y="336">LRC</text>
+  <circle class="pin" cx="570" cy="390" r="9"/><text class="small" x="588" y="396">DIN</text>
+  <circle class="pin" cx="790" cy="285" r="9"/><text class="small" x="708" y="290">SPK+</text>
+  <circle class="pin" cx="790" cy="345" r="9"/><text class="small" x="708" y="350">SPK-</text>
+
+  <path class="wire-red" d="M365 150 C440 150 500 150 570 150"/>
+  <path class="wire-black" d="M365 210 C440 210 500 210 570 210"/>
+  <path class="wire-blue" d="M365 270 C440 270 500 270 570 270"/>
+  <path class="wire-green" d="M365 330 C440 330 500 330 570 330"/>
+  <path class="wire-orange" d="M365 390 C440 390 500 390 570 390"/>
+
+  <path class="speaker" d="M860 275 L895 275 L930 245 L930 385 L895 355 L860 355 Z"/>
+  <path class="sound" d="M940 285 Q958 315 940 345"/>
+  <path class="sound" d="M955 265 Q985 315 955 365"/>
+  <text class="small" x="858" y="430">4Ω / 8Ω speaker</text>
+  <path class="wire-purple" d="M790 285 C820 285 835 285 860 285" style="fill:none;stroke:#7b4ab2;stroke-width:4;stroke-linecap:round"/>
+  <path class="wire-black" d="M790 345 C820 345 835 345 860 345"/>
+
+  <rect x="70" y="512" width="850" height="32" rx="6" fill="#e8eef2"/>
+  <text class="small" x="88" y="534">Do not connect a speaker directly to GPIO. Use an amplifier and share GND.</text>
+</svg>
