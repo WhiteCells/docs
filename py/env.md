@@ -51,7 +51,8 @@ conda env remove -n <env_name>
 conda info --envs
 
 # 关闭 base 虚拟环境自动激活
-conda config --set auto_activate_base false
+# conda config --set auto_activate_base false
+conda config --set auto_activate false
 
 # 更新 conda
 conda update conda
