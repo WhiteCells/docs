@@ -1,36 +1,61 @@
 # 常用包安装
 
 ```sh
-paru -S fuse
-paru -S nekoray-bin
-paru -S google-chrome
-paru -S linuxqq
-paru -S wechat-bin
-paru -S wps wps-office-fonts ttf-wps-fonts ttf-ms-fonts freetype2-wps libtiff5
-paru -S fcitx5 fcitx5-configtool fcitx5-chinese-addons fcitx5-gtk fcitx5-qt
-paru -S cmake
-paru -S gdb
-paru -S clang
-paru -S visual-studio-code-bin
-paru -S telegram-desktop
-paru -S drawio-desktop
-paru -S flameshot
-paru -S qtcreator
-paru -S go
-paru -S rust
-paru -S nvm
-paru -S uv
-paru -S termius
-paru -S obs-studio
-paru -S docker docker-compose
-paru -S mariadb
-paru -S redis
-paru -S datagrip
-paru -S nvtop
-paru -S kubectl
-paru -S virtualbox
-paru -S nginx
+paru -S \
+fuse \
+nekoray-bin \
+throne \
+google-chrome \
+linuxqq \
+wechat-bin \
+wps-office wps-office-fonts ttf-wps-fonts ttf-ms-fonts freetype2-wps libtiff5 \
+fcitx5 fcitx5-configtool fcitx5-chinese-addons fcitx5-gtk fcitx5-qt \
+cmake \
+gdb \
+clang \
+ninja \
+visual-studio-code-bin \
+telegram-desktop \
+drawio-desktop \
+flameshot \
+qtcreator \
+go \
+rust \
+nvm \
+uv \
+termius \
+tabby \
+obs-studio \
+docker docker-compose \
+mariadb \
+redis \
+datagrip \
+nvtop \
+kubectl \
+virtualbox \
+nginx \
+cuda
 ```
+
+```sh
+echo 'export PATH=/opt/cuda/bin:$PATH' >> ~/.zshrc
+echo 'export LD_LIBRARY_PATH=/opt/cuda/lib64:$LD_LIBRARY_PATH' >> ~/.zshrc
+source ~/.zshrc
+```
+
+wayland
+
+```sh
+sudo vim ~/.config/environment.d/envvars.conf
+```
+
+```
+GTK_IM_MODULE=fcitx
+QT_IM_MODULE=fcitx
+XMODIFIERS=@im=fcitx
+```
+
+x11
 
 ```sh
 mkdir -p ~/.config/environment.d
