@@ -248,3 +248,11 @@ sing-box
 ```sh
 sudo sing-box run -c config.json
 ```
+
+声学前端处理算法
+
+- AEC
+- AGC
+- NS
+- VAD
+- Mic Array Processing

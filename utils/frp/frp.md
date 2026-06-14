@@ -6,7 +6,17 @@
 sudo apt update
 sudo apt install -y curl tar
 export FRP_VERSION=0.68.1
-export ARCH=amd64 # note, 注意架构
+
+# export ARCH=amd64 # note, 注意架构
+case "$(uname -m)" in
+  x86_64) ARCH=amd64 ;;
+  aarch64|arm64) ARCH=arm64 ;;
+  armv7l) ARCH=arm ;;
+  *) ARCH=$(uname -m) ;;
+esac
+
+echo "$ARCH"
+
 curl -fL -O "https://github.com/fatedier/frp/releases/download/v${FRP_VERSION}/frp_${FRP_VERSION}_linux_${ARCH}.tar.gz"
 tar xf frp_${FRP_VERSION}_linux_${ARCH}.tar.gz
 ```
