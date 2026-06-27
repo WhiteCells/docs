@@ -40,18 +40,7 @@ sudo mysql_install_db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
 设置用户名及密码：
 
 ```sh
-sudo mariadb -u root -p
-```
-
-
-
-```sh
+sudo systemctl enable --new mariadb
 sudo mysql_secure_installation
-sudo mysql
+mariadb -u root -p
 ```
-
-```sql
-ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '10101';
-FLUSH PRIVILEGES;
-```
-
